@@ -3,7 +3,7 @@
 
     // Application
 
-    <string name="app_name">FOSS Moodle</string>
+    <string name="app_name" translatable="false">Mebis</string>
     <string name="app_permissions">
 
         &lt;i>\"Access storage\" permission:&lt;/i>&lt;br>
@@ -33,7 +33,7 @@
 
     <string name="login_user">Username</string>
     <string name="login_link">Link of your Moodle instance</string>
-    <string name="login_password">Password (8 characters): big/small letter, number, extra sign)</string>
+    <string name="login_password">Password</string>
     <string name="login_automatic_title">Automatic login</string>
     <string name="login_text_edit">Please fill in login data.</string>
 

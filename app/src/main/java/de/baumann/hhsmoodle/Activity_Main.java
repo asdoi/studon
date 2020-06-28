@@ -84,7 +84,8 @@ import java.util.Objects;
 
 public class Activity_Main extends AppCompatActivity {
 
-    public static final String DEFAULT_WEBSITE = "https://moodle.huebsch.ka.schule-bw.de/moodle/";
+    public static final String DEFAULT_WEBSITE = "https://lernplattform.mebis.bayern.de/";
+    public static final String MEBIS = "mebis.bayern.de";
 
     private WebView mWebView;
     private ProgressBar progressBar;
@@ -159,7 +160,7 @@ public class Activity_Main extends AppCompatActivity {
                 loadUrl = true;
 
                 if (sharedPref.getBoolean("external", true)) {
-                    if (url.contains(sharedPref.getString("link", DEFAULT_WEBSITE))) {
+                    if (url.contains(sharedPref.getString("link", MEBIS))) {
                         webView.loadUrl(url);
                         return true;
                     } else {
@@ -206,7 +207,8 @@ public class Activity_Main extends AppCompatActivity {
 
                 final String js = "javascript:" +
                         "document.getElementById('password').value = '" + password + "';"  +
-                        "document.getElementById('username').value = '" + username + "';";
+                        "document.getElementById('username').value = '" + username + "';" +
+                        "document.getElementById('submitbutton').click();";
 
                 view.evaluateJavascript(js, new ValueCallback<String>() {
                     @Override

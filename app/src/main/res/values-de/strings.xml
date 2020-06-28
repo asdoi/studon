@@ -4,7 +4,7 @@
 
     // Application
 
-    <string name="app_name">FOSS Moodle</string>
+
     <string name="app_permissions">
 
         &lt;i>Zugriff auf SD Karte:&lt;/i>&lt;br>
@@ -33,7 +33,7 @@
 
     <string name="login_user">Benutzername</string>
     <string name="login_link">Link deiner Moodle Instanz</string>
-    <string name="login_password">Passwort (8 Zeichen: Groß-/Kleinbuchstabe, Zahl, Sonderzeichen)</string>
+    <string name="login_password">Passwort</string>
     <string name="login_automatic_title">Automatische Anmeldung</string>
     <string name="login_text_edit">Bitte Logindaten eingeben.</string>
 
@@ -138,7 +138,7 @@
 
     // Password
 
-    <string name="pw_hint">nur Ziffern</string>
+    <string name="pw_hint">Nur Ziffern</string>
     <string name="pw_forgotten">Pin vergessen?</string>
     <string name="pw_forgotten_dialog">Anwendungsdaten löschen?</string>
 
