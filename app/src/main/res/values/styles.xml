@@ -12,4 +12,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
     </style>
 
+    <style name="SplashTheme" parent="AppTheme_system">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
 </resources>
