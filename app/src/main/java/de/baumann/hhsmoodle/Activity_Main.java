@@ -84,6 +84,8 @@ import java.util.Objects;
 
 public class Activity_Main extends AppCompatActivity {
 
+    public static final String DEFAULT_WEBSITE = "https://moodle.huebsch.ka.schule-bw.de/moodle/";
+
     private WebView mWebView;
     private ProgressBar progressBar;
     private SharedPreferences sharedPref;
@@ -157,7 +159,7 @@ public class Activity_Main extends AppCompatActivity {
                 loadUrl = true;
 
                 if (sharedPref.getBoolean("external", true)) {
-                    if (url.contains(sharedPref.getString("link", "https://moodle.huebsch.ka.schule-bw.de/moodle/"))) {
+                    if (url.contains(sharedPref.getString("link", DEFAULT_WEBSITE))) {
                         webView.loadUrl(url);
                         return true;
                     } else {
@@ -339,10 +341,10 @@ public class Activity_Main extends AppCompatActivity {
         try {
             if (sharedPref.getString("username", "").length() < 1 ||
                     sharedPref.getString("password", "").length() < 1  ||
-                    sharedPref.getString("link", "https://moodle.huebsch.ka.schule-bw.de/moodle/").length() < 1 ) {
+                    sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE).length() < 1 ) {
                 Class_Helper.setLoginData (activity);
             } else {
-                mWebView.loadUrl(sharedPref.getString("favoriteURL", "https://moodle.huebsch.ka.schule-bw.de/moodle/"));
+                mWebView.loadUrl(sharedPref.getString("favoriteURL", Activity_Main.DEFAULT_WEBSITE));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -674,7 +676,7 @@ public class Activity_Main extends AppCompatActivity {
         bookmarkList.setNumColumns(columns);
 
         if (bookmarkList.getAdapter().getCount() == 0) {
-            String url = sharedPref.getString("link", "https://moodle.huebsch.ka.schule-bw.de/moodle/");
+            String url = sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE);
             db.insert("Dashboard", url, "14", "");
             setBookmarksList();
         }

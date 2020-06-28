@@ -23,7 +23,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -151,12 +150,13 @@ class Class_Helper {
     private static String protect;
     private static SharedPreferences sharedPref;
 
+    @SuppressLint("ApplySharedPref")
     static void setLoginData (final Activity activity) {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             final View dialogView = View.inflate(activity, R.layout.dialog_edit_login, null);
             final EditText moodle_link = dialogView.findViewById(R.id.moodle_link);
-            moodle_link.setText(sharedPref.getString("link", "https://moodle.huebsch.ka.schule-bw.de/moodle/"));
+            moodle_link.setText(sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE));
             final EditText moodle_userName = dialogView.findViewById(R.id.moodle_userName);
             moodle_userName.setText(sharedPref.getString("username", ""));
             final EditText moodle_userPW = dialogView.findViewById(R.id.moodle_userPW);
