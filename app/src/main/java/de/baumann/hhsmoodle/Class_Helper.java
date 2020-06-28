@@ -258,7 +258,7 @@ class Class_Helper {
                     try {
                         // clearing app data
                         Runtime runtime = Runtime.getRuntime();
-                        runtime.exec("pm clear de.baumann.hhsmoodle");
+                        runtime.exec("pm clear de.asdoi.mebis");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

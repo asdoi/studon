@@ -160,7 +160,7 @@ public class Activity_Main extends AppCompatActivity {
                 loadUrl = true;
 
                 if (sharedPref.getBoolean("external", true)) {
-                    if (url.contains(sharedPref.getString("link", MEBIS))) {
+                    if (url.contains(MEBIS)) {
                         webView.loadUrl(url);
                         return true;
                     } else {

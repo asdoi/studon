@@ -16,7 +16,7 @@
     <string name="app_share">Teilen mit:</string>
 
 
-    // Moodle
+    // Mebis
 
     <string name="subjects_color_red">Rot</string>
     <string name="subjects_color_pink">Pink</string>
@@ -32,7 +32,7 @@
     // Login
 
     <string name="login_user">Benutzername</string>
-    <string name="login_link">Link deiner Moodle Instanz</string>
+    <string name="login_link">Link deiner Mebis Instanz</string>
     <string name="login_password">Passwort</string>
     <string name="login_automatic_title">Automatische Anmeldung</string>
     <string name="login_text_edit">Bitte Logindaten eingeben.</string>
@@ -56,8 +56,9 @@
 
     <string name="dialog_license_title">Copyright © 2020 by AOSD</string>
     <string name="dialog_license_text">
+        Eine veränderte Version von https://github.com/scoute-dich/HHSMoodle
 
-        &lt;i>Besuche für mehr Informationen: https://github.com/scoute-dich/HHSMoodle&lt;/i>&lt;br>&lt;br>
+        &lt;i>Besuche für mehr Informationen: https://github.com/asdoi/HHSMoodle&lt;/i>&lt;br>&lt;br>
 
         Dieses Programm ist freie Software. Sie können es unter den Bedingungen der GNU General Public License, wie von
         der Free Software Foundation veröffentlicht, weitergeben und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder
@@ -114,8 +115,8 @@
 
     // Settings
 
-    <string name="settings_security_moodle">Logindaten (Moodle)</string>
-    <string name="settings_security_moodle_summary">Bitte gib deinen Moodledaten an. Sie werden dann auf der Anmeldeseite automatisch eingefügt. Nach dem
+    <string name="settings_security_moodle">Logindaten (Mebis)</string>
+    <string name="settings_security_moodle_summary">Bitte gib deinen Mebisdaten an. Sie werden dann auf der Anmeldeseite automatisch eingefügt. Nach dem
         Bearbeiten die App neu starten und evtl. veraltete Lesezeichen löschen.</string>
 
     <string name="settings_license_about_summary">Erfahre mehr über die App.</string>
