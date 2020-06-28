@@ -23,6 +23,7 @@ package de.baumann.hhsmoodle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -92,7 +93,14 @@ public class Activity_Settings extends AppCompatActivity {
             });
 
             findPreference("settings_security_moodle").setOnPreferenceClickListener(preference -> {
-                Class_Helper.setLoginData (getActivity());
+                Class_Helper.setLoginData (getActivity(), ()-> {
+                    Intent i = getContext().getPackageManager().
+                        getLaunchIntentForPackage(getContext().getPackageName());
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                    getActivity().finish();
+                });
                 return false;
             });
 

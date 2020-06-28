@@ -360,13 +360,13 @@ public class Activity_Main extends AppCompatActivity {
             if (sharedPref.getString("username", "").length() < 1 ||
                     sharedPref.getString("password", "").length() < 1  ||
                     sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE).length() < 1 ) {
-                Class_Helper.setLoginData (activity);
+                Class_Helper.setLoginData (activity, this::recreate);
             } else {
                 mWebView.loadUrl(sharedPref.getString("favoriteURL", Activity_Main.DEFAULT_WEBSITE));
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Class_Helper.setLoginData (activity);
+            Class_Helper.setLoginData (activity, this::recreate);
         }
     }
 

@@ -151,7 +151,7 @@ class Class_Helper {
     private static SharedPreferences sharedPref;
 
     @SuppressLint("ApplySharedPref")
-    static void setLoginData (final Activity activity) {
+    static void setLoginData (final Activity activity, Runnable runAfter) {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             final View dialogView = View.inflate(activity, R.layout.dialog_edit_login, null);
@@ -177,6 +177,7 @@ class Class_Helper {
                             .putString("favoriteURL", link)
                             .putString("favoriteTitle", "Dashboard").commit();
                     dialog.cancel();
+                    runAfter.run();
                 }
             });
             builder.setNegativeButton(R.string.toast_cancel, (dialog, whichButton) -> dialog.cancel());
@@ -258,7 +259,7 @@ class Class_Helper {
                     try {
                         // clearing app data
                         Runtime runtime = Runtime.getRuntime();
-                        runtime.exec("pm clear de.asdoi.mebis");
+                        runtime.exec("pm clear com.asdoi.mebis");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
