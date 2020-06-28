@@ -39,4 +39,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
     implementation 'androidx.webkit:webkit:1.3.0-rc01'
+
+    implementation 'saschpe.android:customtabs:3.0.2'
+    implementation 'androidx.browser:browser:1.2.0'
 }

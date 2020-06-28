@@ -67,6 +67,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.widget.NestedScrollView;
 import androidx.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -80,6 +81,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+
+import saschpe.android.customtabs.CustomTabsHelper;
+import saschpe.android.customtabs.WebViewFallback;
 
 
 public class Activity_Main extends AppCompatActivity {
@@ -172,12 +176,22 @@ public class Activity_Main extends AppCompatActivity {
                         action_ok.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                loadUrl = false;
-                                Intent intent = new Intent(Intent.ACTION_VIEW);
-                                intent.setData(uri);
-                                Intent chooser = Intent.createChooser(intent, null);
-                                startActivity(chooser);
-                                bottomSheetDialog.cancel();
+                                try {
+                                    CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+                                            .addDefaultShareMenuItem()
+                                            .setShowTitle(true)
+                                            .build();
+
+                                    // This is optional but recommended
+                                    CustomTabsHelper.Companion.addKeepAliveExtra(getApplicationContext(), customTabsIntent.intent);
+
+                                    // This is where the magic happens...
+                                    CustomTabsHelper.Companion.openCustomTab(getApplicationContext(), customTabsIntent,
+                                            Uri.parse(url),
+                                            new WebViewFallback());
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                         bottomSheetDialog.setContentView(dialogView);
