@@ -101,7 +101,7 @@ public class Activity_Settings extends AppCompatActivity {
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(i);
                     getActivity().finish();
-                });
+                }, () -> {});
                 return false;
             });
 

@@ -30,6 +30,7 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.util.Linkify;
 import android.view.View;
+import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -151,7 +152,7 @@ class Class_Helper {
     private static SharedPreferences sharedPref;
 
     @SuppressLint("ApplySharedPref")
-    static void setLoginData (final Activity activity, Runnable runAfter) {
+    static void setLoginData (final Activity activity, Runnable runOnSuccess, Runnable runOnCancel) {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             final View dialogView = View.inflate(activity, R.layout.dialog_edit_login, null);
@@ -169,18 +170,19 @@ class Class_Helper {
 
                 if (username.length() < 1 || password.length() < 1  || link.length() < 1 ) {
                     Toast.makeText(activity, activity.getString(R.string.login_text_edit), Toast.LENGTH_SHORT).show();
+                    setLoginData(activity, runOnSuccess, runOnCancel);
                 } else {
                     sharedPref.edit()
                             .putString("username", username)
                             .putString("password", password)
                             .putString("link", link)
                             .putString("favoriteURL", link)
-                            .putString("favoriteTitle", "Dashboard").commit();
+                            .putString("favoriteTitle", Activity_Main.DASHBOARD).commit();
                     dialog.cancel();
-                    runAfter.run();
+                    runOnSuccess.run();
                 }
             });
-            builder.setNegativeButton(R.string.toast_cancel, (dialog, whichButton) -> dialog.cancel());
+            builder.setNegativeButton(R.string.toast_cancel, (dialog, whichButton) -> {dialog.cancel(); runOnCancel.run();});
             final AlertDialog dialog = builder.create();
             dialog.show();
         } catch (Exception e) {

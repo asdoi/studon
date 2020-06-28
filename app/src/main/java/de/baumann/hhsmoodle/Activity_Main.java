@@ -91,6 +91,7 @@ public class Activity_Main extends AppCompatActivity {
 
     public static final String DEFAULT_WEBSITE = "https://lernplattform.mebis.bayern.de/";
     public static final String MEBIS = "mebis.bayern.de";
+    public static final String DASHBOARD = "Schreibtisch";
 
     private WebView mWebView;
     private ProgressBar progressBar;
@@ -360,13 +361,13 @@ public class Activity_Main extends AppCompatActivity {
             if (sharedPref.getString("username", "").length() < 1 ||
                     sharedPref.getString("password", "").length() < 1  ||
                     sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE).length() < 1 ) {
-                Class_Helper.setLoginData (activity, this::recreate);
+                Class_Helper.setLoginData (activity, this::recreate, this::finishAffinity);
             } else {
                 mWebView.loadUrl(sharedPref.getString("favoriteURL", Activity_Main.DEFAULT_WEBSITE));
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Class_Helper.setLoginData (activity, this::recreate);
+            Class_Helper.setLoginData (activity, this::recreate, this::finishAffinity);
         }
     }
 
@@ -439,7 +440,7 @@ public class Activity_Main extends AppCompatActivity {
         db.open();
         bottomSheetDialog = new BottomSheetDialog(Objects.requireNonNull(activity));
         View dialogView = View.inflate(activity, R.layout.grid_layout, null);
-        String favoriteTitle = getString(R.string.bookmark_setFav) + ": " + sharedPref.getString("favoriteTitle", "Dashboard");
+        String favoriteTitle = getString(R.string.bookmark_setFav) + ": " + sharedPref.getString("favoriteTitle", DASHBOARD);
         favoriteTitleTV = dialogView.findViewById(R.id.grid_title);
         favoriteTitleTV.setText(favoriteTitle);
         bookmarkList = dialogView.findViewById(R.id.grid_item);
@@ -695,7 +696,7 @@ public class Activity_Main extends AppCompatActivity {
 
         if (bookmarkList.getAdapter().getCount() == 0) {
             String url = sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE);
-            db.insert("Dashboard", url, "14", "");
+            db.insert(DASHBOARD, url, "14", "");
             setBookmarksList();
         }
         //onClick function
@@ -876,7 +877,7 @@ public class Activity_Main extends AppCompatActivity {
                                         .putString("favoriteURL", bookmarks_url)
                                         .putString("favoriteTitle", bookmarks_title).apply();
 
-                                String favoriteTitle = getString(R.string.bookmark_setFav) + ": " + sharedPref.getString("favoriteTitle", "Dashboard");
+                                String favoriteTitle = getString(R.string.bookmark_setFav) + ": " + sharedPref.getString("favoriteTitle", DASHBOARD);
 
                                 favoriteTitleTV.setText(favoriteTitle);
                                 break;
