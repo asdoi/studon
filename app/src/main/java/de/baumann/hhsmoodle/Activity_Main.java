@@ -68,6 +68,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -179,14 +180,15 @@ public class Activity_Main extends AppCompatActivity {
                                 try {
                                     CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
                                             .addDefaultShareMenuItem()
+                                            .setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary))
                                             .setShowTitle(true)
                                             .build();
 
                                     // This is optional but recommended
-                                    CustomTabsHelper.Companion.addKeepAliveExtra(getApplicationContext(), customTabsIntent.intent);
+                                    CustomTabsHelper.Companion.addKeepAliveExtra(activity, customTabsIntent.intent);
 
                                     // This is where the magic happens...
-                                    CustomTabsHelper.Companion.openCustomTab(getApplicationContext(), customTabsIntent,
+                                    CustomTabsHelper.Companion.openCustomTab(activity, customTabsIntent,
                                             Uri.parse(url),
                                             new WebViewFallback());
                                 } catch (Exception e) {
