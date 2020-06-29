@@ -72,24 +72,12 @@ public class Activity_Settings extends AppCompatActivity {
             setPreferencesFromResource(R.xml.user_settings, rootKey);
 
             findPreference("settings_help").setOnPreferenceClickListener(preference -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setPositiveButton(R.string.toast_cancel, (dialog, id) -> dialog.cancel());
-                builder.setTitle(R.string.dialog_help_title);
-                builder.setMessage(Class_Helper.textSpannable(requireActivity().getString(R.string.dialog_help_text)));
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                ((TextView)dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+                createInfoDialog(requireActivity(), R.string.dialog_help_title, R.string.dialog_help_text);
                 return false;
             });
 
             findPreference("settings_license").setOnPreferenceClickListener(preference -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setPositiveButton(R.string.toast_cancel, (dialog, id) -> dialog.cancel());
-                builder.setTitle(R.string.dialog_license_title);
-                builder.setMessage(Class_Helper.textSpannable(requireActivity().getString(R.string.dialog_license_text)));
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                ((TextView)dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+                createInfoDialog(requireActivity(), R.string.dialog_license_title, R.string.dialog_license_text);
                 return false;
             });
 
@@ -126,6 +114,16 @@ public class Activity_Settings extends AppCompatActivity {
                 dialog.show();
                 return false;
             });
+        }
+
+        public static void createInfoDialog(Activity activity, int p, int p2) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setPositiveButton(R.string.toast_yes, (dialog, id) -> dialog.cancel());
+            builder.setTitle(p);
+            builder.setMessage(Class_Helper.textSpannable(activity.getString(p2)));
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            ((TextView) dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
         }
     }
 
