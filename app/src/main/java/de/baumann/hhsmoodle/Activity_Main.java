@@ -357,6 +357,17 @@ public class Activity_Main extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        try{
+            Uri uri = Objects.requireNonNull(getIntent().getData());
+            String url = uri.toString();
+            mWebView.loadUrl(url);
+            setIntent(null);
+        }catch (Exception ignore){}
+    }
+
     private void openInCustomTabs(String url) {
         try {
             CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
