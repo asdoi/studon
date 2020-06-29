@@ -50,6 +50,7 @@ import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
 import android.webkit.URLUtil;
 import android.webkit.ValueCallback;
+import android.webkit.WebBackForwardList;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -91,6 +92,7 @@ public class Activity_Main extends AppCompatActivity {
 
     public static final String DEFAULT_WEBSITE = "https://lernplattform.mebis.bayern.de/";
     public static final String MEBIS = "mebis.bayern.de";
+    public static final String LOGIN_SITE = "idp.mebis.bayern.de";
     public static final String DASHBOARD = "Schreibtisch";
 
     private WebView mWebView;
@@ -620,7 +622,12 @@ public class Activity_Main extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (mWebView.canGoBack()) {
-            mWebView.goBack();
+            WebBackForwardList currentList = mWebView.copyBackForwardList();
+            if(currentList.getItemAtIndex(0).getUrl().contains(LOGIN_SITE)){
+                mWebView.destroy();
+                finish();
+            }else
+                mWebView.goBack();
         } else {
             mWebView.destroy();
             finish();
