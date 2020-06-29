@@ -159,6 +159,7 @@ public class Activity_Main extends AppCompatActivity {
             }
 
             private boolean handleUri(final WebView webView, final Uri uri) {
+                pressedBack = false;
 
                 final String url = uri.toString();
                 loadUrl = true;
@@ -588,18 +589,23 @@ public class Activity_Main extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    private static boolean pressedBack = false;
+
     @Override
     public void onBackPressed() {
-        if (mWebView.canGoBack()) {
-            WebBackForwardList currentList = mWebView.copyBackForwardList();
-            if (currentList.getItemAtIndex(0).getUrl().contains(LOGIN_SITE)) {
-                mWebView.destroy();
-                finish();
-            } else
-                mWebView.goBack();
+        WebBackForwardList currentList = mWebView.copyBackForwardList();
+
+        if (mWebView.canGoBack() && (currentList.getSize() > 0 && !currentList.getItemAtIndex(0).getUrl().contains(LOGIN_SITE))) {
+            mWebView.goBack();
         } else {
-            mWebView.destroy();
-            finish();
+            if (pressedBack) {
+                mWebView.destroy();
+                finishAffinity();
+                pressedBack = false;
+            } else {
+                Toast.makeText(getApplicationContext(), R.string.back_button, Toast.LENGTH_LONG).show();
+                pressedBack = true;
+            }
         }
     }
 
