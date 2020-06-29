@@ -3,11 +3,13 @@ package de.baumann.hhsmoodle;
 
 class GridItem_Menu {
     private final String title;
+
     String getTitle() {
         return title;
     }
 
     private final int icon;
+
     int getIcon() {
         return icon;
     }

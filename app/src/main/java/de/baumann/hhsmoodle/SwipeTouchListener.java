@@ -13,7 +13,7 @@ public class SwipeTouchListener implements OnTouchListener {
 
     private final GestureDetector gestureDetector;
 
-    public SwipeTouchListener(Context ctx){
+    public SwipeTouchListener(Context ctx) {
         gestureDetector = new GestureDetector(ctx, new GestureListener());
     }
 
@@ -48,8 +48,7 @@ public class SwipeTouchListener implements OnTouchListener {
                         }
                     }
                     result = true;
-                }
-                else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
+                } else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
                     if (diffY > 0) {
                         onSwipeBottom();
                     } else {

@@ -30,7 +30,6 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.util.Linkify;
 import android.view.View;
-import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -50,11 +49,11 @@ class Class_Helper {
 
     // Messages, Toasts, ...
 
-    static SpannableString textSpannable (String text) {
+    static SpannableString textSpannable(String text) {
         SpannableString s;
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            s = new SpannableString(Html.fromHtml(text,Html.FROM_HTML_MODE_LEGACY));
+            s = new SpannableString(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY));
         } else {
             s = new SpannableString(Html.fromHtml(text));
         }
@@ -79,33 +78,53 @@ class Class_Helper {
         assert be != null;
 
         switch (string) {
-            case "15":be.setImageResource(R.drawable.circle_pink);
-                sharedPref.edit().putString("bookmarks_icon", "15").apply();break;
-            case "16":be.setImageResource(R.drawable.circle_purple);
-                sharedPref.edit().putString("bookmarks_icon", "16").apply();break;
-            case "17":be.setImageResource(R.drawable.circle_blue);
-                sharedPref.edit().putString("bookmarks_icon", "17").apply();break;
-            case "18":be.setImageResource(R.drawable.circle_teal);
-                sharedPref.edit().putString("bookmarks_icon", "18").apply();break;
-            case "19":be.setImageResource(R.drawable.circle_green);
-                sharedPref.edit().putString("bookmarks_icon", "19").apply();break;
-            case "20":be.setImageResource(R.drawable.circle_lime);
-                sharedPref.edit().putString("bookmarks_icon", "20").apply();break;
-            case "21":be.setImageResource(R.drawable.circle_yellow);
-                sharedPref.edit().putString("bookmarks_icon", "21").apply();break;
-            case "22":be.setImageResource(R.drawable.circle_orange);
-                sharedPref.edit().putString("bookmarks_icon", "22").apply();break;
-            case "23":be.setImageResource(R.drawable.circle_brown);
-                sharedPref.edit().putString("bookmarks_icon", "23").apply();break;
-            default:be.setImageResource(R.drawable.circle_red);
-                sharedPref.edit().putString("bookmarks_icon", "14").apply();break;
+            case "15":
+                be.setImageResource(R.drawable.circle_pink);
+                sharedPref.edit().putString("bookmarks_icon", "15").apply();
+                break;
+            case "16":
+                be.setImageResource(R.drawable.circle_purple);
+                sharedPref.edit().putString("bookmarks_icon", "16").apply();
+                break;
+            case "17":
+                be.setImageResource(R.drawable.circle_blue);
+                sharedPref.edit().putString("bookmarks_icon", "17").apply();
+                break;
+            case "18":
+                be.setImageResource(R.drawable.circle_teal);
+                sharedPref.edit().putString("bookmarks_icon", "18").apply();
+                break;
+            case "19":
+                be.setImageResource(R.drawable.circle_green);
+                sharedPref.edit().putString("bookmarks_icon", "19").apply();
+                break;
+            case "20":
+                be.setImageResource(R.drawable.circle_lime);
+                sharedPref.edit().putString("bookmarks_icon", "20").apply();
+                break;
+            case "21":
+                be.setImageResource(R.drawable.circle_yellow);
+                sharedPref.edit().putString("bookmarks_icon", "21").apply();
+                break;
+            case "22":
+                be.setImageResource(R.drawable.circle_orange);
+                sharedPref.edit().putString("bookmarks_icon", "22").apply();
+                break;
+            case "23":
+                be.setImageResource(R.drawable.circle_brown);
+                sharedPref.edit().putString("bookmarks_icon", "23").apply();
+                break;
+            default:
+                be.setImageResource(R.drawable.circle_red);
+                sharedPref.edit().putString("bookmarks_icon", "14").apply();
+                break;
         }
     }
 
     // Strings, files, ...
 
-    static String secString (String string) {
-        return  string.replaceAll("'", "\'\'");
+    static String secString(String string) {
+        return string.replaceAll("'", "\'\'");
     }
 
     static void grantPermissionsStorage(final Activity activity) {
@@ -140,6 +159,7 @@ class Class_Helper {
                     dialog.cancel();
                 }
             }
+
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
             }
@@ -152,7 +172,7 @@ class Class_Helper {
     private static SharedPreferences sharedPref;
 
     @SuppressLint("ApplySharedPref")
-    static void setLoginData (final Activity activity, Runnable runOnSuccess, Runnable runOnCancel) {
+    static void setLoginData(final Activity activity, Runnable runOnSuccess, Runnable runOnCancel) {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             final View dialogView = View.inflate(activity, R.layout.dialog_edit_login, null);
@@ -168,7 +188,7 @@ class Class_Helper {
                 final String password = moodle_userPW.getText().toString().trim();
                 final String link = moodle_link.getText().toString().trim();
 
-                if (username.length() < 1 || password.length() < 1  || link.length() < 1 ) {
+                if (username.length() < 1 || password.length() < 1 || link.length() < 1) {
                     Toast.makeText(activity, activity.getString(R.string.login_text_edit), Toast.LENGTH_SHORT).show();
                     setLoginData(activity, runOnSuccess, runOnCancel);
                 } else {
@@ -182,7 +202,10 @@ class Class_Helper {
                     runOnSuccess.run();
                 }
             });
-            builder.setNegativeButton(R.string.toast_cancel, (dialog, whichButton) -> {dialog.cancel(); runOnCancel.run();});
+            builder.setNegativeButton(R.string.toast_cancel, (dialog, whichButton) -> {
+                dialog.cancel();
+                runOnCancel.run();
+            });
             final AlertDialog dialog = builder.create();
             dialog.show();
         } catch (Exception e) {
@@ -190,7 +213,7 @@ class Class_Helper {
         }
     }
 
-    static void checkPin (final Activity activity) {
+    static void checkPin(final Activity activity) {
 
         PreferenceManager.setDefaultValues(activity, R.xml.user_settings, false);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
@@ -292,7 +315,7 @@ class Class_Helper {
         }
     }
 
-    private static void enterNum (View view, String number) {
+    private static void enterNum(View view, String number) {
         TextView text = view.findViewById(R.id.pass_userPin);
         String textNow = text.getText().toString().trim();
         String pin = textNow + number;

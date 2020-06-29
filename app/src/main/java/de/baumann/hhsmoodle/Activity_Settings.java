@@ -22,20 +22,19 @@ package de.baumann.hhsmoodle;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
-
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import java.util.Objects;
 
@@ -54,7 +53,7 @@ public class Activity_Settings extends AppCompatActivity {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -72,24 +71,27 @@ public class Activity_Settings extends AppCompatActivity {
             setPreferencesFromResource(R.xml.user_settings, rootKey);
 
             findPreference("settings_help").setOnPreferenceClickListener(preference -> {
-                createInfoDialog(requireActivity(), R.string.dialog_help_title, R.string.dialog_help_text, () -> {});
+                createInfoDialog(requireActivity(), R.string.dialog_help_title, R.string.dialog_help_text, () -> {
+                });
                 return false;
             });
 
             findPreference("settings_license").setOnPreferenceClickListener(preference -> {
-                createInfoDialog(requireActivity(), R.string.dialog_license_title, R.string.dialog_license_text, () -> {});
+                createInfoDialog(requireActivity(), R.string.dialog_license_title, R.string.dialog_license_text, () -> {
+                });
                 return false;
             });
 
             findPreference("settings_security_moodle").setOnPreferenceClickListener(preference -> {
-                Class_Helper.setLoginData (getActivity(), ()-> {
+                Class_Helper.setLoginData(getActivity(), () -> {
                     Intent i = getContext().getPackageManager().
-                        getLaunchIntentForPackage(getContext().getPackageName());
+                            getLaunchIntentForPackage(getContext().getPackageName());
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(i);
                     getActivity().finish();
-                }, () -> {});
+                }, () -> {
+                });
                 return false;
             });
 
@@ -119,7 +121,10 @@ public class Activity_Settings extends AppCompatActivity {
 
     public static void createInfoDialog(Activity activity, int p, int p2, Runnable runOnOk) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setPositiveButton(R.string.toast_yes, (dialog, id) -> {dialog.cancel(); runOnOk.run();});
+        builder.setPositiveButton(R.string.toast_yes, (dialog, id) -> {
+            dialog.cancel();
+            runOnOk.run();
+        });
         builder.setTitle(p);
         builder.setMessage(Class_Helper.textSpannable(activity.getString(p2)));
         AlertDialog dialog = builder.create();
@@ -135,14 +140,14 @@ public class Activity_Settings extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-           onBackPressed();
+            onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         Class_Helper.switchToActivity(Activity_Settings.this, Activity_Main.class);
     }
 }

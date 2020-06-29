@@ -14,7 +14,8 @@
         android:scaleType="fitCenter"
         android:src="@drawable/circle_red" />
 
-    <TextView android:id="@+id/item_title"
+    <TextView
+        android:id="@+id/item_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
@@ -22,6 +23,6 @@
         android:includeFontPadding="false"
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:maxLines="1"
-        android:ellipsize="end"/>
+        android:ellipsize="end" />
 
 </LinearLayout>

@@ -28,7 +28,7 @@
                 android:textColor="@color/color_light"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
 
         </RelativeLayout>
 
@@ -42,13 +42,13 @@
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:maxHeight="4dp"
-        android:progressTint="?android:attr/colorAccent"/>
+        android:progressTint="?android:attr/colorAccent" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:background="@drawable/toolbar_drop_shadow"
         android:layout_gravity="top|center"
-        app:layout_anchor="@+id/bar"/>
+        app:layout_anchor="@+id/bar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

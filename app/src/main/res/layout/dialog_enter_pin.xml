@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?android:attr/colorBackground" >
+    android:background="?android:attr/colorBackground">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="32dp" >
+        android:padding="32dp">
 
         <TextView
             android:visibility="gone"
@@ -38,7 +38,7 @@
                 android:textSize="24sp"
                 android:progressTint="?android:attr/colorAccent"
                 tools:ignore="HardcodedText"
-                style="?android:attr/buttonBarStyle"/>
+                style="?android:attr/buttonBarStyle" />
 
             <Button
                 android:text="2"
@@ -50,7 +50,7 @@
                 android:textSize="24sp"
                 android:progressTint="?android:attr/colorAccent"
                 tools:ignore="HardcodedText"
-                style="?android:attr/buttonBarStyle"/>
+                style="?android:attr/buttonBarStyle" />
 
             <Button
                 android:text="3"
@@ -62,14 +62,14 @@
                 android:textSize="24sp"
                 android:progressTint="?android:attr/colorAccent"
                 tools:ignore="HardcodedText"
-                style="?android:attr/buttonBarStyle"/>
+                style="?android:attr/buttonBarStyle" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:text="4"
@@ -81,7 +81,7 @@
                 android:textSize="24sp"
                 android:progressTint="?android:attr/colorAccent"
                 tools:ignore="HardcodedText"
-                style="?android:attr/buttonBarStyle"/>
+                style="?android:attr/buttonBarStyle" />
 
             <Button
                 android:text="5"
@@ -93,7 +93,7 @@
                 android:textSize="24sp"
                 android:progressTint="?android:attr/colorAccent"
                 tools:ignore="HardcodedText"
-                style="?android:attr/buttonBarStyle"/>
+                style="?android:attr/buttonBarStyle" />
 
             <Button
                 android:text="6"
@@ -105,7 +105,7 @@
                 android:textSize="24sp"
                 android:progressTint="?android:attr/colorAccent"
                 tools:ignore="HardcodedText"
-                style="?android:attr/buttonBarStyle"/>
+                style="?android:attr/buttonBarStyle" />
 
         </LinearLayout>
 
@@ -124,7 +124,7 @@
                 android:textSize="24sp"
                 android:progressTint="?android:attr/colorAccent"
                 tools:ignore="HardcodedText"
-                style="?android:attr/buttonBarStyle"/>
+                style="?android:attr/buttonBarStyle" />
 
             <Button
                 android:text="8"
@@ -136,7 +136,7 @@
                 android:textSize="24sp"
                 android:progressTint="?android:attr/colorAccent"
                 tools:ignore="HardcodedText"
-                style="?android:attr/buttonBarStyle"/>
+                style="?android:attr/buttonBarStyle" />
 
             <Button
                 android:text="9"
@@ -148,7 +148,7 @@
                 android:textSize="24sp"
                 android:progressTint="?android:attr/colorAccent"
                 tools:ignore="HardcodedText"
-                style="?android:attr/buttonBarStyle"/>
+                style="?android:attr/buttonBarStyle" />
 
         </LinearLayout>
 
@@ -156,7 +156,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            tools:ignore="ContentDescription" >
+            tools:ignore="ContentDescription">
 
             <ImageButton
                 android:layout_width="75dp"
@@ -177,7 +177,7 @@
                 android:textSize="24sp"
                 android:progressTint="?android:attr/colorAccent"
                 tools:ignore="HardcodedText"
-                style="?android:attr/buttonBarStyle"/>
+                style="?android:attr/buttonBarStyle" />
 
             <ImageButton
                 android:layout_width="75dp"

@@ -32,23 +32,23 @@ import androidx.preference.PreferenceManager;
 class Bookmarks_Database {
 
     //define static variable
-    private static final int dbVersion =6;
+    private static final int dbVersion = 6;
     private static final String dbName = "bookmarks_DB_v01.db";
     private static final String dbTable = "bookmarks";
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseHelper(Context context) {
-            super(context,dbName,null, dbVersion);
+            super(context, dbName, null, dbVersion);
         }
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL("CREATE TABLE IF NOT EXISTS "+dbTable+" (_id INTEGER PRIMARY KEY autoincrement, bookmarks_title, bookmarks_content, bookmarks_icon, bookmarks_attachment, UNIQUE(bookmarks_content))");
+            db.execSQL("CREATE TABLE IF NOT EXISTS " + dbTable + " (_id INTEGER PRIMARY KEY autoincrement, bookmarks_title, bookmarks_content, bookmarks_icon, bookmarks_attachment, UNIQUE(bookmarks_content))");
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS "+dbTable);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTable);
             onCreate(db);
         }
     }
@@ -60,6 +60,7 @@ class Bookmarks_Database {
     Bookmarks_Database(Context context) {
         this.c = context;
     }
+
     void open() throws SQLException {
         DatabaseHelper dbHelper = new DatabaseHelper(c);
         sqlDb = dbHelper.getWritableDatabase();
@@ -68,31 +69,33 @@ class Bookmarks_Database {
     //insert data
     @SuppressWarnings("SameParameterValue")
     void insert(String bookmarks_title, String bookmarks_content, String bookmarks_icon, String bookmarks_attachment) {
-        if(!isExist(bookmarks_title)) {
+        if (!isExist(bookmarks_title)) {
             sqlDb.execSQL("INSERT INTO bookmarks (bookmarks_title, bookmarks_content, bookmarks_icon, bookmarks_attachment) VALUES('" + bookmarks_title + "','" + bookmarks_content + "','" + bookmarks_icon + "','" + bookmarks_attachment + "')");
         }
     }
+
     //check entry already in database or not
-    boolean isExist(String bookmarks_content){
-        String query = "SELECT bookmarks_content FROM bookmarks WHERE bookmarks_content='"+bookmarks_content+"' LIMIT 1";
+    boolean isExist(String bookmarks_content) {
+        String query = "SELECT bookmarks_content FROM bookmarks WHERE bookmarks_content='" + bookmarks_content + "' LIMIT 1";
         @SuppressLint("Recycle") Cursor row = sqlDb.rawQuery(query, null);
         return row.moveToFirst();
     }
+
     //edit data
-    void update(int id,String bookmarks_title,String bookmarks_content,String bookmarks_icon,String bookmarks_attachment) {
-        sqlDb.execSQL("UPDATE "+dbTable+" SET bookmarks_title='"+bookmarks_title+"', bookmarks_content='"+bookmarks_content+"', bookmarks_icon='"+bookmarks_icon+"', bookmarks_attachment='"+bookmarks_attachment+"'   WHERE _id=" + id);
+    void update(int id, String bookmarks_title, String bookmarks_content, String bookmarks_icon, String bookmarks_attachment) {
+        sqlDb.execSQL("UPDATE " + dbTable + " SET bookmarks_title='" + bookmarks_title + "', bookmarks_content='" + bookmarks_content + "', bookmarks_icon='" + bookmarks_icon + "', bookmarks_attachment='" + bookmarks_attachment + "'   WHERE _id=" + id);
     }
 
     //delete data
     void delete(int id) {
-        sqlDb.execSQL("DELETE FROM "+dbTable+" WHERE _id="+id);
+        sqlDb.execSQL("DELETE FROM " + dbTable + " WHERE _id=" + id);
     }
 
     //fetch data
     Cursor fetchAllData(Context context) {
         PreferenceManager.setDefaultValues(context, R.xml.user_settings, false);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        String[] columns = new String[]{"_id", "bookmarks_title", "bookmarks_content", "bookmarks_icon","bookmarks_attachment"};
+        String[] columns = new String[]{"_id", "bookmarks_title", "bookmarks_content", "bookmarks_icon", "bookmarks_attachment"};
 
         switch (sp.getString("sortDBB", "title")) {
             case "title":

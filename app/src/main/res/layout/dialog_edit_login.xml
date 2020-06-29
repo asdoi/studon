@@ -1,5 +1,4 @@
-<ScrollView
-    android:layout_width="match_parent"
+<ScrollView android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,7 +16,7 @@
             android:layout_margin="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold"
-            android:text="@string/login_automatic_title"/>
+            android:text="@string/login_automatic_title" />
 
         <TextView
             android:layout_width="match_parent"
@@ -25,7 +24,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:text="@string/settings_security_moodle_summary"/>
+            android:text="@string/settings_security_moodle_summary" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -33,7 +32,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:visibility="gone"
-            app:passwordToggleEnabled="false" >
+            app:passwordToggleEnabled="false">
 
             <EditText
                 android:id="@+id/moodle_link"
@@ -50,7 +49,7 @@
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="false"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp" >
+            android:layout_marginEnd="16dp">
 
             <EditText
                 android:id="@+id/moodle_userName"

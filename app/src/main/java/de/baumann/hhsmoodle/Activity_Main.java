@@ -27,7 +27,6 @@ import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -43,11 +42,9 @@ import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
 import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.CookieManager;
-import android.webkit.DownloadListener;
 import android.webkit.URLUtil;
 import android.webkit.ValueCallback;
 import android.webkit.WebBackForwardList;
@@ -56,7 +53,6 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -68,12 +64,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.preference.PreferenceManager;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
 
@@ -202,16 +197,17 @@ public class Activity_Main extends AppCompatActivity {
                 String password = sharedPref.getString("password", "");
 
                 final String js = "javascript:" +
-                        "document.getElementById('password').value = '" + password + "';"  +
+                        "document.getElementById('password').value = '" + password + "';" +
                         "document.getElementById('username').value = '" + username + "';" +
                         "document.getElementById('submitbutton').click();";
 
-                view.evaluateJavascript(js, s -> {});
+                view.evaluateJavascript(js, s -> {
+                });
             }
         });
 
         mWebView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) -> {
-            final String filename= URLUtil.guessFileName(url, contentDisposition, mimetype);
+            final String filename = URLUtil.guessFileName(url, contentDisposition, mimetype);
             String text = getString(R.string.toast_download_1) + " " + filename;
 
             final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(activity);
@@ -252,7 +248,7 @@ public class Activity_Main extends AppCompatActivity {
 
         registerForContextMenu(mWebView);
 
-        if(WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK) && sharedPref.getBoolean("nightMode", false)) {
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK) && sharedPref.getBoolean("nightMode", false)) {
             int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
             switch (currentNightMode) {
                 case Configuration.UI_MODE_NIGHT_NO:
@@ -270,17 +266,21 @@ public class Activity_Main extends AppCompatActivity {
 
         bottomAppBar.setOnTouchListener(new SwipeTouchListener(activity) {
             public void onSwipeTop() {
-                scrollView.smoothScrollTo(0,0);
+                scrollView.smoothScrollTo(0, 0);
             }
+
             public void onSwipeBottom() {
-                scrollView.smoothScrollTo(0,1000000000);
-            }public void onSwipeRight() {
+                scrollView.smoothScrollTo(0, 1000000000);
+            }
+
+            public void onSwipeRight() {
                 if (mWebView.canGoForward()) {
                     mWebView.goForward();
                 } else {
                     Toast.makeText(activity, getString(R.string.toast_notForward), Toast.LENGTH_SHORT).show();
                 }
             }
+
             public void onSwipeLeft() {
                 if (mWebView.canGoBack()) {
                     mWebView.goBack();
@@ -299,17 +299,21 @@ public class Activity_Main extends AppCompatActivity {
 
         fab.setOnTouchListener(new SwipeTouchListener(activity) {
             public void onSwipeTop() {
-                scrollView.smoothScrollTo(0,0);
+                scrollView.smoothScrollTo(0, 0);
             }
+
             public void onSwipeBottom() {
-                scrollView.smoothScrollTo(0,1000000000);
-            }public void onSwipeRight() {
+                scrollView.smoothScrollTo(0, 1000000000);
+            }
+
+            public void onSwipeRight() {
                 if (mWebView.canGoForward()) {
                     mWebView.goForward();
                 } else {
                     Toast.makeText(activity, getString(R.string.toast_notForward), Toast.LENGTH_SHORT).show();
                 }
             }
+
             public void onSwipeLeft() {
                 if (mWebView.canGoBack()) {
                     mWebView.goBack();
@@ -321,27 +325,28 @@ public class Activity_Main extends AppCompatActivity {
 
         try {
             if (sharedPref.getString("username", "").length() < 1 ||
-                    sharedPref.getString("password", "").length() < 1  ||
-                    sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE).length() < 1 ) {
+                    sharedPref.getString("password", "").length() < 1 ||
+                    sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE).length() < 1) {
                 throw new Exception();
             } else {
                 mWebView.loadUrl(sharedPref.getString("favoriteURL", Activity_Main.DEFAULT_WEBSITE));
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Class_Helper.setLoginData (activity, () -> Activity_Settings.createInfoDialog(this, R.string.dialog_help_title, R.string.dialog_help_text, this::recreate), this::finishAffinity);
+            Class_Helper.setLoginData(activity, () -> Activity_Settings.createInfoDialog(this, R.string.dialog_help_title, R.string.dialog_help_text, this::recreate), this::finishAffinity);
         }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        try{
+        try {
             Uri uri = Objects.requireNonNull(getIntent().getData());
             String url = uri.toString();
             mWebView.loadUrl(url);
             setIntent(null);
-        }catch (Exception ignore){}
+        } catch (Exception ignore) {
+        }
     }
 
     private void openInCustomTabs(String url) {
@@ -365,7 +370,7 @@ public class Activity_Main extends AppCompatActivity {
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         WebView.HitTestResult result = mWebView.getHitTestResult();
         if (result.getType() == WebView.HitTestResult.SRC_ANCHOR_TYPE) {
@@ -379,7 +384,7 @@ public class Activity_Main extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if(WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK) && sharedPref.getBoolean("nightMode", false)) {
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK) && sharedPref.getBoolean("nightMode", false)) {
             int currentNightMode = newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK;
             switch (currentNightMode) {
                 case Configuration.UI_MODE_NIGHT_NO:
@@ -425,7 +430,7 @@ public class Activity_Main extends AppCompatActivity {
         });
     }
 
-    private void openBookmarkDialog () {
+    private void openBookmarkDialog() {
         db = new Bookmarks_Database(activity);
         db.open();
         bottomSheetDialog = new BottomSheetDialog(Objects.requireNonNull(activity));
@@ -439,7 +444,7 @@ public class Activity_Main extends AppCompatActivity {
         bottomSheetDialog.show();
     }
 
-    private void openMenu () {
+    private void openMenu() {
         bottomSheetDialog = new BottomSheetDialog(Objects.requireNonNull(activity));
         View dialogView = View.inflate(activity, R.layout.grid_layout, null);
         TextView menuTitle = dialogView.findViewById(R.id.grid_title);
@@ -494,9 +499,9 @@ public class Activity_Main extends AppCompatActivity {
                         bottomSheetDialog.cancel();
                         final Bookmarks_Database db = new Bookmarks_Database(activity);
                         db.open();
-                        if(db.isExist(Class_Helper.secString(mWebView.getUrl()))){
+                        if (db.isExist(Class_Helper.secString(mWebView.getUrl()))) {
                             Toast.makeText(activity, getString(R.string.bookmark_saved_not), Toast.LENGTH_SHORT).show();
-                        }else{
+                        } else {
                             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                             View dialogView1 = View.inflate(activity, R.layout.dialog_edit_title, null);
                             final EditText edit_title = dialogView1.findViewById(R.id.pass_title);
@@ -587,10 +592,10 @@ public class Activity_Main extends AppCompatActivity {
     public void onBackPressed() {
         if (mWebView.canGoBack()) {
             WebBackForwardList currentList = mWebView.copyBackForwardList();
-            if(currentList.getItemAtIndex(0).getUrl().contains(LOGIN_SITE)){
+            if (currentList.getItemAtIndex(0).getUrl().contains(LOGIN_SITE)) {
                 mWebView.destroy();
                 finish();
-            }else
+            } else
                 mWebView.goBack();
         } else {
             mWebView.destroy();
@@ -601,14 +606,14 @@ public class Activity_Main extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode != INPUT_FILE_REQUEST_CODE || mFilePathCallback == null) {
+        if (requestCode != INPUT_FILE_REQUEST_CODE || mFilePathCallback == null) {
             super.onActivityResult(requestCode, resultCode, data);
             return;
         }
         Uri[] results = null;
         // Check that the response is a good one
-        if(resultCode == Activity.RESULT_OK) {
-            if(data != null) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (data != null) {
                 // If there is not data, then we may have taken a photo
                 String dataString = data.getDataString();
                 if (dataString != null) {
@@ -642,10 +647,10 @@ public class Activity_Main extends AppCompatActivity {
 
         //display data
         final int layoutStyle = R.layout.item;
-        int[] xml_id = new int[] {
+        int[] xml_id = new int[]{
                 R.id.item_title
         };
-        String[] column = new String[] {
+        String[] column = new String[]{
                 "bookmarks_title"
         };
         final Cursor row = db.fetchAllData(activity);
@@ -872,7 +877,7 @@ public class Activity_Main extends AppCompatActivity {
         }
 
         public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
-            if(mFilePathCallback != null) {
+            if (mFilePathCallback != null) {
                 mFilePathCallback.onReceiveValue(null);
             }
             mFilePathCallback = filePathCallback;

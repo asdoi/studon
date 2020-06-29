@@ -20,7 +20,7 @@
         android:title="@string/setting_sort"
         android:summary="@string/setting_sort_summary"
         android:entries="@array/setting_entries_sort"
-        android:entryValues="@array/setting_values_sort"/>
+        android:entryValues="@array/setting_values_sort" />
 
     <ListPreference
         android:icon="@drawable/icon_columns"
@@ -29,21 +29,21 @@
         android:title="@string/setting_columns"
         android:summary="@string/setting_columns_summary"
         android:entries="@array/setting_entries_columns"
-        android:entryValues="@array/setting_values_columns"/>
+        android:entryValues="@array/setting_values_columns" />
 
     <CheckBoxPreference
         android:key="nightMode"
         android:defaultValue="false"
         android:icon="@drawable/icon_night"
         android:title="@string/setting_nightMode"
-        android:summary="@string/setting_nightMode_summary"/>
+        android:summary="@string/setting_nightMode_summary" />
 
     <CheckBoxPreference
         android:key="external"
         android:defaultValue="true"
         android:icon="@drawable/icon_exit"
         android:title="@string/setting_external"
-        android:summary="@string/setting_external_summary"/>
+        android:summary="@string/setting_external_summary" />
 
     <Preference
         android:icon="@drawable/icon_help"
