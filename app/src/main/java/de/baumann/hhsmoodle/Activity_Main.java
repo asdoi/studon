@@ -178,23 +178,7 @@ public class Activity_Main extends AppCompatActivity {
                         action_ok.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                try {
-                                    CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-                                            .addDefaultShareMenuItem()
-                                            .setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary))
-                                            .setShowTitle(true)
-                                            .build();
-
-                                    // This is optional but recommended
-                                    CustomTabsHelper.Companion.addKeepAliveExtra(activity, customTabsIntent.intent);
-
-                                    // This is where the magic happens...
-                                    CustomTabsHelper.Companion.openCustomTab(activity, customTabsIntent,
-                                            Uri.parse(url),
-                                            new WebViewFallback());
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
+                                openInCustomTabs(url);
                             }
                         });
                         bottomSheetDialog.setContentView(dialogView);
@@ -368,6 +352,26 @@ public class Activity_Main extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
             Class_Helper.setLoginData (activity, this::recreate, this::finishAffinity);
+        }
+    }
+
+    private void openInCustomTabs(String url) {
+        try {
+            CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+                    .addDefaultShareMenuItem()
+                    .setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary))
+                    .setShowTitle(true)
+                    .build();
+
+            // This is optional but recommended
+            CustomTabsHelper.Companion.addKeepAliveExtra(activity, customTabsIntent.intent);
+
+            // This is where the magic happens...
+            CustomTabsHelper.Companion.openCustomTab(activity, customTabsIntent,
+                    Uri.parse(url),
+                    new WebViewFallback());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -597,9 +601,7 @@ public class Activity_Main extends AppCompatActivity {
                         break;
                     case 6:
                         bottomSheetDialog.cancel();
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(Uri.parse(mWebView.getUrl()));
-                        startActivity(i);
+                        openInCustomTabs(mWebView.getUrl());
                         break;
                 }
             }
