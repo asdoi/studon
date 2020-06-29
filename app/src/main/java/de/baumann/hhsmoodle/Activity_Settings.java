@@ -137,9 +137,14 @@ public class Activity_Settings extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Class_Helper.switchToActivity(Activity_Settings.this, Activity_Main.class);
+           onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Class_Helper.switchToActivity(Activity_Settings.this, Activity_Main.class);
     }
 }
