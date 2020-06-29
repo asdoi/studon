@@ -347,13 +347,13 @@ public class Activity_Main extends AppCompatActivity {
             if (sharedPref.getString("username", "").length() < 1 ||
                     sharedPref.getString("password", "").length() < 1  ||
                     sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE).length() < 1 ) {
-                Class_Helper.setLoginData (activity, this::recreate, this::finishAffinity);
+                throw new Exception();
             } else {
                 mWebView.loadUrl(sharedPref.getString("favoriteURL", Activity_Main.DEFAULT_WEBSITE));
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Class_Helper.setLoginData (activity, this::recreate, this::finishAffinity);
+            Class_Helper.setLoginData (activity, () -> Activity_Settings.createInfoDialog(this, R.string.dialog_help_title, R.string.dialog_help_text, this::recreate), this::finishAffinity);
         }
     }
 

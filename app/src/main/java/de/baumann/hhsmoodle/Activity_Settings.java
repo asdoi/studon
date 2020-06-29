@@ -72,12 +72,12 @@ public class Activity_Settings extends AppCompatActivity {
             setPreferencesFromResource(R.xml.user_settings, rootKey);
 
             findPreference("settings_help").setOnPreferenceClickListener(preference -> {
-                createInfoDialog(requireActivity(), R.string.dialog_help_title, R.string.dialog_help_text);
+                createInfoDialog(requireActivity(), R.string.dialog_help_title, R.string.dialog_help_text, () -> {});
                 return false;
             });
 
             findPreference("settings_license").setOnPreferenceClickListener(preference -> {
-                createInfoDialog(requireActivity(), R.string.dialog_license_title, R.string.dialog_license_text);
+                createInfoDialog(requireActivity(), R.string.dialog_license_title, R.string.dialog_license_text, () -> {});
                 return false;
             });
 
@@ -115,16 +115,16 @@ public class Activity_Settings extends AppCompatActivity {
                 return false;
             });
         }
+    }
 
-        public static void createInfoDialog(Activity activity, int p, int p2) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            builder.setPositiveButton(R.string.toast_yes, (dialog, id) -> dialog.cancel());
-            builder.setTitle(p);
-            builder.setMessage(Class_Helper.textSpannable(activity.getString(p2)));
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            ((TextView) dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
-        }
+    public static void createInfoDialog(Activity activity, int p, int p2, Runnable runOnOk) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setPositiveButton(R.string.toast_yes, (dialog, id) -> {dialog.cancel(); runOnOk.run();});
+        builder.setTitle(p);
+        builder.setMessage(Class_Helper.textSpannable(activity.getString(p2)));
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        ((TextView) dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
