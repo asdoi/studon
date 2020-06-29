@@ -120,7 +120,7 @@
 
     <string name="settings_security_moodle">Logindaten (Mebis)</string>
     <string name="settings_security_moodle_summary">Bitte gib deinen Mebisdaten an. Sie werden dann auf der Anmeldeseite automatisch eingefügt. Nach dem
-        Bearbeiten die App neu starten und evtl. veraltete Lesezeichen löschen.</string>
+        Bearbeiten evtl. veraltete Lesezeichen löschen.</string>
 
     <string name="settings_license_about_summary">Erfahre mehr über die App.</string>
 
