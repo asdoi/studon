@@ -193,10 +193,13 @@ public class Activity_Main extends AppCompatActivity {
                 return true;//do nothing in other cases
             }
 
+            @Override
+            public void onPageCommitVisible(WebView view, String url) {
+                scrollView.scrollTo(0, 0);
+            }
+
             public void onPageFinished(WebView view, final String url) {
                 super.onPageFinished(view, url);
-
-                scrollView.scrollTo(0, 250);
 
                 if (url.contains(LOGIN_SITE)) {
                     String username = sharedPref.getString("username", "");
