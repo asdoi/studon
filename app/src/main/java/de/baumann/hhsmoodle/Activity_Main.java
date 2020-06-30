@@ -123,6 +123,8 @@ public class Activity_Main extends AppCompatActivity {
 
         activity = Activity_Main.this;
 
+        final NestedScrollView scrollView = findViewById(R.id.scrollView);
+
         PreferenceManager.setDefaultValues(activity, R.xml.user_settings, false);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
         columns = Integer.parseInt(sharedPref.getString("columns", "2"));
@@ -194,16 +196,20 @@ public class Activity_Main extends AppCompatActivity {
             public void onPageFinished(WebView view, final String url) {
                 super.onPageFinished(view, url);
 
-                String username = sharedPref.getString("username", "");
-                String password = sharedPref.getString("password", "");
+                scrollView.scrollTo(0, 250);
 
-                final String js = "javascript:" +
-                        "document.getElementById('password').value = '" + password + "';" +
-                        "document.getElementById('username').value = '" + username + "';" +
-                        "document.getElementById('submitbutton').click();";
+                if (url.contains(LOGIN_SITE)) {
+                    String username = sharedPref.getString("username", "");
+                    String password = sharedPref.getString("password", "");
 
-                view.evaluateJavascript(js, s -> {
-                });
+                    final String js = "javascript:" +
+                            "document.getElementById('password').value = '" + password + "';" +
+                            "document.getElementById('username').value = '" + username + "';" +
+                            "document.getElementById('submitbutton').click();";
+
+                    view.evaluateJavascript(js, s -> {
+                    });
+                }
             }
         });
 
@@ -262,8 +268,6 @@ public class Activity_Main extends AppCompatActivity {
                     break;
             }
         }
-
-        final NestedScrollView scrollView = findViewById(R.id.scrollView);
 
         bottomAppBar.setOnTouchListener(new SwipeTouchListener(activity) {
             public void onSwipeTop() {
@@ -595,7 +599,7 @@ public class Activity_Main extends AppCompatActivity {
     public void onBackPressed() {
         WebBackForwardList currentList = mWebView.copyBackForwardList();
 
-        if (mWebView.canGoBack() && (currentList.getSize() > 0 && !currentList.getItemAtIndex(0).getUrl().contains(LOGIN_SITE))) {
+        if (mWebView.canGoBack() && (currentList.getSize() > 0 && !currentList.getItemAtIndex(currentList.getCurrentIndex() - 1).getUrl().contains(LOGIN_SITE))) {
             mWebView.goBack();
         } else {
             if (pressedBack) {
