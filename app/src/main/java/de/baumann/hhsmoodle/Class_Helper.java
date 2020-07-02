@@ -67,6 +67,13 @@ class Class_Helper {
         Intent intent = new Intent(activity, to);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         activity.startActivity(intent);
+        new Thread(() -> {
+            try {
+                Thread.sleep(200);
+            } catch (Exception ignore) {
+            }
+            activity.finish();
+        }).start();
     }
 
     // used Methods

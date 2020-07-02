@@ -149,6 +149,5 @@ public class Activity_Settings extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Class_Helper.switchToActivity(Activity_Settings.this, Activity_Main.class);
-        finish();
     }
 }
