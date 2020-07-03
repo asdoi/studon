@@ -1,15 +1,15 @@
-FOSS Moodle zeigt dir die mobile Internetseite von Moodleinstanzen an. Dazu müssen Link, Benutzername und Passwort deines Accounts eingegeben werden. Standardmäßig ist die App für die Heinrich-Hübsch-Schule in Karlsruhe entwickelt.
+Diese App zeigt dir die mobile Internetseite von <a href="https://lernplattform.mebis.bayern.de/my/">Mebis</a> an. Dazu müssen Link, Benutzername und Passwort deines Accounts eingegeben werden.
 
 -------------------------------------------------
 <b>FUNKTIONEN</b>
 -------------------------------------------------
 
-• alle Funktionen der mobilen Moodleseite
-• automatische Anmeldung
-• eigene Lesezeichenverwaltung
+• Alle Funktionen der mobilen Mebisseite
+• Automatische Anmeldung
+• Eigene Lesezeichenverwaltung
 • App-Schutz durch PIN
 • Gestensteuerung
-• keine Werbung
-• keine unnötigen Berechtigungen
-• geringer Speicherbedarf (<3mb)
-• Quelloffen: https://github.com/scoute-dich/HHSMoodle
+• Keine Werbung
+• Keine unnötigen Berechtigungen
+• Geringer Speicherbedarf (<3mb)
+• Quelloffen: https://gitlab.com/asdoi/MebisApp

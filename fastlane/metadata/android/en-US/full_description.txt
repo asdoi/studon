@@ -1,15 +1,15 @@
-FOSS Moodle displays mobile Moodle websites. You must set link, username and password to use the app. By default the app is developed for the Heinrich-Hübsch-Schule in Karlsruhe.
+This app displays mobile <a href="https://lernplattform.mebis.bayern.de/my/">Mebis</a> websites. You must set link, username and password to use the app.
 
 -------------------------------------------------
 <b>FEATURES</b>
 -------------------------------------------------
 
-• all features of mobile Moodle websites
-• automatic login
-• own bookmark management
-• app protection by pin
-• small app size (<3mb)
-• gesture navigation
-• no ads
-• no unnecessary permissions
-• Open Source: https://github.com/scoute-dich/HHSMoodle
+• All features of mobile Mebis websites
+• Automatic login
+• Own bookmark management
+• App protection by pin
+• Small app size (<3mb)
+• Gesture navigation
+• No ads
+• No unnecessary permissions
+• Open Source: https://gitlab.com/asdoi/MebisApp

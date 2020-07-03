@@ -1,1 +1,1 @@
-Zeigt die mobile Seite von Moodleinstanzen an.
+Mobile Verwendung von Mebis

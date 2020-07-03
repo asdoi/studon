@@ -1,41 +1,34 @@
-# FOSS Moodle
+# MebisApp
 
-FOSS Moodle zeigt dir die mobile Internetseite von Moodleinstanzen an. Dazu müssen Link, Benutzername und Passwort deines Accounts eingegeben werden. Standardmäßig ist die App für die Heinrich-Hübsch-Schule in Karlsruhe entwickelt.
+Diese App zeigt dir die mobile Internetseite von <a href="https://lernplattform.mebis.bayern.de/my/">Mebis</a> an. Dazu müssen Link, Benutzername und Passwort deines Accounts eingegeben werden.
 
 ------
 ### FUNKTIONEN
 ------
 
-- alle Funktionen der mobilen Moodleseite
-- automatische Anmeldung
-- eigene Lesezeichenverwaltung
-- App-Schutz durch PIN
-- Gestensteuerung
-- keine Werbung
-- keine unnötigen Berechtigungen
-- geringer Speicherbedarf (<3mb)
-- Quelloffen: https://github.com/scoute-dich/HHSMoodle
+• Alle Funktionen der mobilen Mebisseite
+• Automatische Anmeldung
+• Eigene Lesezeichenverwaltung
+• App-Schutz durch PIN
+• Gestensteuerung
+• Keine Werbung
+• Keine unnötigen Berechtigungen
+• Geringer Speicherbedarf (<3mb)
+• Quelloffen: https://gitlab.com/asdoi/MebisApp
 
 ### Download
-<a href="https://play.google.com/store/apps/details?id=de.baumann.hhsmoodle" target="_blank">
-<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/></a>
-<a href="https://f-droid.org/packages/de.baumann.hhsmoodle/">
-<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90"></a>
-
-Die offizielle Moodle Mobile App gibt es [hier für Android und IOS](https://download.moodle.org/mobile).
+<a href="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/release/mebis.apk" target="_blank">
+<img src="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/src/main/direct-apk-download.png" alt="Download APK" height="90"/></a>
 
 ### Links:
-- [Änderungen](https://github.com/scoute-dich/HHSMoodle/blob/master/CHANGELOG.md)
-- [Lizenz](https://github.com/scoute-dich/HHSMoodle/blob/master/LICENSE.md)
+- [Lizenz](https://gitlab.com/asdoi/MebisApp/-/blob/mebis/LICENSE.md)
 
-![1](https://github.com/scoute-dich/HHSMoodle/blob/master/fastlane/metadata/android/de-DE/images/phoneScreenshots/1.jpg)
+![1](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg?inline=false)
 
-![2](https://github.com/scoute-dich/HHSMoodle/blob/master/fastlane/metadata/android/de-DE/images/phoneScreenshots/2.jpg)
+![2](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/2.jpg?inline=false)
 
-![3](https://github.com/scoute-dich/HHSMoodle/blob/master/fastlane/metadata/android/de-DE/images/phoneScreenshots/3.jpg)
+![4](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/4.jpg?inline=false)
 
-![4](https://github.com/scoute-dich/HHSMoodle/blob/master/fastlane/metadata/android/de-DE/images/phoneScreenshots/4.jpg)
+![5](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/5.jpg?inline=false)
 
-![5](https://github.com/scoute-dich/HHSMoodle/blob/master/fastlane/metadata/android/de-DE/images/phoneScreenshots/5.jpg)
-
-![6](https://github.com/scoute-dich/HHSMoodle/blob/master/fastlane/metadata/android/de-DE/images/phoneScreenshots/6.jpg)
+![6](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/6.jpg?inline=false)
