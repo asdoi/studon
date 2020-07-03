@@ -20,6 +20,7 @@
 package de.baumann.hhsmoodle;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -44,6 +45,8 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.webkit.CookieManager;
 import android.webkit.URLUtil;
 import android.webkit.ValueCallback;
@@ -67,7 +70,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
 import androidx.preference.PreferenceManager;
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
@@ -91,7 +93,7 @@ public class Activity_Main extends AppCompatActivity {
     public static final String LOGIN_SITE = "idp.mebis.bayern.de";
     public static final String DASHBOARD = "Schreibtisch";
 
-    private WebView mWebView;
+    private ScrollWebView mWebView;
     private ProgressBar progressBar;
     private SharedPreferences sharedPref;
     private ValueCallback<Uri[]> mFilePathCallback;
@@ -122,8 +124,6 @@ public class Activity_Main extends AppCompatActivity {
         Class_Helper.checkPin(Activity_Main.this);
 
         activity = Activity_Main.this;
-
-        final NestedScrollView scrollView = findViewById(R.id.scrollView);
 
         PreferenceManager.setDefaultValues(activity, R.xml.user_settings, false);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
@@ -193,11 +193,6 @@ public class Activity_Main extends AppCompatActivity {
                 return true;//do nothing in other cases
             }
 
-            @Override
-            public void onPageCommitVisible(WebView view, String url) {
-                scrollView.scrollTo(0, 0);
-            }
-
             public void onPageFinished(WebView view, final String url) {
                 super.onPageFinished(view, url);
 
@@ -215,6 +210,49 @@ public class Activity_Main extends AppCompatActivity {
                 }
             }
         });
+
+        mWebView.setOnTouchListener(new SwipeTouchListener(activity) {
+            public void onSwipeTop() {
+                bottomAppBar.animate().translationY(+bottomAppBar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+            }
+
+            public void onSwipeBottom() {
+                bottomAppBar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
+            }
+
+            public void onSwipeRight() {
+            }
+
+            public void onSwipeLeft() {
+            }
+        });
+
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mWebView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+                if (scrollY > oldScrollY) {
+                    bottomAppBar.animate().translationY(+bottomAppBar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+                } else if (scrollY < oldScrollY) {
+                    bottomAppBar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
+                }
+            });
+        }*/
+
+//        mWebView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+////                    case MotionEvent.ACTION_UP:
+////                    case MotionEvent.ACTION_POINTER_UP:
+////                        bottomAppBar.animate().translationY(+bottomAppBar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+////                        break;
+//                    case MotionEvent.ACTION_DOWN:
+//                    case MotionEvent.ACTION_POINTER_DOWN:
+//                        bottomAppBar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
 
         mWebView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) -> {
             final String filename = URLUtil.guessFileName(url, contentDisposition, mimetype);
@@ -274,11 +312,13 @@ public class Activity_Main extends AppCompatActivity {
 
         bottomAppBar.setOnTouchListener(new SwipeTouchListener(activity) {
             public void onSwipeTop() {
-                scrollView.smoothScrollTo(0, 0);
+                ObjectAnimator anim = ObjectAnimator.ofInt(mWebView, "scrollY", mWebView.getScrollY(), 0);
+                anim.setDuration(500).start();
             }
 
             public void onSwipeBottom() {
-                scrollView.smoothScrollTo(0, 1000000000);
+                ObjectAnimator anim = ObjectAnimator.ofInt(mWebView, "scrollY", mWebView.getScrollY(), mWebView.getContentHeight() * ((int) getResources().getDisplayMetrics().density));
+                anim.setDuration(500).start();
             }
 
             public void onSwipeRight() {
@@ -307,11 +347,13 @@ public class Activity_Main extends AppCompatActivity {
 
         fab.setOnTouchListener(new SwipeTouchListener(activity) {
             public void onSwipeTop() {
-                scrollView.smoothScrollTo(0, 0);
+                ObjectAnimator anim = ObjectAnimator.ofInt(mWebView, "scrollY", mWebView.getScrollY(), 0);
+                anim.setDuration(500).start();
             }
 
             public void onSwipeBottom() {
-                scrollView.smoothScrollTo(0, 1000000000);
+                ObjectAnimator anim = ObjectAnimator.ofInt(mWebView, "scrollY", mWebView.getScrollY(), mWebView.getContentHeight() * ((int) getResources().getDisplayMetrics().density));
+                anim.setDuration(500).start();
             }
 
             public void onSwipeRight() {
@@ -409,7 +451,6 @@ public class Activity_Main extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void setUpBottomAppBar() {
-
         bottomAppBar = findViewById(R.id.bar);
         bottomAppBar.setNavigationIcon(null);
         setSupportActionBar(bottomAppBar);
