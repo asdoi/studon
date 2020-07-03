@@ -1,4 +1,5 @@
-This app displays mobile <a href="https://lernplattform.mebis.bayern.de/my/">Mebis</a> websites. You must set link, username and password to use the app.
+This app displays mobile <a href="https://lernplattform.mebis.bayern.de/my/">Mebis</a> websites.
+You must set link, username and password to use the app.
 
 -------------------------------------------------
 <b>FEATURES</b>

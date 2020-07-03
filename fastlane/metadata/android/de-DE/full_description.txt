@@ -1,4 +1,5 @@
-Diese App zeigt dir die mobile Internetseite von <a href="https://lernplattform.mebis.bayern.de/my/">Mebis</a> an. Dazu müssen Link, Benutzername und Passwort deines Accounts eingegeben werden.
+Diese App zeigt dir die mobile Internetseite von <a href="https://lernplattform.mebis.bayern.de/my/">Mebis</a> an.
+Dazu müssen Link, Benutzername und Passwort deines Accounts eingegeben werden.
 
 -------------------------------------------------
 <b>FUNKTIONEN</b>

@@ -1,20 +1,19 @@
 # MebisApp
 
-Diese App zeigt dir die mobile Internetseite von <a href="https://lernplattform.mebis.bayern.de/my/">Mebis</a> an. Dazu müssen Link, Benutzername und Passwort deines Accounts eingegeben werden.
+Diese App zeigt dir die mobile Internetseite von <a href="https://lernplattform.mebis.bayern.de/my/">Mebis</a> an.  
+Dazu müssen Link, Benutzername und Passwort deines Accounts eingegeben werden.
 
-------
 ### FUNKTIONEN
-------
 
-• Alle Funktionen der mobilen Mebisseite
-• Automatische Anmeldung
-• Eigene Lesezeichenverwaltung
-• App-Schutz durch PIN
-• Gestensteuerung
-• Keine Werbung
-• Keine unnötigen Berechtigungen
-• Geringer Speicherbedarf (<3mb)
-• Quelloffen: https://gitlab.com/asdoi/MebisApp
+• Alle Funktionen der mobilen Mebisseite  
+• Automatische Anmeldung  
+• Eigene Lesezeichenverwaltung  
+• App-Schutz durch PIN  
+• Gestensteuerung  
+• Keine Werbung  
+• Keine unnötigen Berechtigungen  
+• Geringer Speicherbedarf (<3mb)  
+• Quelloffen: https://gitlab.com/asdoi/MebisApp  
 
 ### Download
 <a href="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/release/mebis.apk" target="_blank">
@@ -23,12 +22,12 @@ Diese App zeigt dir die mobile Internetseite von <a href="https://lernplattform.
 ### Links:
 - [Lizenz](https://gitlab.com/asdoi/MebisApp/-/blob/mebis/LICENSE.md)
 
-![1](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg?inline=false)
+![1](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png?inline=false =250x)
 
-![2](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/2.jpg?inline=false)
+![2](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png?inline=false =250x)
 
-![4](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/4.jpg?inline=false)
+![4](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/4.jpg?inline=false =250x)
 
-![5](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/5.jpg?inline=false)
+![5](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/5.jpg?inline=false =250x)
 
-![6](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/6.jpg?inline=false)
+![6](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/6.jpg?inline=false =250x)
