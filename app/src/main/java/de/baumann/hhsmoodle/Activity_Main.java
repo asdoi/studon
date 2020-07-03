@@ -93,7 +93,7 @@ public class Activity_Main extends AppCompatActivity {
     public static final String LOGIN_SITE = "idp.mebis.bayern.de";
     public static final String DASHBOARD = "Schreibtisch";
 
-    private ScrollWebView mWebView;
+    private WebViewWithTouchEvents mWebView;
     private ProgressBar progressBar;
     private SharedPreferences sharedPref;
     private ValueCallback<Uri[]> mFilePathCallback;
@@ -226,33 +226,6 @@ public class Activity_Main extends AppCompatActivity {
             public void onSwipeLeft() {
             }
         });
-
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mWebView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-                if (scrollY > oldScrollY) {
-                    bottomAppBar.animate().translationY(+bottomAppBar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
-                } else if (scrollY < oldScrollY) {
-                    bottomAppBar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
-                }
-            });
-        }*/
-
-//        mWebView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                switch (event.getAction()) {
-////                    case MotionEvent.ACTION_UP:
-////                    case MotionEvent.ACTION_POINTER_UP:
-////                        bottomAppBar.animate().translationY(+bottomAppBar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
-////                        break;
-//                    case MotionEvent.ACTION_DOWN:
-//                    case MotionEvent.ACTION_POINTER_DOWN:
-//                        bottomAppBar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
 
         mWebView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) -> {
             final String filename = URLUtil.guessFileName(url, contentDisposition, mimetype);

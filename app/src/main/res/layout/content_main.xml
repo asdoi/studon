@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:showIn="@layout/activity_screen_main">
 
-    <de.baumann.hhsmoodle.ScrollWebView
+    <de.baumann.hhsmoodle.WebViewWithTouchEvents
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
