@@ -193,6 +193,7 @@ public class Activity_Main extends AppCompatActivity {
                 return true;//do nothing in other cases
             }
 
+            @Override
             public void onPageFinished(WebView view, final String url) {
                 super.onPageFinished(view, url);
 
@@ -208,6 +209,14 @@ public class Activity_Main extends AppCompatActivity {
                     view.evaluateJavascript(js, s -> {
                     });
                 }
+            }
+
+            @Override
+            public void onPageCommitVisible(WebView view, String url) {
+                super.onPageCommitVisible(view, url);
+                final String js = "javascript:document.querySelector(\".me-in-page-menu\").remove();";
+                view.evaluateJavascript(js, s -> {
+                });
             }
         });
 
@@ -378,6 +387,7 @@ public class Activity_Main extends AppCompatActivity {
                     .addDefaultShareMenuItem()
                     .setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary))
                     .setShowTitle(true)
+                    .setStartAnimations(this, R.anim.slide_in, 0)
                     .build();
 
             // This is optional but recommended
@@ -387,8 +397,7 @@ public class Activity_Main extends AppCompatActivity {
             CustomTabsHelper.Companion.openCustomTab(activity, customTabsIntent,
                     Uri.parse(url),
                     new WebViewFallback());
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignore) {
         }
     }
 
