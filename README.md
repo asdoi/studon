@@ -17,17 +17,14 @@ Dazu müssen Link, Benutzername und Passwort deines Accounts eingegeben werden.
 
 ### Download
 <a href="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/release/mebis.apk" target="_blank">
-<img src="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/src/main/direct-apk-download.png" alt="Download APK" height="90"/></a>
+<img src="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/src/main/direct-apk-download.png" alt="Download APK" height="120"/></a>
 
 ### Links:
 - [Lizenz](https://gitlab.com/asdoi/MebisApp/-/blob/mebis/LICENSE.md)
 
-![1](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png?inline=false =250x)
+<img src="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png?inline=false" height="600"/>
+<img src="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png?inline=false" height="600"/><br>
 
-![2](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png?inline=false =250x)
-
-![4](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/4.jpg?inline=false =250x)
-
-![5](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/5.jpg?inline=false =250x)
-
-![6](https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/6.jpg?inline=false =250x)
+<img src="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/4.jpg?inline=false" height="600"/>
+<img src="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/5.jpg?inline=false" height="600"/>
+<img src="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/fastlane/metadata/android/en-US/images/phoneScreenshots/6.jpg?inline=false" height="600"/>
