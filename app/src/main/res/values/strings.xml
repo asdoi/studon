@@ -36,6 +36,7 @@
     <string name="login_password">Password</string>
     <string name="login_automatic_title">Automatic login</string>
     <string name="login_text_edit">Please fill in login data.</string>
+    <string name="login_failed">Login failed!</string>
 
 
     // Bookmarks

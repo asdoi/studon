@@ -48,6 +48,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.webkit.CookieManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.URLUtil;
 import android.webkit.ValueCallback;
 import android.webkit.WebBackForwardList;
@@ -201,10 +202,18 @@ public class Activity_Main extends AppCompatActivity {
                     String username = sharedPref.getString("username", "");
                     String password = sharedPref.getString("password", "");
 
+                    view.addJavascriptInterface(new LogInFailedInterface(), "Android");
+
+
                     final String js = "javascript:" +
+                            "var logfail = document.querySelector(\".form-error\");" +
+                            "if (logfail != null) {" +
+                            "Android.loginFailed();" +
+                            "}else{" +
                             "document.getElementById('password').value = '" + password + "';" +
                             "document.getElementById('username').value = '" + username + "';" +
-                            "document.getElementById('submitbutton').click();";
+                            "document.getElementById('submitbutton').click();" +
+                            "}";
 
                     view.evaluateJavascript(js, s -> {
                     });
@@ -924,6 +933,23 @@ public class Activity_Main extends AppCompatActivity {
             chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
             startActivityForResult(chooserIntent, INPUT_FILE_REQUEST_CODE);
             return true;
+        }
+    }
+
+    public class LogInFailedInterface {
+
+        /**
+         * Instantiate the interface and set the context
+         */
+        LogInFailedInterface() {
+        }
+
+        @JavascriptInterface
+        public void loginFailed() {
+            activity.runOnUiThread(() -> {
+                Toast.makeText(activity, getString(R.string.login_failed), Toast.LENGTH_LONG).show();
+                Class_Helper.setLoginData(activity, () -> activity.recreate(), () -> activity.finishAffinity());
+            });
         }
     }
 }
