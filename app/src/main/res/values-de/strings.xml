@@ -162,4 +162,10 @@
     <string name="dialog_help_summary">Ein paar Tipps zur Nutzung der App.</string>
 
     <string name="back_button">Erneut drücken zum Beenden</string>
+    <string name="authentication_error">Anmeldungsfehler: </string>
+    <string name="authentication_failed">Anmeldung fehlgeschlagen</string>
+    <string name="biometric_unlock">Biometrisch Entsperren</string>
+    <string name="biometric_unlock_description">Entsperre die App mit deinem Fingerabdruck oder deinen Handy-Anmeldedaten.</string>
+    <string name="biometric_login_title">Biometrisches Entsperren der Mebis App</string>
+    <string name="biometric_login_message">Entsperre mit deinen biometrischen Daten</string>
 </resources>

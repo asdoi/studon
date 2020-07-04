@@ -35,6 +35,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Objects;
 
@@ -95,6 +96,15 @@ public class Activity_Settings extends AppCompatActivity {
                 return false;
             });
 
+            final SwitchPreferenceCompat biometric = findPreference("biometric");
+
+            biometric.setOnPreferenceClickListener(preference -> {
+                final Activity activity = getActivity();
+                final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(activity));
+                sharedPref.edit().putString("settings_security_pin", "").apply();
+                return false;
+            });
+
             findPreference("settings_security_pin").setOnPreferenceClickListener(preference -> {
                 final Activity activity = getActivity();
                 final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(activity));
@@ -110,6 +120,7 @@ public class Activity_Settings extends AppCompatActivity {
                 builder.setPositiveButton(R.string.toast_yes, (dialog, whichButton) -> {
                     String inputTag = pass_userPW.getText().toString().trim();
                     sharedPref.edit().putString("settings_security_pin", inputTag).apply();
+                    biometric.setChecked(false);
                 });
                 builder.setNegativeButton(R.string.toast_cancel, (dialog, whichButton) -> dialog.cancel());
                 final AlertDialog dialog = builder.create();

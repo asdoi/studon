@@ -38,10 +38,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import java.util.concurrent.Executor;
 
 class Class_Helper {
 
@@ -174,8 +179,6 @@ class Class_Helper {
     }
 
     // Security
-
-    private static String protect;
     private static SharedPreferences sharedPref;
 
     @SuppressLint("ApplySharedPref")
@@ -220,12 +223,20 @@ class Class_Helper {
         }
     }
 
-    static void checkPin(final Activity activity) {
-
+    static void checkAuthentication(final Activity activity) {
         PreferenceManager.setDefaultValues(activity, R.xml.user_settings, false);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
-        protect = sharedPref.getString("settings_security_pin", "");
 
+        boolean biometric = sharedPref.getBoolean("biometric", false);
+
+        if (biometric)
+            checkFingerprint(activity);
+        else
+            checkPin(activity);
+    }
+
+    private static void checkPin(final Activity activity) {
+        String protect = sharedPref.getString("settings_security_pin", "");
         if (protect.length() > 0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             final View dialogView = View.inflate(activity, R.layout.dialog_enter_pin, null);
@@ -281,7 +292,6 @@ class Class_Helper {
             final Button clear = dialogView.findViewById(R.id.buttonReset);
             assert clear != null;
             clear.setOnClickListener(view -> {
-
                 final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(activity);
                 View dialogView1 = View.inflate(activity, R.layout.dialog_action, null);
                 TextView textView = dialogView1.findViewById(R.id.dialog_text);
@@ -313,13 +323,49 @@ class Class_Helper {
                 String Password = text.getText().toString().trim();
 
                 if (Password.equals(protect)) {
-                    sharedPref.edit().putBoolean("isOpened", false).apply();
                     dialog.dismiss();
                 } else {
                     Toast.makeText(activity, activity.getString(R.string.toast_wrongPW), Toast.LENGTH_SHORT).show();
                 }
             });
         }
+    }
+
+    private static void checkFingerprint(final Activity activity) {
+        Executor executor = ContextCompat.getMainExecutor(activity);
+        BiometricPrompt biometricPrompt = new BiometricPrompt((FragmentActivity) activity,
+                executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode,
+                                              @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+                Toast.makeText(activity, activity.getString(R.string.authentication_error) + errString, Toast.LENGTH_SHORT).show();
+                activity.finishAffinity();
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(
+                    @NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+                Toast.makeText(activity, R.string.authentication_failed, Toast.LENGTH_SHORT).show();
+                activity.finishAffinity();
+            }
+        });
+
+        BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle(activity.getString(R.string.biometric_login_title))
+                .setSubtitle(activity.getString(R.string.biometric_login_message))
+//                .setNegativeButtonText("Use account password")
+                .setDeviceCredentialAllowed(true)
+                .build();
+
+
+        biometricPrompt.authenticate(promptInfo);
     }
 
     private static void enterNum(View view, String number) {
