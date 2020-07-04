@@ -148,7 +148,7 @@
 
     // Password
 
-    <string name="pw_hint">only numbers</string>
+    <string name="pw_hint">Only numbers</string>
     <string name="pw_forgotten">Pin forgotten?</string>
     <string name="pw_forgotten_dialog">Reset app data?</string>
 
