@@ -121,7 +121,7 @@ public class Activity_Main extends AppCompatActivity {
         setContentView(R.layout.activity_screen_main);
         setUpBottomAppBar();
 
-        Class_Helper.checkPin(Activity_Main.this);
+        Class_Helper.checkAuthentication(Activity_Main.this);
 
         activity = Activity_Main.this;
 

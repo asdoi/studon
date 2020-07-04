@@ -2,57 +2,64 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
-        android:title="@string/settings_security_moodle"
         android:icon="@drawable/key"
+        android:key="settings_security_moodle"
         android:summary="@string/settings_security_moodle_summary"
-        android:key="settings_security_moodle" />
+        android:title="@string/settings_security_moodle" />
 
     <Preference
-        android:title="@string/settings_security_pin"
         android:icon="@drawable/close_circle_outline"
+        android:key="settings_security_pin"
         android:summary="@string/settings_security_pin_summary"
-        android:key="settings_security_pin" />
+        android:title="@string/settings_security_pin" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:icon="@drawable/ic_baseline_fingerprint_24"
+        android:key="biometric"
+        android:summary="@string/biometric_unlock_description"
+        android:title="@string/biometric_unlock" />
 
     <ListPreference
+        android:defaultValue="title"
+        android:entries="@array/setting_entries_sort"
+        android:entryValues="@array/setting_values_sort"
         android:icon="@drawable/icon_sort"
         android:key="sortDBB"
-        android:defaultValue="title"
-        android:title="@string/setting_sort"
         android:summary="@string/setting_sort_summary"
-        android:entries="@array/setting_entries_sort"
-        android:entryValues="@array/setting_values_sort" />
+        android:title="@string/setting_sort" />
 
     <ListPreference
+        android:defaultValue="2"
+        android:entries="@array/setting_entries_columns"
+        android:entryValues="@array/setting_values_columns"
         android:icon="@drawable/icon_columns"
         android:key="columns"
-        android:defaultValue="2"
-        android:title="@string/setting_columns"
         android:summary="@string/setting_columns_summary"
-        android:entries="@array/setting_entries_columns"
-        android:entryValues="@array/setting_values_columns" />
+        android:title="@string/setting_columns" />
 
     <CheckBoxPreference
-        android:key="nightMode"
         android:defaultValue="false"
         android:icon="@drawable/icon_night"
-        android:title="@string/setting_nightMode"
-        android:summary="@string/setting_nightMode_summary" />
+        android:key="nightMode"
+        android:summary="@string/setting_nightMode_summary"
+        android:title="@string/setting_nightMode" />
 
     <CheckBoxPreference
-        android:key="external"
         android:defaultValue="true"
         android:icon="@drawable/icon_exit"
-        android:title="@string/setting_external"
-        android:summary="@string/setting_external_summary" />
+        android:key="external"
+        android:summary="@string/setting_external_summary"
+        android:title="@string/setting_external" />
 
     <Preference
         android:icon="@drawable/icon_help"
-        android:summary="@string/dialog_help_summary"
-        android:key="settings_help" />
+        android:key="settings_help"
+        android:summary="@string/dialog_help_summary" />
 
     <Preference
         android:icon="@drawable/icon_info"
-        android:summary="@string/settings_license_about_summary"
-        android:key="settings_license" />
+        android:key="settings_license"
+        android:summary="@string/settings_license_about_summary" />
 
 </PreferenceScreen>
