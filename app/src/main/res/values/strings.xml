@@ -5,7 +5,6 @@
 
     <string name="app_name" translatable="false">Mebis</string>
     <string name="app_permissions">
-
         &lt;i>\"Access storage\" permission:&lt;/i>&lt;br>
         used for saving downloads on the sd-card.&lt;br>&lt;br>
 

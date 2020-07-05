@@ -217,25 +217,26 @@ public class Activity_Main extends AppCompatActivity {
 
                     view.evaluateJavascript(js, s -> {
                     });
-                }
+                } else
+                    removeElements(view);
             }
 
             @Override
             public void onPageCommitVisible(WebView view, String url) {
                 super.onPageCommitVisible(view, url);
-                final String js = "javascript:document.querySelector(\".me-in-page-menu\").remove();";
-                view.evaluateJavascript(js, s -> {
-                });
+                removeElements(view);
             }
         });
 
         mWebView.setOnTouchListener(new SwipeTouchListener(activity) {
             public void onSwipeTop() {
                 bottomAppBar.animate().translationY(+bottomAppBar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+                removeElements(mWebView);
             }
 
             public void onSwipeBottom() {
                 bottomAppBar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
+                removeElements(mWebView);
             }
 
             public void onSwipeRight() {
@@ -376,6 +377,19 @@ public class Activity_Main extends AppCompatActivity {
             e.printStackTrace();
             Class_Helper.setLoginData(activity, () -> Activity_Settings.createInfoDialog(this, R.string.dialog_help_title, R.string.dialog_help_text, this::recreate), this::finishAffinity);
         }
+    }
+
+    private void removeElements(WebView view) {
+        final String js = "javascript:" +
+                "document.querySelector(\".me-in-page-menu\").remove();" +
+                "document.querySelector(\".logo-row .logo\").remove();" +
+                "document.querySelector(\"#page-navbar\").remove();" +
+                "document.querySelector(\"#block-region-top\").remove();" +
+                "document.querySelector(\".notifications\").remove();";
+
+
+        view.evaluateJavascript(js, s -> {
+        });
     }
 
     @Override
