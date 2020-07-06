@@ -1,1 +1,1 @@
-Mobile Verwendung von Mebis
+Eine App die den mobilen Umgang mit Mebis erleichtern soll.
