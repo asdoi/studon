@@ -322,9 +322,7 @@ public class Activity_Main extends AppCompatActivity {
             }
 
             public void onSwipeLeft() {
-                if (mWebView.canGoBack()) {
-                    mWebView.goBack();
-                } else {
+                if (!goBack()) {
                     Toast.makeText(activity, getString(R.string.toast_notBack), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -357,9 +355,7 @@ public class Activity_Main extends AppCompatActivity {
             }
 
             public void onSwipeLeft() {
-                if (mWebView.canGoBack()) {
-                    mWebView.goBack();
-                } else {
+                if (!goBack()) {
                     Toast.makeText(activity, getString(R.string.toast_notBack), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -512,25 +508,25 @@ public class Activity_Main extends AppCompatActivity {
         });
 
         GridView grid = dialogView.findViewById(R.id.grid_item);
-        GridItem_Menu itemAlbum_01 = new GridItem_Menu(getResources().getString(R.string.menu_more_files), R.drawable.icon_download);
-        GridItem_Menu itemAlbum_02 = new GridItem_Menu(getResources().getString(R.string.menu_more_settings), R.drawable.icon_settings);
-        GridItem_Menu itemAlbum_03 = new GridItem_Menu(getResources().getString(R.string.menu_save_bookmark), R.drawable.icon_bookmark);
-        GridItem_Menu itemAlbum_04 = new GridItem_Menu(getResources().getString(R.string.menu_save_pdf), R.drawable.icon_printer);
-        GridItem_Menu itemAlbum_05 = new GridItem_Menu(getResources().getString(R.string.menu_share), R.drawable.icon_share);
-        GridItem_Menu itemAlbum_06 = new GridItem_Menu(getResources().getString(R.string.menu_finish), R.drawable.icon_exit);
-        GridItem_Menu itemAlbum_07 = new GridItem_Menu(getResources().getString(R.string.menu_search), R.drawable.icon_magnify);
-        GridItem_Menu itemAlbum_08 = new GridItem_Menu(getResources().getString(R.string.menu_openInBrowser), R.drawable.icon_earth);
+        GridItem_Menu itemAlbum_downloads = new GridItem_Menu(getResources().getString(R.string.menu_more_files), R.drawable.icon_download);
+        GridItem_Menu itemAlbum_settings = new GridItem_Menu(getResources().getString(R.string.menu_more_settings), R.drawable.icon_settings);
+        GridItem_Menu itemAlbum_save = new GridItem_Menu(getResources().getString(R.string.menu_save_bookmark), R.drawable.icon_bookmark);
+        GridItem_Menu itemAlbum_print = new GridItem_Menu(getResources().getString(R.string.menu_save_pdf), R.drawable.icon_printer);
+        GridItem_Menu itemAlbum_share = new GridItem_Menu(getResources().getString(R.string.menu_share), R.drawable.icon_share);
+        GridItem_Menu itemAlbum_exit = new GridItem_Menu(getResources().getString(R.string.menu_finish), R.drawable.icon_exit);
+        GridItem_Menu itemAlbum_search = new GridItem_Menu(getResources().getString(R.string.menu_search), R.drawable.icon_magnify);
+        GridItem_Menu itemAlbum_open_in_browser = new GridItem_Menu(getResources().getString(R.string.menu_openInBrowser), R.drawable.icon_earth);
 
         final String url = mWebView.getUrl();
         final List<GridItem_Menu> gridList = new LinkedList<>();
-        gridList.add(gridList.size(), itemAlbum_02);
-        gridList.add(gridList.size(), itemAlbum_01);
-        gridList.add(gridList.size(), itemAlbum_03);
-        gridList.add(gridList.size(), itemAlbum_05);
-        gridList.add(gridList.size(), itemAlbum_04);
-        gridList.add(gridList.size(), itemAlbum_07);
-        gridList.add(gridList.size(), itemAlbum_08);
-        gridList.add(gridList.size(), itemAlbum_06);
+        gridList.add(gridList.size(), itemAlbum_settings);
+//        gridList.add(gridList.size(), itemAlbum_downloads);
+        gridList.add(gridList.size(), itemAlbum_save);
+        gridList.add(gridList.size(), itemAlbum_share);
+        gridList.add(gridList.size(), itemAlbum_print);
+        gridList.add(gridList.size(), itemAlbum_search);
+//        gridList.add(gridList.size(), itemAlbum_open_in_browser);
+        gridList.add(gridList.size(), itemAlbum_exit);
 
         GridAdapter_Menu gridAdapter = new GridAdapter_Menu(activity, gridList);
         grid.setAdapter(gridAdapter);
@@ -646,11 +642,7 @@ public class Activity_Main extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        WebBackForwardList currentList = mWebView.copyBackForwardList();
-
-        if (mWebView.canGoBack() && (currentList.getSize() > 0 && !currentList.getItemAtIndex(currentList.getCurrentIndex() - 1).getUrl().contains(LOGIN_SITE))) {
-            mWebView.goBack();
-        } else {
+        if (!goBack()) {
             if (pressedBack) {
                 mWebView.destroy();
                 finishAffinity();
@@ -660,6 +652,16 @@ public class Activity_Main extends AppCompatActivity {
                 pressedBack = true;
             }
         }
+    }
+
+    private boolean goBack() {
+        WebBackForwardList currentList = mWebView.copyBackForwardList();
+
+        if (mWebView.canGoBack() && (currentList.getSize() > 0 && !currentList.getItemAtIndex(currentList.getCurrentIndex() - 1).getUrl().contains(LOGIN_SITE))) {
+            mWebView.goBack();
+            return true;
+        } else
+            return false;
     }
 
     @Override
