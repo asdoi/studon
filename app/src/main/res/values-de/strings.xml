@@ -132,7 +132,7 @@
     <string name="toast_cancel">Abbrechen</string>
     <string name="toast_download">Lade Datei herunter:</string>
     <string name="toast_download_1">Herunterladen:</string>
-    <string name="toast_download_2">Download vollständig. Downloadmanager öffnen?</string>
+    <string name="toast_download_2">Download vollständig. Datei öffnen?</string>
     <string name="toast_wrongPW">Falsches Passwort.</string>
     <string name="toast_notPrint">Kein Drucker gefunden.</string>
     <string name="toast_notBack">Keine vorherige Seite.</string>

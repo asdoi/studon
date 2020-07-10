@@ -699,21 +699,59 @@ public class Activity_Main extends AppCompatActivity {
 
     private final BroadcastReceiver onComplete = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
-            final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(activity);
-            View dialogView = View.inflate(activity, R.layout.dialog_action, null);
-            TextView textView = dialogView.findViewById(R.id.dialog_text);
-            textView.setText(Class_Helper.textSpannable(activity.getString(R.string.toast_download_2)));
-            Button action_ok = dialogView.findViewById(R.id.action_ok);
-            action_ok.setOnClickListener(view -> {
-                bottomSheetDialog.cancel();
-                startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
-            });
-            bottomSheetDialog.setContentView(dialogView);
-            bottomSheetDialog.show();
-            Class_Helper.setBottomSheetBehavior(bottomSheetDialog, dialogView);
+            String action = intent.getAction();
+            if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
+                long downloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0);
+                DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+                DownloadManager.Query query = new DownloadManager.Query();
+                query.setFilterById(downloadId);
+                Cursor cursor = downloadManager.query(query);
+
+                if (cursor.moveToFirst()) {
+                    int downloadStatus = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS));
+                    String downloadLocalUri = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
+                    String downloadMimeType = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_MEDIA_TYPE));
+
+                    if ((downloadStatus == DownloadManager.STATUS_SUCCESSFUL) && downloadLocalUri != null) {
+                        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(activity);
+                        View dialogView = View.inflate(activity, R.layout.dialog_action, null);
+                        TextView textView = dialogView.findViewById(R.id.dialog_text);
+                        textView.setText(Class_Helper.textSpannable(activity.getString(R.string.toast_download_2)));
+                        Button action_ok = dialogView.findViewById(R.id.action_ok);
+                        action_ok.setOnClickListener(view -> {
+                            bottomSheetDialog.cancel();
+                            openDownloadedAttachment(Uri.parse(downloadLocalUri), downloadMimeType);
+                        });
+                        bottomSheetDialog.setContentView(dialogView);
+                        bottomSheetDialog.show();
+                        Class_Helper.setBottomSheetBehavior(bottomSheetDialog, dialogView);
+                    }
+                }
+                cursor.close();
+            }
             Objects.requireNonNull(activity).unregisterReceiver(onComplete);
         }
     };
+
+    private void openDownloadedAttachment(Uri attachmentUri, final String attachmentMimeType) {
+        if (attachmentUri != null) {
+            // Get Content Uri.
+            if (ContentResolver.SCHEME_FILE.equals(attachmentUri.getScheme())) {
+                // FileUri - Convert it to contentUri.
+                File file = new File(attachmentUri.getPath());
+                attachmentUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
+            }
+
+            Intent openAttachmentIntent = new Intent(Intent.ACTION_VIEW);
+            openAttachmentIntent.setDataAndType(attachmentUri, attachmentMimeType);
+            openAttachmentIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            try {
+                startActivity(openAttachmentIntent);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
+            }
+        }
+    }
 
     private void setBookmarksList() {
 

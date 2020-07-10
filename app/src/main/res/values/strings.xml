@@ -87,7 +87,7 @@
     <string name="toast_cancel">Cancel</string>
     <string name="toast_download">Downloading file:</string>
     <string name="toast_download_1">Download:</string>
-    <string name="toast_download_2">Download completed. Open download manager?</string>
+    <string name="toast_download_2">Download completed. Open file?</string>
     <string name="toast_wrongPW">Wrong password.</string>
     <string name="toast_notPrint">No printer found.</string>
     <string name="toast_notBack">Can not go back.</string>
