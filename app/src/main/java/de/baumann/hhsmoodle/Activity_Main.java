@@ -266,7 +266,6 @@ public class Activity_Main extends AppCompatActivity {
                 CookieManager cookieManager = CookieManager.getInstance();
                 String cookie = cookieManager.getCookie(url);
                 request.addRequestHeader("Cookie", cookie);
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                 request.setTitle(filename);
                 request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename);
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
