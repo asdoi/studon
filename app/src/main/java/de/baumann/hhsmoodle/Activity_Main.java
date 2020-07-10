@@ -26,7 +26,9 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -71,6 +73,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
@@ -79,6 +82,7 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -257,6 +261,7 @@ public class Activity_Main extends AppCompatActivity {
             Button action_ok = dialogView.findViewById(R.id.action_ok);
             action_ok.setOnClickListener(view -> {
                 bottomSheetDialog.cancel();
+
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
                 CookieManager cookieManager = CookieManager.getInstance();
                 String cookie = cookieManager.getCookie(url);
@@ -264,6 +269,8 @@ public class Activity_Main extends AppCompatActivity {
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                 request.setTitle(filename);
                 request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename);
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
+
                 DownloadManager manager = (DownloadManager) Objects.requireNonNull(activity).getSystemService(Context.DOWNLOAD_SERVICE);
                 assert manager != null;
                 activity.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
@@ -282,8 +289,12 @@ public class Activity_Main extends AppCompatActivity {
                 }
             });
             bottomSheetDialog.setContentView(dialogView);
-            bottomSheetDialog.show();
-            Class_Helper.setBottomSheetBehavior(bottomSheetDialog, dialogView);
+
+            if (sharedPref.getBoolean("confirm_download", true)) {
+                bottomSheetDialog.show();
+                Class_Helper.setBottomSheetBehavior(bottomSheetDialog, dialogView);
+            } else
+                action_ok.performClick();
         });
 
         registerForContextMenu(mWebView);

@@ -173,4 +173,7 @@
     <string name="biometric_unlock_description">Unlock the app with your fingerprint or your device credentials.</string>
     <string name="biometric_login_title">Biometric unlock of Mebis app</string>
     <string name="biometric_login_message">Unlock using your biometric credential</string>
+
+    <string name="confirm_download">Confirm Downloads</string>
+    <string name="confirm_download_desc">Show a confirmation dialog before starting downloads</string>
 </resources>
