@@ -289,7 +289,7 @@ public class Activity_Main extends AppCompatActivity {
             });
             bottomSheetDialog.setContentView(dialogView);
 
-            if (sharedPref.getBoolean("confirm_download", true)) {
+            if (sharedPref.getBoolean("confirm_download", false)) {
                 bottomSheetDialog.show();
                 Class_Helper.setBottomSheetBehavior(bottomSheetDialog, dialogView);
             } else

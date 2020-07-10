@@ -7,7 +7,7 @@
 
     <string name="app_permissions">
         &lt;i>Zugriff auf SD Karte:&lt;/i>&lt;br>
-        wird gebraucht, um Downloads auf der SD-Karte speichern zu können.&lt;br>&lt;br>
+        Dies wird benötigt, um Downloads auf der SD-Karte zu speichern.&lt;br>&lt;br>
 
         &lt;i>Berechtigung nachträglich erteilen:&lt;/i>&lt;br>
         Wenn du die Berechtigung verweigerst, kannst du sie nachträglich erteilen, indem du \"Einstellungen -> Berechtigung erteilen\" öffnest.</string>
@@ -34,7 +34,7 @@
     <string name="login_link">Link deiner Mebis Instanz</string>
     <string name="login_password">Passwort</string>
     <string name="login_automatic_title">Automatische Anmeldung</string>
-    <string name="login_text_edit">Bitte Logindaten eingeben.</string>
+    <string name="login_text_edit">Bitte Logindaten eingeben</string>
 
 
     // Dialogs
@@ -89,9 +89,9 @@
     <string name="bookmark_remove_confirm">Lesezeichen löschen?</string>
     <string name="bookmark_setFav">Startseite</string>
     <string name="bookmark_edit">Bearbeiten</string>
-    <string name="bookmark_edit_hint">Neuer Titel …</string>
-    <string name="bookmark_saved">Lesezeichen gespeichert.</string>
-    <string name="bookmark_saved_not">Lesezeichen existiert bereits.</string>
+    <string name="bookmark_edit_hint">Neuer Titel…</string>
+    <string name="bookmark_saved">Lesezeichen gespeichert</string>
+    <string name="bookmark_saved_not">Lesezeichen existiert bereits</string>
     <string name="bookmark_icon">Icon</string>
 
     // Menu Items
@@ -118,8 +118,7 @@
     // Settings
 
     <string name="settings_security_moodle">Logindaten (Mebis)</string>
-    <string name="settings_security_moodle_summary">Bitte gib deinen Mebisdaten an. Sie werden dann auf der Anmeldeseite automatisch eingefügt. Nach dem
-        Bearbeiten evtl. veraltete Lesezeichen löschen.</string>
+    <string name="settings_security_moodle_summary">Bitte gib deinen Mebisdaten an. Sie werden dann auf der Anmeldeseite automatisch eingefügt. Anschließend evtl. veraltete Lesezeichen löschen.</string>
 
     <string name="settings_license_about_summary">Erfahre mehr über die App.</string>
 
@@ -133,10 +132,10 @@
     <string name="toast_download">Lade Datei herunter:</string>
     <string name="toast_download_1">Herunterladen:</string>
     <string name="toast_download_2">Download vollständig. Datei öffnen?</string>
-    <string name="toast_wrongPW">Falsches Passwort.</string>
-    <string name="toast_notPrint">Kein Drucker gefunden.</string>
-    <string name="toast_notBack">Keine vorherige Seite.</string>
-    <string name="toast_notForward">Keine nächste Seite.</string>
+    <string name="toast_wrongPW">Falsches Passwort</string>
+    <string name="toast_notPrint">Keinen Drucker gefunden</string>
+    <string name="toast_notBack">Keine vorherige Seite</string>
+    <string name="toast_notForward">Keine nächste Seite</string>
     <string name="toast_external">Externer Link. Im Standardbrowser öffnen?</string>
 
     // Password
@@ -156,7 +155,7 @@
     <string name="setting_external_summary">Einen Dialog anzeigen, um externe Links im Standardbrowser zu öffnen.</string>
 
     <string name="setting_nightMode">Nachtmodus</string>
-    <string name="setting_nightMode_summary">Benutze den Nachtmodus um Internetseiten dazustellen, wenn das System den Nachtmodus nutzt. Das funktioniert nur, wenn du die aktuelle WebView auf dem Handy installiert hast.</string>
+    <string name="setting_nightMode_summary">Benutze den Nachtmodus um Internetseiten dazustellen, wenn das System auch den Nachtmodus nutzt. Das funktioniert nur, wenn du die aktuelle WebView auf dem Handy installiert hast.</string>
 
     <string name="dialog_help_summary">Ein paar Tipps zur Nutzung der App.</string>
 

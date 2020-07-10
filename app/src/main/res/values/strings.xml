@@ -6,10 +6,10 @@
     <string name="app_name" translatable="false">Mebis</string>
     <string name="app_permissions">
         &lt;i>\"Access storage\" permission:&lt;/i>&lt;br>
-        used for saving downloads on the sd-card.&lt;br>&lt;br>
+        Used for saving downloads on the sd-card.&lt;br>&lt;br>
 
         &lt;i>Grant permission later:&lt;/i>&lt;br>
-        If you don\'t permit this now, you can do it later. Please open then \"Settings -> Grant permission\".</string>
+        If you do not permit this now, you can do it later. Then, please open \"Settings -> Grant permission\".</string>
 
     <string name="app_share">Share using:</string>
 
@@ -34,7 +34,7 @@
     <string name="login_link">Link of your Mebis instance</string>
     <string name="login_password">Password</string>
     <string name="login_automatic_title">Automatic login</string>
-    <string name="login_text_edit">Please fill in login data.</string>
+    <string name="login_text_edit">Please fill in login data</string>
     <string name="login_failed">Login failed!</string>
 
 
@@ -44,9 +44,9 @@
     <string name="bookmark_remove_confirm">Delete Bookmark?</string>
     <string name="bookmark_setFav">Start site</string>
     <string name="bookmark_edit">Edit</string>
-    <string name="bookmark_edit_hint">New title …</string>
-    <string name="bookmark_saved">Bookmark saved.</string>
-    <string name="bookmark_saved_not">Bookmark already exists.</string>
+    <string name="bookmark_edit_hint">New title…</string>
+    <string name="bookmark_saved">Bookmark saved</string>
+    <string name="bookmark_saved_not">Bookmark already exists</string>
     <string name="bookmark_icon">Icon</string>
 
     // Menu Items
@@ -88,10 +88,10 @@
     <string name="toast_download">Downloading file:</string>
     <string name="toast_download_1">Download:</string>
     <string name="toast_download_2">Download completed. Open file?</string>
-    <string name="toast_wrongPW">Wrong password.</string>
-    <string name="toast_notPrint">No printer found.</string>
-    <string name="toast_notBack">Can not go back.</string>
-    <string name="toast_notForward">Can not go forward.</string>
+    <string name="toast_wrongPW">Wrong password</string>
+    <string name="toast_notPrint">No printer found</string>
+    <string name="toast_notBack">Cannot go back</string>
+    <string name="toast_notForward">Cannot go forward</string>
     <string name="toast_external">External link. Open in default browser?</string>
 
     // Dialogs
@@ -162,7 +162,7 @@
     <string name="setting_external_summary">Show a dialog to open external links in default browser.</string>
 
     <string name="setting_nightMode">Dark mode</string>
-    <string name="setting_nightMode_summary">Use the dark mode to display websites, if system uses dark mode. This works only if latest webview is installed on device.</string>
+    <string name="setting_nightMode_summary">Will use the dark mode for displaying websites, if system uses dark mode. This works only, if latest webview is installed on device.</string>
 
     <string name="dialog_help_summary">Some useful hints for using the app.</string>
 
@@ -175,5 +175,5 @@
     <string name="biometric_login_message">Unlock using your biometric credential</string>
 
     <string name="confirm_download">Confirm Downloads</string>
-    <string name="confirm_download_desc">Show a confirmation dialog before starting downloads</string>
+    <string name="confirm_download_desc">Show a confirmation dialog before starting downloads.</string>
 </resources>
