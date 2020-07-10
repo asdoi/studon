@@ -551,11 +551,11 @@ public class Activity_Main extends AppCompatActivity {
                     bottomSheetDialog.cancel();
                     Class_Helper.switchToActivity(activity, Activity_Settings.class);
                     break;
+//                case 1:
+//                    bottomSheetDialog.cancel();
+//                    startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
+//                    break;
                 case 1:
-                    bottomSheetDialog.cancel();
-                    startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
-                    break;
-                case 2:
                     if (url != null) {
                         bottomSheetDialog.cancel();
                         final Bookmarks_Database db = new Bookmarks_Database(activity);
@@ -582,7 +582,7 @@ public class Activity_Main extends AppCompatActivity {
                         }
                     }
                     break;
-                case 3:
+                case 2:
                     if (url != null) {
                         bottomSheetDialog.cancel();
                         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
@@ -592,7 +592,7 @@ public class Activity_Main extends AppCompatActivity {
                         startActivity(Intent.createChooser(sharingIntent, (getString(R.string.app_share))));
                         break;
                     }
-                case 4:
+                case 3:
                     if (url != null) {
                         bottomSheetDialog.cancel();
                         try {
@@ -607,12 +607,12 @@ public class Activity_Main extends AppCompatActivity {
                         }
                     }
                     break;
-                case 7:
+                case 5:
                     bottomSheetDialog.cancel();
                     mWebView.destroy();
                     Objects.requireNonNull(activity).finish();
                     break;
-                case 5:
+                case 4:
                     bottomSheetDialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     View dialogView2 = View.inflate(activity, R.layout.dialog_edit_title, null);
@@ -632,10 +632,10 @@ public class Activity_Main extends AppCompatActivity {
                     final AlertDialog dialog = builder.create();
                     dialog.show();
                     break;
-                case 6:
-                    bottomSheetDialog.cancel();
-                    openInCustomTabs(mWebView.getUrl());
-                    break;
+//                case 6:
+//                    bottomSheetDialog.cancel();
+//                    openInCustomTabs(mWebView.getUrl());
+//                    break;
             }
         });
         bottomSheetDialog.setContentView(dialogView);
