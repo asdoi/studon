@@ -528,15 +528,27 @@ public class Activity_Main extends AppCompatActivity {
         GridItem_Menu itemAlbum_open_in_browser = new GridItem_Menu(getResources().getString(R.string.menu_openInBrowser), R.drawable.icon_earth);
 
         final String url = mWebView.getUrl();
+
+        final int SETTINGS = 0;
+        final int SAVE = 1;
+        final int SHARE = 2;
+        final int SEARCH = 3;
+        final int DOWNLOADS = 4;
+        final int EXIT = 5;
+        final int PRINT = -1;
+        final int OPEN_IN_BROWSER = -2;
+
+
         final List<GridItem_Menu> gridList = new LinkedList<>();
-        gridList.add(gridList.size(), itemAlbum_settings);
-//        gridList.add(gridList.size(), itemAlbum_downloads);
-        gridList.add(gridList.size(), itemAlbum_save);
-        gridList.add(gridList.size(), itemAlbum_share);
-        gridList.add(gridList.size(), itemAlbum_print);
-        gridList.add(gridList.size(), itemAlbum_search);
-//        gridList.add(gridList.size(), itemAlbum_open_in_browser);
-        gridList.add(gridList.size(), itemAlbum_exit);
+
+        gridList.add(SETTINGS, itemAlbum_settings);
+        gridList.add(SAVE, itemAlbum_save);
+        gridList.add(SHARE, itemAlbum_share);
+        gridList.add(SEARCH, itemAlbum_search);
+        gridList.add(DOWNLOADS, itemAlbum_downloads);
+        gridList.add(EXIT, itemAlbum_exit);
+//        gridList.add(PRINT, itemAlbum_print);
+//        gridList.add(OPEN_IN_BROWSER, itemAlbum_open_in_browser);
 
         GridAdapter_Menu gridAdapter = new GridAdapter_Menu(activity, gridList);
         grid.setAdapter(gridAdapter);
@@ -546,15 +558,15 @@ public class Activity_Main extends AppCompatActivity {
         grid.setOnItemClickListener((parent, view, position, id) -> {
 
             switch (position) {
-                case 0:
+                case SETTINGS:
                     bottomSheetDialog.cancel();
                     Class_Helper.switchToActivity(activity, Activity_Settings.class);
                     break;
-//                case 1:
-//                    bottomSheetDialog.cancel();
-//                    startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
-//                    break;
-                case 1:
+                case DOWNLOADS:
+                    bottomSheetDialog.cancel();
+                    startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
+                    break;
+                case SAVE:
                     if (url != null) {
                         bottomSheetDialog.cancel();
                         final Bookmarks_Database db = new Bookmarks_Database(activity);
@@ -581,7 +593,7 @@ public class Activity_Main extends AppCompatActivity {
                         }
                     }
                     break;
-                case 2:
+                case SHARE:
                     if (url != null) {
                         bottomSheetDialog.cancel();
                         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
@@ -591,7 +603,7 @@ public class Activity_Main extends AppCompatActivity {
                         startActivity(Intent.createChooser(sharingIntent, (getString(R.string.app_share))));
                         break;
                     }
-                case 3:
+                case PRINT:
                     if (url != null) {
                         bottomSheetDialog.cancel();
                         try {
@@ -606,12 +618,7 @@ public class Activity_Main extends AppCompatActivity {
                         }
                     }
                     break;
-                case 5:
-                    bottomSheetDialog.cancel();
-                    mWebView.destroy();
-                    Objects.requireNonNull(activity).finish();
-                    break;
-                case 4:
+                case SEARCH:
                     bottomSheetDialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     View dialogView2 = View.inflate(activity, R.layout.dialog_edit_title, null);
@@ -631,10 +638,15 @@ public class Activity_Main extends AppCompatActivity {
                     final AlertDialog dialog = builder.create();
                     dialog.show();
                     break;
-//                case 6:
-//                    bottomSheetDialog.cancel();
-//                    openInCustomTabs(mWebView.getUrl());
-//                    break;
+                case EXIT:
+                    bottomSheetDialog.cancel();
+                    mWebView.destroy();
+                    Objects.requireNonNull(activity).finish();
+                    break;
+                case OPEN_IN_BROWSER:
+                    bottomSheetDialog.cancel();
+                    openInCustomTabs(mWebView.getUrl());
+                    break;
             }
         });
         bottomSheetDialog.setContentView(dialogView);
@@ -737,7 +749,7 @@ public class Activity_Main extends AppCompatActivity {
             // Get Content Uri.
             if (ContentResolver.SCHEME_FILE.equals(attachmentUri.getScheme())) {
                 // FileUri - Convert it to contentUri.
-                File file = new File(attachmentUri.getPath());
+                File file = new File(Objects.requireNonNull(attachmentUri.getPath()));
                 attachmentUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
             }
 
