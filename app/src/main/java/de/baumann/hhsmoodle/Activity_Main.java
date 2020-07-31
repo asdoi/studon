@@ -26,7 +26,9 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -71,6 +73,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
@@ -79,6 +82,7 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -257,13 +261,15 @@ public class Activity_Main extends AppCompatActivity {
             Button action_ok = dialogView.findViewById(R.id.action_ok);
             action_ok.setOnClickListener(view -> {
                 bottomSheetDialog.cancel();
+
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
                 CookieManager cookieManager = CookieManager.getInstance();
                 String cookie = cookieManager.getCookie(url);
                 request.addRequestHeader("Cookie", cookie);
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                 request.setTitle(filename);
                 request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename);
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
+
                 DownloadManager manager = (DownloadManager) Objects.requireNonNull(activity).getSystemService(Context.DOWNLOAD_SERVICE);
                 assert manager != null;
                 activity.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
@@ -282,8 +288,12 @@ public class Activity_Main extends AppCompatActivity {
                 }
             });
             bottomSheetDialog.setContentView(dialogView);
-            bottomSheetDialog.show();
-            Class_Helper.setBottomSheetBehavior(bottomSheetDialog, dialogView);
+
+            if (sharedPref.getBoolean("confirm_download", false)) {
+                bottomSheetDialog.show();
+                Class_Helper.setBottomSheetBehavior(bottomSheetDialog, dialogView);
+            } else
+                action_ok.performClick();
         });
 
         registerForContextMenu(mWebView);
@@ -322,9 +332,7 @@ public class Activity_Main extends AppCompatActivity {
             }
 
             public void onSwipeLeft() {
-                if (mWebView.canGoBack()) {
-                    mWebView.goBack();
-                } else {
+                if (!goBack()) {
                     Toast.makeText(activity, getString(R.string.toast_notBack), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -357,9 +365,7 @@ public class Activity_Main extends AppCompatActivity {
             }
 
             public void onSwipeLeft() {
-                if (mWebView.canGoBack()) {
-                    mWebView.goBack();
-                } else {
+                if (!goBack()) {
                     Toast.makeText(activity, getString(R.string.toast_notBack), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -512,25 +518,37 @@ public class Activity_Main extends AppCompatActivity {
         });
 
         GridView grid = dialogView.findViewById(R.id.grid_item);
-        GridItem_Menu itemAlbum_01 = new GridItem_Menu(getResources().getString(R.string.menu_more_files), R.drawable.icon_download);
-        GridItem_Menu itemAlbum_02 = new GridItem_Menu(getResources().getString(R.string.menu_more_settings), R.drawable.icon_settings);
-        GridItem_Menu itemAlbum_03 = new GridItem_Menu(getResources().getString(R.string.menu_save_bookmark), R.drawable.icon_bookmark);
-        GridItem_Menu itemAlbum_04 = new GridItem_Menu(getResources().getString(R.string.menu_save_pdf), R.drawable.icon_printer);
-        GridItem_Menu itemAlbum_05 = new GridItem_Menu(getResources().getString(R.string.menu_share), R.drawable.icon_share);
-        GridItem_Menu itemAlbum_06 = new GridItem_Menu(getResources().getString(R.string.menu_finish), R.drawable.icon_exit);
-        GridItem_Menu itemAlbum_07 = new GridItem_Menu(getResources().getString(R.string.menu_search), R.drawable.icon_magnify);
-        GridItem_Menu itemAlbum_08 = new GridItem_Menu(getResources().getString(R.string.menu_openInBrowser), R.drawable.icon_earth);
+        GridItem_Menu itemAlbum_downloads = new GridItem_Menu(getResources().getString(R.string.menu_more_files), R.drawable.icon_download);
+        GridItem_Menu itemAlbum_settings = new GridItem_Menu(getResources().getString(R.string.menu_more_settings), R.drawable.icon_settings);
+        GridItem_Menu itemAlbum_save = new GridItem_Menu(getResources().getString(R.string.menu_save_bookmark), R.drawable.icon_bookmark);
+        GridItem_Menu itemAlbum_print = new GridItem_Menu(getResources().getString(R.string.menu_save_pdf), R.drawable.icon_printer);
+        GridItem_Menu itemAlbum_share = new GridItem_Menu(getResources().getString(R.string.menu_share), R.drawable.icon_share);
+        GridItem_Menu itemAlbum_exit = new GridItem_Menu(getResources().getString(R.string.menu_finish), R.drawable.icon_exit);
+        GridItem_Menu itemAlbum_search = new GridItem_Menu(getResources().getString(R.string.menu_search), R.drawable.icon_magnify);
+        GridItem_Menu itemAlbum_open_in_browser = new GridItem_Menu(getResources().getString(R.string.menu_openInBrowser), R.drawable.icon_earth);
 
         final String url = mWebView.getUrl();
+
+        final int SETTINGS = 0;
+        final int SAVE = 1;
+        final int SHARE = 2;
+        final int SEARCH = 3;
+        final int DOWNLOADS = 4;
+        final int EXIT = 5;
+        final int PRINT = -1;
+        final int OPEN_IN_BROWSER = -2;
+
+
         final List<GridItem_Menu> gridList = new LinkedList<>();
-        gridList.add(gridList.size(), itemAlbum_02);
-        gridList.add(gridList.size(), itemAlbum_01);
-        gridList.add(gridList.size(), itemAlbum_03);
-        gridList.add(gridList.size(), itemAlbum_05);
-        gridList.add(gridList.size(), itemAlbum_04);
-        gridList.add(gridList.size(), itemAlbum_07);
-        gridList.add(gridList.size(), itemAlbum_08);
-        gridList.add(gridList.size(), itemAlbum_06);
+
+        gridList.add(SETTINGS, itemAlbum_settings);
+        gridList.add(SAVE, itemAlbum_save);
+        gridList.add(SHARE, itemAlbum_share);
+        gridList.add(SEARCH, itemAlbum_search);
+        gridList.add(DOWNLOADS, itemAlbum_downloads);
+        gridList.add(EXIT, itemAlbum_exit);
+//        gridList.add(PRINT, itemAlbum_print);
+//        gridList.add(OPEN_IN_BROWSER, itemAlbum_open_in_browser);
 
         GridAdapter_Menu gridAdapter = new GridAdapter_Menu(activity, gridList);
         grid.setAdapter(gridAdapter);
@@ -540,15 +558,15 @@ public class Activity_Main extends AppCompatActivity {
         grid.setOnItemClickListener((parent, view, position, id) -> {
 
             switch (position) {
-                case 0:
+                case SETTINGS:
                     bottomSheetDialog.cancel();
                     Class_Helper.switchToActivity(activity, Activity_Settings.class);
                     break;
-                case 1:
+                case DOWNLOADS:
                     bottomSheetDialog.cancel();
                     startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
                     break;
-                case 2:
+                case SAVE:
                     if (url != null) {
                         bottomSheetDialog.cancel();
                         final Bookmarks_Database db = new Bookmarks_Database(activity);
@@ -575,7 +593,7 @@ public class Activity_Main extends AppCompatActivity {
                         }
                     }
                     break;
-                case 3:
+                case SHARE:
                     if (url != null) {
                         bottomSheetDialog.cancel();
                         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
@@ -585,7 +603,7 @@ public class Activity_Main extends AppCompatActivity {
                         startActivity(Intent.createChooser(sharingIntent, (getString(R.string.app_share))));
                         break;
                     }
-                case 4:
+                case PRINT:
                     if (url != null) {
                         bottomSheetDialog.cancel();
                         try {
@@ -600,12 +618,7 @@ public class Activity_Main extends AppCompatActivity {
                         }
                     }
                     break;
-                case 7:
-                    bottomSheetDialog.cancel();
-                    mWebView.destroy();
-                    Objects.requireNonNull(activity).finish();
-                    break;
-                case 5:
+                case SEARCH:
                     bottomSheetDialog.cancel();
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     View dialogView2 = View.inflate(activity, R.layout.dialog_edit_title, null);
@@ -625,7 +638,12 @@ public class Activity_Main extends AppCompatActivity {
                     final AlertDialog dialog = builder.create();
                     dialog.show();
                     break;
-                case 6:
+                case EXIT:
+                    bottomSheetDialog.cancel();
+                    mWebView.destroy();
+                    Objects.requireNonNull(activity).finish();
+                    break;
+                case OPEN_IN_BROWSER:
                     bottomSheetDialog.cancel();
                     openInCustomTabs(mWebView.getUrl());
                     break;
@@ -646,11 +664,7 @@ public class Activity_Main extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        WebBackForwardList currentList = mWebView.copyBackForwardList();
-
-        if (mWebView.canGoBack() && (currentList.getSize() > 0 && !currentList.getItemAtIndex(currentList.getCurrentIndex() - 1).getUrl().contains(LOGIN_SITE))) {
-            mWebView.goBack();
-        } else {
+        if (!goBack()) {
             if (pressedBack) {
                 mWebView.destroy();
                 finishAffinity();
@@ -660,6 +674,16 @@ public class Activity_Main extends AppCompatActivity {
                 pressedBack = true;
             }
         }
+    }
+
+    private boolean goBack() {
+        WebBackForwardList currentList = mWebView.copyBackForwardList();
+
+        if (mWebView.canGoBack() && (currentList.getSize() > 0 && !currentList.getItemAtIndex(currentList.getCurrentIndex() - 1).getUrl().contains(LOGIN_SITE))) {
+            mWebView.goBack();
+            return true;
+        } else
+            return false;
     }
 
     @Override
@@ -686,21 +710,59 @@ public class Activity_Main extends AppCompatActivity {
 
     private final BroadcastReceiver onComplete = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
-            final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(activity);
-            View dialogView = View.inflate(activity, R.layout.dialog_action, null);
-            TextView textView = dialogView.findViewById(R.id.dialog_text);
-            textView.setText(Class_Helper.textSpannable(activity.getString(R.string.toast_download_2)));
-            Button action_ok = dialogView.findViewById(R.id.action_ok);
-            action_ok.setOnClickListener(view -> {
-                bottomSheetDialog.cancel();
-                startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
-            });
-            bottomSheetDialog.setContentView(dialogView);
-            bottomSheetDialog.show();
-            Class_Helper.setBottomSheetBehavior(bottomSheetDialog, dialogView);
+            String action = intent.getAction();
+            if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
+                long downloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0);
+                DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+                DownloadManager.Query query = new DownloadManager.Query();
+                query.setFilterById(downloadId);
+                Cursor cursor = downloadManager.query(query);
+
+                if (cursor.moveToFirst()) {
+                    int downloadStatus = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS));
+                    String downloadLocalUri = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
+                    String downloadMimeType = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_MEDIA_TYPE));
+
+                    if ((downloadStatus == DownloadManager.STATUS_SUCCESSFUL) && downloadLocalUri != null) {
+                        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(activity);
+                        View dialogView = View.inflate(activity, R.layout.dialog_action, null);
+                        TextView textView = dialogView.findViewById(R.id.dialog_text);
+                        textView.setText(Class_Helper.textSpannable(activity.getString(R.string.toast_download_2)));
+                        Button action_ok = dialogView.findViewById(R.id.action_ok);
+                        action_ok.setOnClickListener(view -> {
+                            bottomSheetDialog.cancel();
+                            openDownloadedAttachment(Uri.parse(downloadLocalUri), downloadMimeType);
+                        });
+                        bottomSheetDialog.setContentView(dialogView);
+                        bottomSheetDialog.show();
+                        Class_Helper.setBottomSheetBehavior(bottomSheetDialog, dialogView);
+                    }
+                }
+                cursor.close();
+            }
             Objects.requireNonNull(activity).unregisterReceiver(onComplete);
         }
     };
+
+    private void openDownloadedAttachment(Uri attachmentUri, final String attachmentMimeType) {
+        if (attachmentUri != null) {
+            // Get Content Uri.
+            if (ContentResolver.SCHEME_FILE.equals(attachmentUri.getScheme())) {
+                // FileUri - Convert it to contentUri.
+                File file = new File(Objects.requireNonNull(attachmentUri.getPath()));
+                attachmentUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
+            }
+
+            Intent openAttachmentIntent = new Intent(Intent.ACTION_VIEW);
+            openAttachmentIntent.setDataAndType(attachmentUri, attachmentMimeType);
+            openAttachmentIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            try {
+                startActivity(openAttachmentIntent);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
+            }
+        }
+    }
 
     private void setBookmarksList() {
 

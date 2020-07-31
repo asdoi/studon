@@ -13,7 +13,7 @@
         android:summary="@string/settings_security_pin_summary"
         android:title="@string/settings_security_pin" />
 
-    <SwitchPreferenceCompat
+    <CheckBoxPreference
         android:defaultValue="false"
         android:icon="@drawable/ic_baseline_fingerprint_24"
         android:key="biometric"
@@ -51,6 +51,13 @@
         android:key="external"
         android:summary="@string/setting_external_summary"
         android:title="@string/setting_external" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:icon="@drawable/icon_download"
+        android:key="confirm_download"
+        android:summary="@string/confirm_download_desc"
+        android:title="@string/confirm_download" />
 
     <Preference
         android:icon="@drawable/icon_help"
