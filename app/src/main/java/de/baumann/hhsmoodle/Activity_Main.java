@@ -386,16 +386,11 @@ public class Activity_Main extends AppCompatActivity {
     }
 
     private void removeElements(WebView view) {
-        final String js = "javascript:" +
-                "document.querySelector(\".me-in-page-menu\").remove();" +
-                "document.querySelector(\".logo-row .logo\").remove();" +
-                "document.querySelector(\"#page-navbar\").remove();" +
-                "document.querySelector(\"#block-region-top\").remove();" +
-                "document.querySelector(\".notifications\").remove();";
-
-
-        view.evaluateJavascript(js, s -> {
-        });
+//        final String js = "javascript:" +
+//                "document.querySelector(\"#mbsmenubar\").remove();";
+//
+//        view.evaluateJavascript(js, s -> {
+//        });
     }
 
     @Override
