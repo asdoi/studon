@@ -117,6 +117,9 @@ public class Activity_Main extends AppCompatActivity {
 
     private BottomAppBar bottomAppBar;
 
+    private boolean openNavDrawer = false;
+    private boolean openMsgDrawer = false;
+
     @SuppressLint({"ClickableViewAccessibility", "SetJavaScriptEnabled"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -244,9 +247,21 @@ public class Activity_Main extends AppCompatActivity {
             }
 
             public void onSwipeRight() {
+                if (openMsgDrawer)
+                    closeMessagesDrawer();
+                else if (openNavDrawer)
+                    closeNavigationDrawer();
+                else
+                    openNavigationDrawer();
             }
 
             public void onSwipeLeft() {
+                if (openNavDrawer)
+                    closeNavigationDrawer();
+                else if (openMsgDrawer)
+                    closeMessagesDrawer();
+                else
+                    openMessagesDrawer();
             }
         });
 
@@ -385,12 +400,46 @@ public class Activity_Main extends AppCompatActivity {
         }
     }
 
+    private void openNavigationDrawer() {
+        final String js = "javascript:" +
+                "document.querySelector(\"nav.navbar div.d-inline-block button\").click();";
+
+        mWebView.evaluateJavascript(js, s -> {
+        });
+        openNavDrawer = true;
+    }
+
+    private void closeNavigationDrawer() {
+        openNavigationDrawer();
+        openNavDrawer = false;
+    }
+
+    private void openMessagesDrawer() {
+        final String js = "javascript:" +
+                "document.querySelector(\"nav.navbar ul.nav li.communication div.popover-region a.nav-link .icon\").click();";
+
+        mWebView.evaluateJavascript(js, s -> {
+        });
+        openMsgDrawer = true;
+    }
+
+    private void closeMessagesDrawer() {
+        final String js = "javascript:" +
+                "document.querySelector(\"div.drawer .message-app .closewidget .text-dark .icon\").click();";
+
+        mWebView.evaluateJavascript(js, s -> {
+        });
+        openMsgDrawer = false;
+    }
+
     private void removeElements(WebView view) {
 //        final String js = "javascript:" +
 //                "document.querySelector(\"#mbsmenubar\").remove();";
 //
 //        view.evaluateJavascript(js, s -> {
-//        });
+//        }
+        openNavDrawer = false;
+        openMsgDrawer = false;
     }
 
     @Override
