@@ -138,6 +138,12 @@
         Made by Sascha Peilicke&lt;br>
         Apache-2.0 License&lt;br>
         &lt;i>https://github.com/saschpe/android-customtabs&lt;/i>
+
+
+        &lt;b>AppUpdater&lt;/b>&lt;br>
+        Made by Javier Santos&lt;br>
+        Apache-2.0 License&lt;br>
+        &lt;i>https://github.com/javiersantos/AppUpdater&lt;/i>
     </string>
 
     <string name="dialog_sortName">Name</string>
@@ -176,4 +182,6 @@
 
     <string name="confirm_download">Confirm Downloads</string>
     <string name="confirm_download_desc">Show a confirmation dialog before starting downloads.</string>
+
+    <string name="update_later">Later</string>
 </resources>

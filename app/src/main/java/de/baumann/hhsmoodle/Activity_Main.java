@@ -78,6 +78,12 @@ import androidx.preference.PreferenceManager;
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
 
+import com.github.javiersantos.appupdater.AppUpdater;
+import com.github.javiersantos.appupdater.AppUpdaterUtils;
+import com.github.javiersantos.appupdater.enums.AppUpdaterError;
+import com.github.javiersantos.appupdater.enums.Display;
+import com.github.javiersantos.appupdater.enums.UpdateFrom;
+import com.github.javiersantos.appupdater.objects.Update;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -385,6 +391,8 @@ public class Activity_Main extends AppCompatActivity {
             e.printStackTrace();
             Class_Helper.setLoginData(activity, () -> Activity_Settings.createInfoDialog(this, R.string.dialog_help_title, R.string.dialog_help_text, this::recreate), this::finishAffinity);
         }
+
+        checkUpdates();
     }
 
     private void navigationDrawerClick() {
@@ -1047,6 +1055,60 @@ public class Activity_Main extends AppCompatActivity {
                 Toast.makeText(activity, getString(R.string.login_failed), Toast.LENGTH_LONG).show();
                 Class_Helper.setLoginData(activity, () -> activity.recreate(), () -> activity.finishAffinity());
             });
+        }
+    }
+
+    //    public static String APK_DOWNLOAD;
+    public static String APK_DOWNLOAD_PAGE = "https://asdoi.gitlab.io/mebisapp.html";
+    public static String UPDATER_JSON = "https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/release/UpdaterFile.json";
+
+    public void checkUpdates() {
+        if (!sharedPref.getBoolean("auto_update", true))
+            return;
+
+        try {
+            AppUpdater appUpdater = new AppUpdater(this)
+                    .setDisplay(Display.DIALOG)
+                    .setUpdateFrom(UpdateFrom.JSON)
+                    .setUpdateJSON(UPDATER_JSON)
+                    .setTitleOnUpdateAvailable(R.string.appupdater_update_available)
+                    .setContentOnUpdateAvailable(R.string.appupdater_update_available_description_dialog)
+                    .setButtonUpdate(R.string.appupdater_btn_update)
+                    .setCancelable(false)
+//                    .setButtonUpdateClickListener((dialogInterface, i) -> {
+//                        try {
+//                            mWebView.loadUrl(APK_DOWNLOAD);
+//                            dialogInterface.dismiss();
+//                        } catch (Exception e) {
+//                            mWebView.loadUrl(APK_DOWNLOAD_PAGE);
+//                        }
+//                    })
+                    .setButtonDismiss(R.string.update_later)
+                    .setButtonDoNotShowAgain(R.string.appupdater_btn_disable)
+                    .setButtonDoNotShowAgainClickListener(((dialog, which) -> {
+                        sharedPref.edit().putBoolean("auto_update", false).apply();
+                    }))
+                    .showAppUpdated(false);
+            appUpdater.start();
+        } catch (Exception e) {
+            AppUpdaterUtils appUpdaterUtils = new AppUpdaterUtils(this)
+                    .setUpdateFrom(UpdateFrom.JSON)
+                    .setUpdateJSON(UPDATER_JSON)
+                    .withListener(new AppUpdaterUtils.UpdateListener() {
+                        @Override
+                        public void onSuccess(Update update, Boolean isUpdateAvailable) {
+                            if (isUpdateAvailable) {
+                                Toast.makeText(getBaseContext(), getString(R.string.appupdater_update_available), Toast.LENGTH_LONG).show();
+                                mWebView.loadUrl(APK_DOWNLOAD_PAGE);
+                            }
+                        }
+
+                        @Override
+                        public void onFailed(AppUpdaterError error) {
+
+                        }
+                    });
+            appUpdaterUtils.start();
         }
     }
 }
