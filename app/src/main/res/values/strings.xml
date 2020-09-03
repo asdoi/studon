@@ -184,4 +184,6 @@
     <string name="confirm_download_desc">Show a confirmation dialog before starting downloads.</string>
 
     <string name="update_later">Later</string>
+    <string name="update_available_content">Download the latest version with the latest features, improvements, and bug fixes.</string>
+
 </resources>

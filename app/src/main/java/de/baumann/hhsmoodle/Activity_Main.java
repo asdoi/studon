@@ -1058,7 +1058,7 @@ public class Activity_Main extends AppCompatActivity {
         }
     }
 
-    //    public static String APK_DOWNLOAD;
+    public static String APK_DOWNLOAD = "https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/release/mebis.apk";
     public static String APK_DOWNLOAD_PAGE = "https://asdoi.gitlab.io/mebisapp.html";
     public static String UPDATER_JSON = "https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/release/UpdaterFile.json";
 
@@ -1071,18 +1071,18 @@ public class Activity_Main extends AppCompatActivity {
                     .setDisplay(Display.DIALOG)
                     .setUpdateFrom(UpdateFrom.JSON)
                     .setUpdateJSON(UPDATER_JSON)
-                    .setTitleOnUpdateAvailable(R.string.appupdater_update_available)
-                    .setContentOnUpdateAvailable(R.string.appupdater_update_available_description_dialog)
-                    .setButtonUpdate(R.string.appupdater_btn_update)
+//                    .setTitleOnUpdateAvailable(R.string.appupdater_update_available)
+//                    .setContentOnUpdateAvailable(R.string.appupdater_update_available_description_dialog)
+//                    .setButtonUpdate(R.string.appupdater_btn_update)
                     .setCancelable(false)
-//                    .setButtonUpdateClickListener((dialogInterface, i) -> {
-//                        try {
-//                            mWebView.loadUrl(APK_DOWNLOAD);
-//                            dialogInterface.dismiss();
-//                        } catch (Exception e) {
-//                            mWebView.loadUrl(APK_DOWNLOAD_PAGE);
-//                        }
-//                    })
+                    .setButtonUpdateClickListener((dialogInterface, i) -> {
+                        try {
+                            mWebView.loadUrl(APK_DOWNLOAD);
+                            dialogInterface.dismiss();
+                        } catch (Exception e) {
+                            mWebView.loadUrl(APK_DOWNLOAD_PAGE);
+                        }
+                    })
                     .setButtonDismiss(R.string.update_later)
                     .setButtonDoNotShowAgain(R.string.appupdater_btn_disable)
                     .setButtonDoNotShowAgainClickListener(((dialog, which) -> {
