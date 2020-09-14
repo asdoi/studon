@@ -1,4 +1,4 @@
-# MebisApp
+# MebisApp (Inoffiziell)
 
 Diese App zeigt dir die mobile Internetseite von <a href="https://lernplattform.mebis.bayern.de/my/">Mebis</a> an.  
 Sie soll durch eine automatische Anmeldung, Lesezeichenverwaltung, Gestensteuerung und einigen weiteren nützlichen Funktionen, den mobilen Umgang mit mebis erleichtern.  
@@ -16,7 +16,7 @@ Dazu müssen Benutzername und Passwort deines Accounts eingegeben werden.
 • Geringer Speicherbedarf (<2mb)  
 • Quelloffen: https://gitlab.com/asdoi/MebisApp 
 
-Die Mebis App basiert auf der App <a href="https://github.com/scoute-dich/HHSMoodle">FOSS Moodle</a> von <a href="https://github.com/scoute-dich">Gaukler Faun</a>.
+Die inoffizielle Mebis App basiert auf der App <a href="https://github.com/scoute-dich/HHSMoodle">FOSS Moodle</a> von <a href="https://github.com/scoute-dich">Gaukler Faun</a>.
 
 ### Download:
 <a href="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/release/mebis.apk" target="_blank">
