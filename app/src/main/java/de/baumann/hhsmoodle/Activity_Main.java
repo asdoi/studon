@@ -28,7 +28,6 @@ import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -73,7 +72,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
@@ -85,7 +83,6 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -740,16 +737,17 @@ public class Activity_Main extends AppCompatActivity {
             if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
                 long downloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0);
                 DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+                Uri downloadUri = downloadManager.getUriForDownloadedFile(downloadId);
+
                 DownloadManager.Query query = new DownloadManager.Query();
                 query.setFilterById(downloadId);
                 Cursor cursor = downloadManager.query(query);
 
                 if (cursor.moveToFirst()) {
                     int downloadStatus = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS));
-                    String downloadLocalUri = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
                     String downloadMimeType = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_MEDIA_TYPE));
 
-                    if ((downloadStatus == DownloadManager.STATUS_SUCCESSFUL) && downloadLocalUri != null) {
+                    if ((downloadStatus == DownloadManager.STATUS_SUCCESSFUL) && downloadUri != null) {
                         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(activity);
                         View dialogView = View.inflate(activity, R.layout.dialog_action, null);
                         TextView textView = dialogView.findViewById(R.id.dialog_text);
@@ -757,7 +755,7 @@ public class Activity_Main extends AppCompatActivity {
                         Button action_ok = dialogView.findViewById(R.id.action_ok);
                         action_ok.setOnClickListener(view -> {
                             bottomSheetDialog.cancel();
-                            openDownloadedAttachment(Uri.parse(downloadLocalUri), downloadMimeType);
+                            openDownloadedAttachment(downloadUri, downloadMimeType);
                         });
                         bottomSheetDialog.setContentView(dialogView);
                         bottomSheetDialog.show();
@@ -772,13 +770,6 @@ public class Activity_Main extends AppCompatActivity {
 
     private void openDownloadedAttachment(Uri attachmentUri, final String attachmentMimeType) {
         if (attachmentUri != null) {
-            // Get Content Uri.
-            if (ContentResolver.SCHEME_FILE.equals(attachmentUri.getScheme())) {
-                // FileUri - Convert it to contentUri.
-                File file = new File(Objects.requireNonNull(attachmentUri.getPath()));
-                attachmentUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
-            }
-
             Intent openAttachmentIntent = new Intent(Intent.ACTION_VIEW);
             openAttachmentIntent.setDataAndType(attachmentUri, attachmentMimeType);
             openAttachmentIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
