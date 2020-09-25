@@ -33,9 +33,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.preference.CheckBoxPreference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Objects;
 
@@ -96,7 +96,7 @@ public class Activity_Settings extends AppCompatActivity {
                 return false;
             });
 
-            final CheckBoxPreference biometric = findPreference("biometric");
+            final SwitchPreferenceCompat biometric = findPreference("biometric");
 
             biometric.setOnPreferenceClickListener(preference -> {
                 final Activity activity = getActivity();
