@@ -173,7 +173,7 @@
     <string name="dialog_help_summary">Some useful hints for using the app.</string>
 
     <string name="back_button">Press again to exit</string>
-    <string name="authentication_error">Authentication error: </string>
+    <string name="authentication_error">Authentication error:</string>
     <string name="authentication_failed">Authentication failed</string>
     <string name="biometric_unlock">Biometric unlock</string>
     <string name="biometric_unlock_description">Unlock the app with your fingerprint or your device credentials.</string>

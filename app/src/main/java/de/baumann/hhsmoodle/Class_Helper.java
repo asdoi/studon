@@ -339,7 +339,7 @@ class Class_Helper {
             public void onAuthenticationError(int errorCode,
                                               @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
-                Toast.makeText(activity, activity.getString(R.string.authentication_error) + errString, Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, activity.getString(R.string.authentication_error) + " " + errString, Toast.LENGTH_SHORT).show();
                 activity.finishAffinity();
             }
 
