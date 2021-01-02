@@ -23,6 +23,13 @@
     <SwitchPreferenceCompat
         android:defaultValue="true"
         android:icon="@drawable/icon_exit"
+        android:key="swipe"
+        android:summary="@string/setting_swipe_summary"
+        android:title="@string/setting_swipe" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:icon="@drawable/icon_exit"
         android:key="external"
         android:summary="@string/setting_external_summary"
         android:title="@string/setting_external" />

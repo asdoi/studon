@@ -167,6 +167,9 @@
     <string name="setting_external">External link</string>
     <string name="setting_external_summary">Show a dialog to open external links in default browser.</string>
 
+    <string name="setting_swipe">Swipe gestures</string>
+    <string name="setting_swipe_summary">Open your local messages on left swipe and the navigation drawer on right swipe.</string>
+
     <string name="setting_nightMode">Dark mode</string>
     <string name="setting_nightMode_summary">Will use the dark mode for displaying websites, if system uses dark mode. This works only, if latest webview is installed on device.</string>
 

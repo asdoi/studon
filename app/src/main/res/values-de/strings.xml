@@ -169,4 +169,8 @@
     <string name="login_failed">Anmeldung fehlgeschlagen!</string>
     <string name="confirm_download">Downloads bestätigen</string>
     <string name="confirm_download_desc">Einen Bestätigungs-Dialog anzeigen, bevor ein Download gestartet wird</string>
+    <string name="update_later">Später</string>
+    <string name="update_available_content">Lade die neueste Version mit neuen Features, Verbesserungen und vielem mehr herunter.</string>
+    <string name="setting_swipe">Wischgesten</string>
+    <string name="setting_swipe_summary">Bei einem Wisch nach links werden deine Nachrichten geöffnet und nach rechts die Übersicht.</string>
 </resources>

@@ -244,11 +244,13 @@ public class Activity_Main extends AppCompatActivity {
             }
 
             public void onSwipeRight() {
+                if (sharedPref.getBoolean("swipe", true))
                     navigationDrawerClick();
             }
 
             public void onSwipeLeft() {
-                messagesDrawerClick();
+                if (sharedPref.getBoolean("swipe", true))
+                    messagesDrawerClick();
             }
         });
 
