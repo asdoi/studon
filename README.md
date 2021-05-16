@@ -19,7 +19,7 @@ Dazu müssen Benutzername und Passwort deines Accounts eingegeben werden.
 Die inoffizielle Mebis App basiert auf der App <a href="https://github.com/scoute-dich/HHSMoodle">FOSS Moodle</a> von <a href="https://github.com/scoute-dich">Gaukler Faun</a>.
 
 ### Download:
-<a href="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/release/mebis.apk" target="_blank">
+*<a href="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/release/mebis.apk" target="_blank">
 <img src="https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/src/main/direct-apk-download.png" alt="Download APK" height="80"/></a>
 <a href="https://f-droid.org/packages/com.asdoi.mebis/" target="_blank">
 <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Download on F-Droid" height="80"/></a>
