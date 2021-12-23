@@ -45,7 +45,7 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data android:host="lernplattform.mebis.bayern.de" />
+                <data android:host="studon.fau.de" />
             </intent-filter>
 
         </activity>

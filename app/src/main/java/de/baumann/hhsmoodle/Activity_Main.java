@@ -93,10 +93,9 @@ import saschpe.android.customtabs.WebViewFallback;
 
 public class Activity_Main extends AppCompatActivity {
 
-    public static final String DEFAULT_WEBSITE = "https://lernplattform.mebis.bayern.de/";
-    public static final String MEBIS = "mebis.bayern.de";
-    public static final String LOGIN_SITE = "idp.mebis.bayern.de";
-    public static final String DASHBOARD = "Schreibtisch";
+    public static final String DEFAULT_WEBSITE = "https://www.studon.fau.de/studon/saml.php";
+    public static final String STUDON = "studon.fau.de";
+    public static final String LOGIN_SITE = "https://www.sso.uni-erlangen.de/";
 
     private WebViewWithTouchEvents mWebView;
     private ProgressBar progressBar;
@@ -172,7 +171,7 @@ public class Activity_Main extends AppCompatActivity {
                 loadUrl = true;
 
                 if (sharedPref.getBoolean("external", true)) {
-                    if (url.contains(MEBIS)) {
+                    if (url.contains(STUDON)) {
                         webView.loadUrl(url);
                         return true;
                     } else {
@@ -210,13 +209,13 @@ public class Activity_Main extends AppCompatActivity {
 
 
                     final String js = "javascript:" +
-                            "var logfail = document.querySelector(\".form-error\");" +
+                            "var logfail = document.querySelector(\".message-box.error\");" +
                             "if (logfail != null) {" +
                             "Android.loginFailed();" +
                             "}else{" +
-                            "document.getElementById('password').value = '" + password + "';" +
                             "document.getElementById('username').value = '" + username + "';" +
-                            "document.getElementById('submitbutton').click();" +
+                            "document.getElementById('password').value = '" + password + "';" +
+                            "document.getElementById('submit_button').click();" +
                             "}";
 
                     view.evaluateJavascript(js, s -> {
@@ -520,7 +519,7 @@ public class Activity_Main extends AppCompatActivity {
         db.open();
         bottomSheetDialog = new BottomSheetDialog(Objects.requireNonNull(activity));
         View dialogView = View.inflate(activity, R.layout.grid_layout, null);
-        String favoriteTitle = getString(R.string.bookmark_setFav) + ": " + sharedPref.getString("favoriteTitle", DASHBOARD);
+        String favoriteTitle = getString(R.string.bookmark_setFav) + ": " + sharedPref.getString("favoriteTitle", getString(R.string.summary));
         favoriteTitleTV = dialogView.findViewById(R.id.grid_title);
         favoriteTitleTV.setText(favoriteTitle);
         bookmarkList = dialogView.findViewById(R.id.grid_item);
@@ -811,7 +810,7 @@ public class Activity_Main extends AppCompatActivity {
 
         if (bookmarkList.getAdapter().getCount() == 0) {
             String url = sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE);
-            db.insert(DASHBOARD, url, "14", "");
+            db.insert(getString(R.string.summary), url, "14", "");
             setBookmarksList();
         }
         //onClick function
@@ -975,7 +974,7 @@ public class Activity_Main extends AppCompatActivity {
                                 .putString("favoriteURL", bookmarks_url)
                                 .putString("favoriteTitle", bookmarks_title).apply();
 
-                        String favoriteTitle = getString(R.string.bookmark_setFav) + ": " + sharedPref.getString("favoriteTitle", DASHBOARD);
+                        String favoriteTitle = getString(R.string.bookmark_setFav) + ": " + sharedPref.getString("favoriteTitle", getString(R.string.summary));
 
                         favoriteTitleTV.setText(favoriteTitle);
                         break;
@@ -1048,7 +1047,7 @@ public class Activity_Main extends AppCompatActivity {
         }
     }
 
-    public static String UPDATER_JSON = "https://gitlab.com/asdoi/MebisApp/-/raw/mebis/app/release/UpdaterFile.json";
+    public static String UPDATER_JSON = "https://gitlab.com/asdoi/studon/-/raw/mebis/app/release/UpdaterFile.json";
 
     public void checkUpdates() {
         if (!sharedPref.getBoolean("auto_update", true))
@@ -1064,6 +1063,6 @@ public class Activity_Main extends AppCompatActivity {
                     sharedPref.edit().putBoolean("auto_update", false).apply();
                 }))
                 .showAppUpdated(false);
-            appUpdater.start();
+        appUpdater.start();
     }
 }

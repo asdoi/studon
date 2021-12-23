@@ -15,7 +15,7 @@
     <string name="app_share">Teilen mit:</string>
 
 
-    // Mebis
+    // StudOn
 
     <string name="subjects_color_red">Rot</string>
     <string name="subjects_color_pink">Pink</string>
@@ -31,7 +31,7 @@
     // Login
 
     <string name="login_user">Benutzername</string>
-    <string name="login_link">Link deiner Mebis Instanz</string>
+    <string name="login_link">Link deiner StudOn Instanz</string>
     <string name="login_password">Passwort</string>
     <string name="login_automatic_title">Automatische Anmeldung</string>
     <string name="login_text_edit">Bitte Logindaten eingeben</string>
@@ -55,7 +55,7 @@
     <string name="dialog_license_title">Copyright © 2020 by AOSD</string>
     <string name="dialog_license_text">
         Eine veränderte Version von https://github.com/scoute-dich/HHSMoodle&lt;br>
-        &lt;i>Besuche für mehr Informationen: https://github.com/asdoi/MebisApp&lt;/i>&lt;br>&lt;br>
+        &lt;i>Besuche für mehr Informationen: https://github.com/asdoi/StudOn&lt;/i>&lt;br>&lt;br>
 
         Dieses Programm ist freie Software. Sie können es unter den Bedingungen der GNU General Public License, wie von
         der Free Software Foundation veröffentlicht, weitergeben und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder
@@ -117,8 +117,8 @@
 
     // Settings
 
-    <string name="settings_security_moodle">Logindaten (Mebis)</string>
-    <string name="settings_security_moodle_summary">Bitte gib deinen Mebisdaten an. Sie werden dann auf der Anmeldeseite automatisch eingefügt. Anschließend evtl. veraltete Lesezeichen löschen.</string>
+    <string name="settings_security_moodle">Logindaten (IDM)</string>
+    <string name="settings_security_moodle_summary">Bitte gib deinen IDM Daten an. Sie werden dann auf der Anmeldeseite automatisch eingefügt. Anschließend evtl. veraltete Lesezeichen löschen.</string>
 
     <string name="settings_license_about_summary">Erfahre mehr über die App.</string>
 
@@ -164,7 +164,7 @@
     <string name="authentication_failed">Anmeldung fehlgeschlagen</string>
     <string name="biometric_unlock">Biometrisch Entsperren</string>
     <string name="biometric_unlock_description">Entsperre die App mit deinem Fingerabdruck oder deinen Handy-Anmeldedaten.</string>
-    <string name="biometric_login_title">Biometrisches Entsperren der Mebis App</string>
+    <string name="biometric_login_title">Biometrisches Entsperren der StudOn App</string>
     <string name="biometric_login_message">Entsperre mit deinen biometrischen Daten</string>
     <string name="login_failed">Anmeldung fehlgeschlagen!</string>
     <string name="confirm_download">Downloads bestätigen</string>
@@ -173,4 +173,5 @@
     <string name="update_available_content">Lade die neueste Version mit neuen Features, Verbesserungen und vielem mehr herunter.</string>
     <string name="setting_swipe">Wischgesten</string>
     <string name="setting_swipe_summary">Bei einem Wisch nach links werden deine Nachrichten geöffnet und nach rechts die Übersicht.</string>
+    <string name="summary">Übersicht</string>
 </resources>

@@ -1,9 +1,9 @@
-Diese (inoffizielle) App zeigt dir die mobile Internetseite von <a href="https://lernplattform.mebis.bayern.de/my/">Mebis</a> an.
-Sie soll durch eine automatische Anmeldung, Lesezeichenverwaltung, Gestensteuerung und einigen weiteren nützlichen Funktionen, den mobilen Umgang mit mebis erleichtern.
+Diese (inoffizielle) App zeigt dir die mobile Internetseite von <a href="https://studon.fau.de">StudOn</a> an.
+Sie soll durch eine automatische Anmeldung, Lesezeichenverwaltung, Gestensteuerung und einigen weiteren nützlichen Funktionen, den mobilen Umgang mit StudOn erleichtern.
 Dazu müssen Benutzername und Passwort deines Accounts eingegeben werden.
 
 <b>Alle Funktionen im Überblick:</b>
-• Alle Funktionen der mobilen Mebisseite
+• Alle Funktionen der mobilen StudOn-Website
 • Automatische Anmeldung
 • Eigene Lesezeichenverwaltung
 • App-Schutz durch PIN/Fingerabdruck
@@ -11,6 +11,6 @@ Dazu müssen Benutzername und Passwort deines Accounts eingegeben werden.
 • Keine Werbung
 • Keine unnötigen Berechtigungen
 • Geringer Speicherbedarf (<2mb)
-• Quelloffen: https://gitlab.com/asdoi/MebisApp
+• Quelloffen: https://gitlab.com/asdoi/StudOn
 
-Die inoffizielle Mebis App basiert auf der App <a href="https://github.com/scoute-dich/HHSMoodle">FOSS Moodle</a> von <a href="https://github.com/scoute-dich">Gaukler Faun</a>.
+Die inoffizielle StudOn App basiert auf der App <a href="https://github.com/scoute-dich/HHSMoodle">FOSS Moodle</a> von <a href="https://github.com/scoute-dich">Gaukler Faun</a>.

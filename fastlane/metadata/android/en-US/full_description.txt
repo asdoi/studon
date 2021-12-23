@@ -1,11 +1,11 @@
-This (unofficial) app displays mobile <a href="https://lernplattform.mebis.bayern.de/my/">Mebis</a> websites.
+This (unofficial) app displays mobile <a href="https://studon.fau.de">StudOn</a> websites.
 You must set link, username and password to use the app.
 
 -------------------------------------------------
 <b>FEATURES</b>
 -------------------------------------------------
 
-• All features of mobile Mebis websites
+• All features of mobile StudOn websites
 • Automatic login
 • Own bookmark management
 • App protection by pin
@@ -13,6 +13,6 @@ You must set link, username and password to use the app.
 • Gesture navigation
 • No ads
 • No unnecessary permissions
-• Open Source: https://gitlab.com/asdoi/MebisApp
+• Open Source: https://gitlab.com/asdoi/StudOn
 
 This is a fork of <a href="https://github.com/scoute-dich/HHSMoodle">FOSS Moodle</a> by <a href="https://github.com/scoute-dich">Gaukler Faun</a>.

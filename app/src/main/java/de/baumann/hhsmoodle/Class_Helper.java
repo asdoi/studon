@@ -207,7 +207,7 @@ class Class_Helper {
                             .putString("password", password)
                             .putString("link", link)
                             .putString("favoriteURL", link)
-                            .putString("favoriteTitle", Activity_Main.DASHBOARD).commit();
+                            .putString("favoriteTitle", activity.getString(R.string.summary)).commit();
                     dialog.cancel();
                     runOnSuccess.run();
                 }
@@ -301,7 +301,7 @@ class Class_Helper {
                     try {
                         // clearing app data
                         Runtime runtime = Runtime.getRuntime();
-                        runtime.exec("pm clear com.asdoi.mebis");
+                        runtime.exec("pm clear com.asdoi.studon");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

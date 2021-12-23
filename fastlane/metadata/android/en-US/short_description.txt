@@ -1,1 +1,1 @@
-Displays mobile Mebis website.
+Displays mobile StudOn website.

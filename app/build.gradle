@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.asdoi.mebis"
+        applicationId "com.asdoi.studon"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         minSdkVersion 21
@@ -27,7 +27,7 @@ android {
 
             applicationVariants.all { variant ->
                 variant.outputs.all {
-                    outputFileName = "mebis.apk"
+                    outputFileName = "StudOn.apk"
                 }
             }
         }
