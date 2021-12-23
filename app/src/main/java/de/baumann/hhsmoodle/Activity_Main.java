@@ -95,7 +95,7 @@ public class Activity_Main extends AppCompatActivity {
 
     public static final String DEFAULT_WEBSITE = "https://www.studon.fau.de/studon/saml.php";
     public static final String STUDON = "studon.fau.de";
-    public static final String LOGIN_SITE = "https://www.sso.uni-erlangen.de/";
+    public static final String LOGIN_SITE = "sso.uni-erlangen.de";
 
     private WebViewWithTouchEvents mWebView;
     private ProgressBar progressBar;
@@ -392,10 +392,8 @@ public class Activity_Main extends AppCompatActivity {
 
     private void navigationDrawerClick() {
         final String js = "javascript:" +
-                "if (document.querySelector(\"#page-wrapper .drawer\").getAttribute(\"aria-expanded\") == \"true\") {" +
-                "document.querySelector(\"#page-wrapper .drawer .message-app .closewidget .text-dark .icon\").click();" +
-                "} else {" +
-                "document.querySelector(\"nav.navbar div.d-inline-block button\").click(); }";
+                "document.querySelector(\".navbar-toggle\").click();" +
+                "document.querySelector(\".navbar-nav a.dropdown-toggle\").click();";
 
         mWebView.evaluateJavascript(js, s -> {
         });
@@ -403,23 +401,15 @@ public class Activity_Main extends AppCompatActivity {
 
     private void messagesDrawerClick() {
         final String js = "javascript:" +
-                "if(document.querySelector(\"#page-wrapper #nav-drawer\").getAttribute(\"aria-hidden\") == \"false\"){" +
-                "document.querySelector(\"nav.navbar div.d-inline-block button\").click(); " +
-                "} else if (document.querySelector(\"#page-wrapper .drawer\").getAttribute(\"aria-expanded\") == \"true\") {" +
-                "document.querySelector(\"#page-wrapper .drawer .message-app .closewidget .text-dark .icon\").click();" +
-                "} else {" +
-                "document.querySelector(\"nav.navbar ul.nav li.communication div.popover-region a.nav-link .icon\").click(); }";
+                "document.querySelector(\".navbar-toggle\").click();" +
+                "document.querySelectorAll(\".navbar-nav a.dropdown-toggle\")[1].click();";
 
         mWebView.evaluateJavascript(js, s -> {
         });
     }
 
     private void removeElements(WebView view) {
-//        final String js = "javascript:" +
-//                "document.querySelector(\"#mbsmenubar\").remove();";
-//
-//        view.evaluateJavascript(js, s -> {
-//        }
+
     }
 
     @Override
