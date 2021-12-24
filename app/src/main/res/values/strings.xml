@@ -33,7 +33,7 @@
     <string name="login_user">Username</string>
     <string name="login_link">Link of your StudOn instance</string>
     <string name="login_password">Password</string>
-    <string name="login_automatic_title">Automatic login</string>
+    <string name="login_automatic_title">Automatic login (IDM)</string>
     <string name="login_text_edit">Please fill in login data</string>
     <string name="login_failed">Login failed!</string>
 
@@ -73,8 +73,7 @@
     // Settings
 
     <string name="settings_security_moodle">Login data (IDM)</string>
-    <string name="settings_security_moodle_summary">Enter your IDM login data. It will be filled in automatically. Please delete unused bookmarks after editing your
-        data.</string>
+    <string name="settings_security_moodle_summary">Enter your IDM login data. It will be filled in automatically. Please delete unused bookmarks after editing your data.</string>
 
     <string name="settings_license_about_summary">Learn more about the app.</string>
 

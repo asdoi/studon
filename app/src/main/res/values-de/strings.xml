@@ -33,7 +33,7 @@
     <string name="login_user">Benutzername</string>
     <string name="login_link">Link deiner StudOn Instanz</string>
     <string name="login_password">Passwort</string>
-    <string name="login_automatic_title">Automatische Anmeldung</string>
+    <string name="login_automatic_title">Automatische Anmeldung (IDM)</string>
     <string name="login_text_edit">Bitte Logindaten eingeben</string>
 
 
@@ -118,7 +118,7 @@
     // Settings
 
     <string name="settings_security_moodle">Logindaten (IDM)</string>
-    <string name="settings_security_moodle_summary">Bitte gib deinen IDM Daten an. Sie werden dann auf der Anmeldeseite automatisch eingefügt. Anschließend evtl. veraltete Lesezeichen löschen.</string>
+    <string name="settings_security_moodle_summary">Bitte gib deinen IDM Daten an. Sie werden dann auf der Anmeldeseite automatisch eingefügt. Bei nachträglichen Änderungen müssen die Lesezeichen gegebenenfalls angepasst werden.</string>
 
     <string name="settings_license_about_summary">Erfahre mehr über die App.</string>
 
