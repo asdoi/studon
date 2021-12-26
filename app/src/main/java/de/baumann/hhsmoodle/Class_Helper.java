@@ -23,9 +23,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.text.Html;
 import android.text.SpannableString;
@@ -42,8 +40,6 @@ import androidx.annotation.NonNull;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-import androidx.security.crypto.EncryptedSharedPreferences;
-import androidx.security.crypto.MasterKey;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -86,51 +82,38 @@ class Class_Helper {
     // used Methods
 
     static void switchIcon(Activity activity, String string, ImageView be) {
-
-        SharedPreferences sharedPref = Class_Helper.getEncryptedSharedPreferences(activity);
-
         assert be != null;
 
         switch (string) {
             case "15":
                 be.setImageResource(R.drawable.circle_pink);
-                sharedPref.edit().putString("bookmarks_icon", "15").apply();
                 break;
             case "16":
                 be.setImageResource(R.drawable.circle_purple);
-                sharedPref.edit().putString("bookmarks_icon", "16").apply();
                 break;
             case "17":
                 be.setImageResource(R.drawable.circle_blue);
-                sharedPref.edit().putString("bookmarks_icon", "17").apply();
                 break;
             case "18":
                 be.setImageResource(R.drawable.circle_teal);
-                sharedPref.edit().putString("bookmarks_icon", "18").apply();
                 break;
             case "19":
                 be.setImageResource(R.drawable.circle_green);
-                sharedPref.edit().putString("bookmarks_icon", "19").apply();
                 break;
             case "20":
                 be.setImageResource(R.drawable.circle_lime);
-                sharedPref.edit().putString("bookmarks_icon", "20").apply();
                 break;
             case "21":
                 be.setImageResource(R.drawable.circle_yellow);
-                sharedPref.edit().putString("bookmarks_icon", "21").apply();
                 break;
             case "22":
                 be.setImageResource(R.drawable.circle_orange);
-                sharedPref.edit().putString("bookmarks_icon", "22").apply();
                 break;
             case "23":
                 be.setImageResource(R.drawable.circle_brown);
-                sharedPref.edit().putString("bookmarks_icon", "23").apply();
                 break;
             default:
                 be.setImageResource(R.drawable.circle_red);
-                sharedPref.edit().putString("bookmarks_icon", "14").apply();
                 break;
         }
     }
@@ -181,35 +164,25 @@ class Class_Helper {
     }
 
     // Security
-    private static SharedPreferences sharedPref;
-
     @SuppressLint("ApplySharedPref")
     static void setLoginData(final Activity activity, Runnable runOnSuccess, Runnable runOnCancel) {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             final View dialogView = View.inflate(activity, R.layout.dialog_edit_login, null);
-            final EditText moodle_link = dialogView.findViewById(R.id.moodle_link);
-            moodle_link.setText(sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE));
             final EditText moodle_userName = dialogView.findViewById(R.id.moodle_userName);
-            moodle_userName.setText(sharedPref.getString("username", ""));
+            moodle_userName.setText(PreferenceHelper.getUsername(activity));
             final EditText moodle_userPW = dialogView.findViewById(R.id.moodle_userPW);
-            moodle_userPW.setText(sharedPref.getString("password", ""));
+            moodle_userPW.setText(PreferenceHelper.getPassword(activity));
             builder.setView(dialogView);
             builder.setPositiveButton(R.string.toast_yes, (dialog, whichButton) -> {
                 final String username = moodle_userName.getText().toString().trim();
                 final String password = moodle_userPW.getText().toString().trim();
-                final String link = moodle_link.getText().toString().trim();
 
-                if (username.length() < 1 || password.length() < 1 || link.length() < 1) {
+                if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(activity, activity.getString(R.string.login_text_edit), Toast.LENGTH_SHORT).show();
                     setLoginData(activity, runOnSuccess, runOnCancel);
                 } else {
-                    sharedPref.edit()
-                            .putString("username", username)
-                            .putString("password", password)
-                            .putString("link", link)
-                            .putString("favoriteURL", link)
-                            .putString("favoriteTitle", activity.getString(R.string.summary)).commit();
+                    PreferenceHelper.setUsernamePassword(activity, username, password);
                     dialog.cancel();
                     runOnSuccess.run();
                 }
@@ -226,9 +199,7 @@ class Class_Helper {
     }
 
     static void checkAuthentication(final Activity activity) {
-        sharedPref = Class_Helper.getEncryptedSharedPreferences(activity);
-
-        boolean biometric = sharedPref.getBoolean("biometric", false);
+        boolean biometric = PreferenceHelper.isBiometric(activity);
 
         if (biometric)
             checkFingerprint(activity);
@@ -237,7 +208,7 @@ class Class_Helper {
     }
 
     private static void checkPin(final Activity activity) {
-        String protect = sharedPref.getString("settings_security_pin", "");
+        String protect = PreferenceHelper.getPin(activity);
         if (protect.length() > 0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             final View dialogView = View.inflate(activity, R.layout.dialog_enter_pin, null);
@@ -374,27 +345,5 @@ class Class_Helper {
         String textNow = text.getText().toString().trim();
         String pin = textNow + number;
         text.setText(pin);
-    }
-
-    private static final String ENCRYPTED_PREFS = "ENCRYPTED_PREFS";
-
-    protected static SharedPreferences getEncryptedSharedPreferences(Context context) {
-        try {
-            return EncryptedSharedPreferences.create(
-                    context,
-                    ENCRYPTED_PREFS,
-                    new MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build(),
-                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return Class_Helper.getEncryptedSharedPreferences(context);
-    }
-
-    private static void test(Context context) {
-        SharedPreferences sharedPreferences = getEncryptedSharedPreferences(context);
     }
 }

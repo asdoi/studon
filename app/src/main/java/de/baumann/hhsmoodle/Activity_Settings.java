@@ -23,7 +23,6 @@ package de.baumann.hhsmoodle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
@@ -35,8 +34,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
-
-import java.util.Objects;
 
 public class Activity_Settings extends AppCompatActivity {
 
@@ -98,15 +95,13 @@ public class Activity_Settings extends AppCompatActivity {
 
             biometric.setOnPreferenceClickListener(preference -> {
                 final Activity activity = getActivity();
-                final SharedPreferences sharedPref = Class_Helper.getEncryptedSharedPreferences(Objects.requireNonNull(activity));
-                sharedPref.edit().putString("settings_security_pin", "").apply();
+                PreferenceHelper.disablePin(activity);
                 return false;
             });
 
             findPreference("settings_security_pin").setOnPreferenceClickListener(preference -> {
                 final Activity activity = getActivity();
-                final SharedPreferences sharedPref = Class_Helper.getEncryptedSharedPreferences(Objects.requireNonNull(activity));
-                final String password = sharedPref.getString("settings_security_pin", "");
+                final String password = PreferenceHelper.getPin(getContext());
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 View dialogView = View.inflate(activity, R.layout.dialog_edit_pin, null);
 
@@ -117,7 +112,7 @@ public class Activity_Settings extends AppCompatActivity {
                 builder.setTitle(R.string.settings_security_pin);
                 builder.setPositiveButton(R.string.toast_yes, (dialog, whichButton) -> {
                     String inputTag = pass_userPW.getText().toString().trim();
-                    sharedPref.edit().putString("settings_security_pin", inputTag).apply();
+                    PreferenceHelper.setPin(getContext(), inputTag);
                     biometric.setChecked(false);
                 });
                 builder.setNegativeButton(R.string.toast_cancel, (dialog, whichButton) -> dialog.cancel());

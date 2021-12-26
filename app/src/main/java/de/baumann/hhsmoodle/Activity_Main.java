@@ -31,7 +31,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -98,7 +97,6 @@ public class Activity_Main extends AppCompatActivity {
 
     private WebViewWithTouchEvents mWebView;
     private ProgressBar progressBar;
-    private SharedPreferences sharedPref;
     private ValueCallback<Uri[]> mFilePathCallback;
 
     private static final int INPUT_FILE_REQUEST_CODE = 1;
@@ -128,8 +126,7 @@ public class Activity_Main extends AppCompatActivity {
 
         activity = Activity_Main.this;
 
-        sharedPref = Class_Helper.getEncryptedSharedPreferences(this);
-        columns = Integer.parseInt(sharedPref.getString("columns", "2"));
+        columns = PreferenceHelper.getColumns(this);
 
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
@@ -168,7 +165,7 @@ public class Activity_Main extends AppCompatActivity {
                 final String url = uri.toString();
                 loadUrl = true;
 
-                if (sharedPref.getBoolean("external", true)) {
+                if (PreferenceHelper.isExternal(getApplicationContext())) {
                     if (url.contains(STUDON) || url.contains(LOGIN_SITE)) {
                         webView.loadUrl(url);
                         return true;
@@ -200,8 +197,8 @@ public class Activity_Main extends AppCompatActivity {
                 super.onPageFinished(view, url);
 
                 if (url.contains(LOGIN_SITE)) {
-                    String username = sharedPref.getString("username", "");
-                    String password = sharedPref.getString("password", "");
+                    String username = PreferenceHelper.getUsername(getApplicationContext());
+                    String password = PreferenceHelper.getPassword(getApplicationContext());
 
                     view.addJavascriptInterface(new LogInFailedInterface(), "Android");
 
@@ -237,12 +234,12 @@ public class Activity_Main extends AppCompatActivity {
             }
 
             public void onSwipeRight() {
-                if (sharedPref.getBoolean("swipe", false))
+                if (PreferenceHelper.isSwipe(getApplicationContext()))
                     navigationDrawerClick();
             }
 
             public void onSwipeLeft() {
-                if (sharedPref.getBoolean("swipe", false))
+                if (PreferenceHelper.isSwipe(getApplicationContext()))
                     messagesDrawerClick();
             }
         });
@@ -286,7 +283,7 @@ public class Activity_Main extends AppCompatActivity {
             });
             bottomSheetDialog.setContentView(dialogView);
 
-            if (sharedPref.getBoolean("confirm_download", false)) {
+            if (PreferenceHelper.isConfirmDownloads(this)) {
                 bottomSheetDialog.show();
                 Class_Helper.setBottomSheetBehavior(bottomSheetDialog, dialogView);
             } else
@@ -295,7 +292,7 @@ public class Activity_Main extends AppCompatActivity {
 
         registerForContextMenu(mWebView);
 
-        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK) && sharedPref.getBoolean("nightMode", false)) {
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK) && PreferenceHelper.isNightMode(this)) {
             int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
             switch (currentNightMode) {
                 case Configuration.UI_MODE_NIGHT_NO:
@@ -370,12 +367,11 @@ public class Activity_Main extends AppCompatActivity {
 
         //Login
         try {
-            if (sharedPref.getString("username", "").length() < 1 ||
-                    sharedPref.getString("password", "").length() < 1 ||
-                    sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE).length() < 1) {
+            if (PreferenceHelper.getUsername(this).isEmpty() ||
+                    PreferenceHelper.getUsername(this).isEmpty()) {
                 throw new Exception();
             } else {
-                mWebView.loadUrl(sharedPref.getString("favoriteURL", Activity_Main.DEFAULT_WEBSITE));
+                mWebView.loadUrl(PreferenceHelper.getDefaultURL(this));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -459,7 +455,7 @@ public class Activity_Main extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK) && sharedPref.getBoolean("nightMode", false)) {
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK) && PreferenceHelper.isNightMode(this)) {
             int currentNightMode = newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK;
             switch (currentNightMode) {
                 case Configuration.UI_MODE_NIGHT_NO:
@@ -509,7 +505,7 @@ public class Activity_Main extends AppCompatActivity {
         db.open();
         bottomSheetDialog = new BottomSheetDialog(Objects.requireNonNull(activity));
         View dialogView = View.inflate(activity, R.layout.grid_layout, null);
-        String favoriteTitle = getString(R.string.bookmark_setFav) + ": " + sharedPref.getString("favoriteTitle", getString(R.string.summary));
+        String favoriteTitle = getString(R.string.bookmark_setFav) + ": " + PreferenceHelper.getDefaultTitle(this);
         favoriteTitleTV = dialogView.findViewById(R.id.grid_title);
         favoriteTitleTV.setText(favoriteTitle);
         bookmarkList = dialogView.findViewById(R.id.grid_item);
@@ -799,7 +795,7 @@ public class Activity_Main extends AppCompatActivity {
         bookmarkList.setNumColumns(columns);
 
         if (bookmarkList.getAdapter().getCount() == 0) {
-            String url = sharedPref.getString("link", Activity_Main.DEFAULT_WEBSITE);
+            String url = PreferenceHelper.getDefaultURL(this);
             db.insert(getString(R.string.summary), url, "14", "");
             setBookmarksList();
         }
@@ -960,11 +956,9 @@ public class Activity_Main extends AppCompatActivity {
                         break;
                     case 2:
                         bottomSheetDialog_context.cancel();
-                        sharedPref.edit()
-                                .putString("favoriteURL", bookmarks_url)
-                                .putString("favoriteTitle", bookmarks_title).apply();
+                        PreferenceHelper.setDefault(this, bookmarks_url, bookmarks_title);
 
-                        String favoriteTitle = getString(R.string.bookmark_setFav) + ": " + sharedPref.getString("favoriteTitle", getString(R.string.summary));
+                        String favoriteTitle = getString(R.string.bookmark_setFav) + ": " + PreferenceHelper.getDefaultTitle(this);
 
                         favoriteTitleTV.setText(favoriteTitle);
                         break;
@@ -1040,7 +1034,7 @@ public class Activity_Main extends AppCompatActivity {
     public static String UPDATER_JSON = "https://gitlab.com/asdoi/studon/-/raw/mebis/app/release/UpdaterFile.json";
 
     public void checkUpdates() {
-        if (!sharedPref.getBoolean("auto_update", true))
+        if (!PreferenceHelper.isAutoUpdate(this))
             return;
 
         AppUpdater appUpdater = new AppUpdater(this)
@@ -1050,7 +1044,7 @@ public class Activity_Main extends AppCompatActivity {
                 .setCancelable(false)
                 .setButtonDismiss(R.string.update_later)
                 .setButtonDoNotShowAgainClickListener(((dialog, which) -> {
-                    sharedPref.edit().putBoolean("auto_update", false).apply();
+                    PreferenceHelper.disableAutoUpdate(this);
                 }))
                 .showAppUpdated(false);
         appUpdater.start();

@@ -21,7 +21,6 @@ package de.baumann.hhsmoodle;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -91,10 +90,9 @@ class Bookmarks_Database {
 
     //fetch data
     Cursor fetchAllData(Context context) {
-        SharedPreferences sp = Class_Helper.getEncryptedSharedPreferences(context);
         String[] columns = new String[]{"_id", "bookmarks_title", "bookmarks_content", "bookmarks_icon", "bookmarks_attachment"};
 
-        switch (sp.getString("sortDBB", "title")) {
+        switch (PreferenceHelper.getBookmarksSort(context)) {
             case "title":
                 return sqlDb.query(dbTable, columns, null, null, null, null, "bookmarks_title" + " COLLATE NOCASE ASC;");
             case "icon": {
