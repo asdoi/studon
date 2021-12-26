@@ -171,7 +171,7 @@ public class Activity_Main extends AppCompatActivity {
                 loadUrl = true;
 
                 if (sharedPref.getBoolean("external", true)) {
-                    if (url.contains(STUDON)) {
+                    if (url.contains(STUDON) || url.contains(LOGIN_SITE)) {
                         webView.loadUrl(url);
                         return true;
                     } else {
@@ -220,26 +220,22 @@ public class Activity_Main extends AppCompatActivity {
 
                     view.evaluateJavascript(js, s -> {
                     });
-                } else
-                    removeElements(view);
+                }
             }
 
             @Override
             public void onPageCommitVisible(WebView view, String url) {
                 super.onPageCommitVisible(view, url);
-                removeElements(view);
             }
         });
 
         mWebView.setOnTouchListener(new SwipeTouchListener(activity) {
             public void onSwipeTop() {
                 bottomAppBar.animate().translationY(+bottomAppBar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
-                removeElements(mWebView);
             }
 
             public void onSwipeBottom() {
                 bottomAppBar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
-                removeElements(mWebView);
             }
 
             public void onSwipeRight() {
@@ -374,6 +370,7 @@ public class Activity_Main extends AppCompatActivity {
             }
         });
 
+        //Login
         try {
             if (sharedPref.getString("username", "").length() < 1 ||
                     sharedPref.getString("password", "").length() < 1 ||
@@ -408,9 +405,6 @@ public class Activity_Main extends AppCompatActivity {
         });
     }
 
-    private void removeElements(WebView view) {
-
-    }
 
     @Override
     protected void onStart() {
@@ -418,7 +412,15 @@ public class Activity_Main extends AppCompatActivity {
         try {
             Uri uri = Objects.requireNonNull(getIntent().getData());
             String url = uri.toString();
-            mWebView.loadUrl(url);
+            String newUrl = url;
+            try {
+                //Redirect to login page through replacing xy.php with saml.php (-> open sso-login)
+                int indexPhp = url.indexOf(".php");
+                int indexSlash = url.substring(0, indexPhp).lastIndexOf('/');
+                newUrl = url.substring(0, indexSlash + 1) + "saml" + url.substring(indexPhp);
+            } catch (Exception e) {
+            }
+            mWebView.loadUrl(newUrl);
             setIntent(null);
         } catch (Exception ignore) {
         }
