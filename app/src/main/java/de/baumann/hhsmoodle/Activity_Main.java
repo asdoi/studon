@@ -72,7 +72,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
-import androidx.preference.PreferenceManager;
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
 
@@ -129,8 +128,7 @@ public class Activity_Main extends AppCompatActivity {
 
         activity = Activity_Main.this;
 
-        PreferenceManager.setDefaultValues(activity, R.xml.user_settings, false);
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
+        sharedPref = Class_Helper.getEncryptedSharedPreferences(this);
         columns = Integer.parseInt(sharedPref.getString("columns", "2"));
 
         progressBar = findViewById(R.id.progressBar);
@@ -239,12 +237,12 @@ public class Activity_Main extends AppCompatActivity {
             }
 
             public void onSwipeRight() {
-                if (sharedPref.getBoolean("swipe", true))
+                if (sharedPref.getBoolean("swipe", false))
                     navigationDrawerClick();
             }
 
             public void onSwipeLeft() {
-                if (sharedPref.getBoolean("swipe", true))
+                if (sharedPref.getBoolean("swipe", false))
                     messagesDrawerClick();
             }
         });

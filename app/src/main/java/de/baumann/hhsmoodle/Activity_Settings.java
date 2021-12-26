@@ -34,7 +34,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Objects;
@@ -48,7 +47,6 @@ public class Activity_Settings extends AppCompatActivity {
 
         setContentView(R.layout.activity_settings);
 
-        PreferenceManager.setDefaultValues(this, R.xml.user_settings, false);
         setTitle(R.string.menu_more_settings);
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -100,14 +98,14 @@ public class Activity_Settings extends AppCompatActivity {
 
             biometric.setOnPreferenceClickListener(preference -> {
                 final Activity activity = getActivity();
-                final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(activity));
+                final SharedPreferences sharedPref = Class_Helper.getEncryptedSharedPreferences(Objects.requireNonNull(activity));
                 sharedPref.edit().putString("settings_security_pin", "").apply();
                 return false;
             });
 
             findPreference("settings_security_pin").setOnPreferenceClickListener(preference -> {
                 final Activity activity = getActivity();
-                final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(activity));
+                final SharedPreferences sharedPref = Class_Helper.getEncryptedSharedPreferences(Objects.requireNonNull(activity));
                 final String password = sharedPref.getString("settings_security_pin", "");
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 View dialogView = View.inflate(activity, R.layout.dialog_edit_pin, null);

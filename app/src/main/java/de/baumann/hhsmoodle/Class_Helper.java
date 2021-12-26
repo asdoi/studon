@@ -23,6 +23,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -41,7 +42,8 @@ import androidx.annotation.NonNull;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-import androidx.preference.PreferenceManager;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKey;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -85,7 +87,7 @@ class Class_Helper {
 
     static void switchIcon(Activity activity, String string, ImageView be) {
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
+        SharedPreferences sharedPref = Class_Helper.getEncryptedSharedPreferences(activity);
 
         assert be != null;
 
@@ -224,8 +226,7 @@ class Class_Helper {
     }
 
     static void checkAuthentication(final Activity activity) {
-        PreferenceManager.setDefaultValues(activity, R.xml.user_settings, false);
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
+        sharedPref = Class_Helper.getEncryptedSharedPreferences(activity);
 
         boolean biometric = sharedPref.getBoolean("biometric", false);
 
@@ -373,5 +374,27 @@ class Class_Helper {
         String textNow = text.getText().toString().trim();
         String pin = textNow + number;
         text.setText(pin);
+    }
+
+    private static final String ENCRYPTED_PREFS = "ENCRYPTED_PREFS";
+
+    protected static SharedPreferences getEncryptedSharedPreferences(Context context) {
+        try {
+            return EncryptedSharedPreferences.create(
+                    context,
+                    ENCRYPTED_PREFS,
+                    new MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build(),
+                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Class_Helper.getEncryptedSharedPreferences(context);
+    }
+
+    private static void test(Context context) {
+        SharedPreferences sharedPreferences = getEncryptedSharedPreferences(context);
     }
 }

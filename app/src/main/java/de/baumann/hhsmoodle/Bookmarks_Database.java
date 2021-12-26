@@ -27,8 +27,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.preference.PreferenceManager;
-
 class Bookmarks_Database {
 
     //define static variable
@@ -93,8 +91,7 @@ class Bookmarks_Database {
 
     //fetch data
     Cursor fetchAllData(Context context) {
-        PreferenceManager.setDefaultValues(context, R.xml.user_settings, false);
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp = Class_Helper.getEncryptedSharedPreferences(context);
         String[] columns = new String[]{"_id", "bookmarks_title", "bookmarks_content", "bookmarks_icon", "bookmarks_attachment"};
 
         switch (sp.getString("sortDBB", "title")) {
