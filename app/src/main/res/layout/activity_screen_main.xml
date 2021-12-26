@@ -8,13 +8,12 @@
     <!-- Bottom bar -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bar"
-        style="@style/Widget.MaterialComponents.BottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:backgroundTint="@color/colorPrimary"
-        app:hideOnScroll="true"
-        android:elevation="4dp">
+        app:elevation="4dp"
+        app:hideOnScroll="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,31 +23,31 @@
                 android:id="@+id/titleView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@color/color_light"
-                android:maxLines="1"
                 android:ellipsize="end"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+                android:maxLines="1"
+                android:text="@string/app_name"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                android:textColor="@color/color_light" />
 
         </RelativeLayout>
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_gravity="top|center"
-        app:layout_anchor="@+id/bar"
         android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="4dp"
+        android:layout_gravity="top|center"
         android:maxHeight="4dp"
-        android:progressTint="?android:attr/colorAccent" />
+        android:progressTint="?android:attr/colorAccent"
+        app:layout_anchor="@+id/bar" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:background="@drawable/toolbar_drop_shadow"
         android:layout_gravity="top|center"
+        android:background="@drawable/toolbar_drop_shadow"
         app:layout_anchor="@+id/bar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

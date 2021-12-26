@@ -39,7 +39,7 @@ public class Activity_Settings extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme_system_Settings);
+        setTheme(R.style.AppThemeSettings);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_settings);

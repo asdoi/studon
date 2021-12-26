@@ -2,17 +2,17 @@
 
     <!-- Base application theme. -->
 
-    <style name="AppTheme_system" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorPrimary">@color/colorPrimary</item>
     </style>
 
-    <style name="AppTheme_system_Settings" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="AppThemeSettings" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorPrimary">@color/colorPrimary</item>
     </style>
 
-    <style name="SplashTheme" parent="AppTheme_system">
+    <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 </resources>
