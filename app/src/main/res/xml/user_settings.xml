@@ -21,8 +21,8 @@
         android:title="@string/biometric_unlock" />
 
     <SwitchPreferenceCompat
-        android:defaultValue="true"
-        android:icon="@drawable/icon_exit"
+        android:defaultValue="false"
+        android:icon="@drawable/ic_baseline_touch_app_24"
         android:key="swipe"
         android:summary="@string/setting_swipe_summary"
         android:title="@string/setting_swipe" />

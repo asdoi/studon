@@ -52,7 +52,7 @@
         \u25AA nach oben/unten um auf der Seite nach oben/unten zu scrollen.
     </string>
 
-    <string name="dialog_license_title">Copyright © 2020 by AOSD</string>
+    <string name="dialog_license_title">Copyright © 2022 by ASDOI</string>
     <string name="dialog_license_text">
         Eine veränderte Version von https://github.com/scoute-dich/HHSMoodle&lt;br>
         &lt;i>Besuche für mehr Informationen: https://github.com/asdoi/StudOn&lt;/i>&lt;br>&lt;br>
@@ -75,7 +75,13 @@
         &lt;b>Android CustomTabs&lt;/b>&lt;br>
         Made by Sascha Peilicke&lt;br>
         Apache-2.0 License&lt;br>
-        &lt;i>https://github.com/saschpe/android-customtabs&lt;/i>
+        &lt;i>https://github.com/saschpe/android-customtabs&lt;/i>&lt;br>&lt;br>
+
+
+        &lt;b>AppUpdater&lt;/b>&lt;br>
+        Made by Javier Santos&lt;br>
+        Apache-2.0 License&lt;br>
+        &lt;i>https://github.com/javiersantos/AppUpdater&lt;/i>
     </string>
 
     <string name="dialog_sortName">Name</string>
@@ -172,6 +178,6 @@
     <string name="update_later">Später</string>
     <string name="update_available_content">Lade die neueste Version mit neuen Features, Verbesserungen und vielem mehr herunter.</string>
     <string name="setting_swipe">Wischgesten</string>
-    <string name="setting_swipe_summary">Bei einem Wisch nach links werden deine Nachrichten geöffnet und nach rechts die Übersicht.</string>
+    <string name="setting_swipe_summary">Bei einem Wisch nach links wird die Schreibtisch-Übersicht geöffnet und nach rechts die Angebots-Übersicht.</string>
     <string name="summary">Übersicht</string>
 </resources>

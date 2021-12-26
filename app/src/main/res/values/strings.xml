@@ -108,7 +108,7 @@
         \u25AA top/bottom to scroll to top/bottom of website.
     </string>
 
-    <string name="dialog_license_title">Copyright © 2020 by AOSD</string>
+    <string name="dialog_license_title">Copyright © 2022 by ASDOI</string>
     <string name="dialog_license_text">
         Forked from https://github.com/scoute-dich/HHSMoodle&lt;br>
         &lt;i>For more information visit: https://github.com/asdoi/StudOn&lt;/i>&lt;br>&lt;br>
@@ -136,7 +136,7 @@
         &lt;b>Android CustomTabs&lt;/b>&lt;br>
         Made by Sascha Peilicke&lt;br>
         Apache-2.0 License&lt;br>
-        &lt;i>https://github.com/saschpe/android-customtabs&lt;/i>
+        &lt;i>https://github.com/saschpe/android-customtabs&lt;/i>&lt;br>&lt;br>
 
 
         &lt;b>AppUpdater&lt;/b>&lt;br>
@@ -167,7 +167,7 @@
     <string name="setting_external_summary">Show a dialog to open external links in default browser.</string>
 
     <string name="setting_swipe">Swipe gestures</string>
-    <string name="setting_swipe_summary">Open your local messages on left swipe and the navigation drawer on right swipe.</string>
+    <string name="setting_swipe_summary">Open the summary-menu on left swipe and the offers-menu on right swipe.</string>
 
     <string name="setting_nightMode">Dark mode</string>
     <string name="setting_nightMode_summary">Will use the dark mode for displaying websites, if system uses dark mode. This works only, if latest webview is installed on device.</string>
