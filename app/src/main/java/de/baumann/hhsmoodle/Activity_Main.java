@@ -415,9 +415,9 @@ public class Activity_Main extends AppCompatActivity {
             } catch (Exception e) {
             }
             mWebView.loadUrl(newUrl);
-            setIntent(null);
         } catch (Exception ignore) {
         }
+        setIntent(null);
     }
 
     private void openInCustomTabs(String url) {
