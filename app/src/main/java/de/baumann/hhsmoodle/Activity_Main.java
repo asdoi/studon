@@ -399,12 +399,11 @@ public class Activity_Main extends AppCompatActivity {
         });
     }
 
-
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
         try {
-            Uri uri = Objects.requireNonNull(getIntent().getData());
+            Uri uri = Objects.requireNonNull(intent.getData());
             String url = uri.toString();
             String newUrl = url;
             try {
@@ -412,12 +411,11 @@ public class Activity_Main extends AppCompatActivity {
                 int indexPhp = url.indexOf(".php");
                 int indexSlash = url.substring(0, indexPhp).lastIndexOf('/');
                 newUrl = url.substring(0, indexSlash + 1) + "saml" + url.substring(indexPhp);
-            } catch (Exception e) {
+            } catch (Exception ignore) {
             }
             mWebView.loadUrl(newUrl);
         } catch (Exception ignore) {
         }
-        setIntent(null);
     }
 
     private void openInCustomTabs(String url) {
