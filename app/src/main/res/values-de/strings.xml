@@ -180,4 +180,6 @@
     <string name="setting_swipe">Wischgesten</string>
     <string name="setting_swipe_summary">Bei einem Wisch nach links wird die Schreibtisch-Übersicht geöffnet und nach rechts die Angebots-Übersicht.</string>
     <string name="summary">Übersicht</string>
+    <string name="automatic_updates">Automatische Updates</string>
+    <string name="automatic_udpates_desc">Prüfe bei jedem Start ob eine neue Version verfügbar ist</string>
 </resources>

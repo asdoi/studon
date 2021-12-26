@@ -48,6 +48,13 @@
         android:summary="@string/setting_nightMode_summary"
         android:title="@string/setting_nightMode" />
 
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:icon="@drawable/ic_baseline_update_24"
+        android:key="auto_update"
+        android:summary="@string/automatic_udpates_desc"
+        android:title="@string/automatic_updates" />
+
     <ListPreference
         android:defaultValue="title"
         android:entries="@array/setting_entries_sort"

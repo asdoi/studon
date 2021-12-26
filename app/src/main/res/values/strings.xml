@@ -188,5 +188,7 @@
     <string name="update_later">Later</string>
     <string name="update_available_content">Download the latest version with the latest features, improvements, and bug fixes.</string>
     <string name="summary">Summary</string>
+    <string name="automatic_updates">Automatic Updates</string>
+    <string name="automatic_udpates_desc">Check for an update on every app start</string>
 
 </resources>
