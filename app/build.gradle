@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     buildToolsVersion '29.0.3'
 
 
@@ -15,10 +15,11 @@ android {
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         minSdkVersion 21
-        targetSdkVersion 31
-        versionCode 160
-        versionName "1.6"
+        targetSdkVersion 32
+        versionCode 170
+        versionName "1.7"
     }
+
     buildTypes {
         release {
             minifyEnabled true
