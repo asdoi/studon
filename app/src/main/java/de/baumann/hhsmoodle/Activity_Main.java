@@ -371,7 +371,7 @@ public class Activity_Main extends AppCompatActivity {
                     PreferenceHelper.getUsername(this).isEmpty()) {
                 throw new Exception();
             } else {
-                mWebView.loadUrl(PreferenceHelper.getDefaultURL(this));
+                onNewIntent(true);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -402,6 +402,14 @@ public class Activity_Main extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        onNewIntent(intent, false);
+    }
+
+    private void onNewIntent(boolean loadDefaultOnError) {
+        onNewIntent(getIntent(), loadDefaultOnError);
+    }
+
+    private void onNewIntent(Intent intent, boolean loadDefaultOnError) {
         try {
             Uri uri = Objects.requireNonNull(intent.getData());
             String url = uri.toString();
@@ -415,6 +423,8 @@ public class Activity_Main extends AppCompatActivity {
             }
             mWebView.loadUrl(newUrl);
         } catch (Exception ignore) {
+            if (loadDefaultOnError)
+                mWebView.loadUrl(PreferenceHelper.getDefaultURL(this));
         }
     }
 
