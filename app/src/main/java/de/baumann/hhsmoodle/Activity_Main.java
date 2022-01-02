@@ -414,12 +414,27 @@ public class Activity_Main extends AppCompatActivity {
             Uri uri = Objects.requireNonNull(intent.getData());
             String url = uri.toString();
             String newUrl = url;
+
             try {
-                //Redirect to login page through replacing xy.php with saml.php (-> open sso-login)
-                int indexPhp = url.indexOf(".php");
-                int indexSlash = url.substring(0, indexPhp).lastIndexOf('/');
-                newUrl = url.substring(0, indexSlash + 1) + "saml" + url.substring(indexPhp);
-            } catch (Exception ignore) {
+                //Redirect to login page through replacing xy.php with saml.php (-> open sso-login), or adding it
+                if (newUrl.contains(".php")) {
+                    int indexPhp = newUrl.indexOf(".php");
+                    int indexSlash = newUrl.substring(0, indexPhp).lastIndexOf('/');
+                    newUrl = newUrl.substring(0, indexSlash + 1) + "saml" + newUrl.substring(indexPhp);
+
+                } /*else {
+                    if (!newUrl.contains("studon.fau.de/studon")) {
+                        int endOfBaseURL = newUrl.indexOf("studon.fau.de");
+                        newUrl = newUrl.substring(0, endOfBaseURL + 13) + "/studon" + newUrl.substring(endOfBaseURL + 13);
+                    }
+
+                    int indexStudon = newUrl.indexOf("studon.fau.de/studon");
+                    boolean hasSlash = newUrl.contains("studon.fau.de/studon/");
+                    int htmIndex = newUrl.indexOf(".htm");
+                    newUrl = newUrl.substring(0, indexStudon + 20) + "/saml.php?target=" + newUrl.substring(indexStudon + 20 + (hasSlash ? 1 : 0), htmIndex);
+                }*/
+            } catch (Exception e) {
+                newUrl = url;
             }
             mWebView.loadUrl(newUrl);
         } catch (Exception ignore) {
