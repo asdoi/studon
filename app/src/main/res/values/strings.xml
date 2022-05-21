@@ -50,12 +50,13 @@
     <string name="bookmark_icon">Icon</string>
 
     // Menu Items
-
-    <string name="action_bookmark">Bookmarks</string>
+    <string name="action_homepage">Homepage</string>
     <string name="action_menu">Menu</string>
     <string name="action_search_prev">Next</string>
     <string name="action_search_next">Previous</string>
     <string name="action_search_cancel">Cancel search</string>
+
+    <string name="menu_bookmarks">Bookmarks</string>
 
     <string name="menu_share">Share</string>
     <string name="menu_finish">Exit</string>

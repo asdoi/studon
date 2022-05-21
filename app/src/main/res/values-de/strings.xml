@@ -102,7 +102,7 @@
 
     // Menu Items
 
-    <string name="action_bookmark">Lesezeichen</string>
+    <string name="menu_bookmarks">Lesezeichen</string>
     <string name="action_menu">Menu</string>
     <string name="action_search_prev">Nächstes Ergebnis</string>
     <string name="action_search_next">Vorheriges Ergebnis</string>
@@ -182,4 +182,5 @@
     <string name="summary">Übersicht</string>
     <string name="automatic_updates">Automatische Updates</string>
     <string name="automatic_udpates_desc">Prüfe bei jedem Start ob eine neue Version verfügbar ist</string>
+    <string name="action_homepage">Startseite</string>
 </resources>

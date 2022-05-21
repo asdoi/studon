@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_bookmark"
+        android:id="@+id/action_homepage"
         app:showAsAction="always"
-        android:icon="@drawable/icon_bookmark_light"
-        android:title="@string/action_bookmark"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/action_homepage"
         tools:ignore="AlwaysShowAction" />
 
     <item

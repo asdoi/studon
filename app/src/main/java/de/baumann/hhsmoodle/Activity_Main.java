@@ -541,8 +541,8 @@ public class Activity_Main extends AppCompatActivity {
                 case R.id.action_search_prev:
                     mWebView.findNext(false);
                     break;
-                case R.id.action_bookmark:
-                    openBookmarkDialog();
+                case R.id.action_homepage:
+                    mWebView.loadUrl(PreferenceHelper.getDefaultURL(this));
                     break;
                 case R.id.action_menu:
                     openMenu();
@@ -582,7 +582,8 @@ public class Activity_Main extends AppCompatActivity {
         GridView grid = dialogView.findViewById(R.id.grid_item);
         GridItem_Menu itemAlbum_downloads = new GridItem_Menu(getResources().getString(R.string.menu_more_files), R.drawable.icon_download);
         GridItem_Menu itemAlbum_settings = new GridItem_Menu(getResources().getString(R.string.menu_more_settings), R.drawable.icon_settings);
-        GridItem_Menu itemAlbum_save = new GridItem_Menu(getResources().getString(R.string.menu_save_bookmark), R.drawable.icon_bookmark);
+        GridItem_Menu itemAlbum_bookmarks = new GridItem_Menu(getResources().getString(R.string.menu_bookmarks), R.drawable.icon_bookmark);
+        GridItem_Menu itemAlbum_save = new GridItem_Menu(getResources().getString(R.string.menu_save_bookmark), R.drawable.ic_baseline_save_24);
         GridItem_Menu itemAlbum_print = new GridItem_Menu(getResources().getString(R.string.menu_save_pdf), R.drawable.icon_printer);
         GridItem_Menu itemAlbum_share = new GridItem_Menu(getResources().getString(R.string.menu_share), R.drawable.icon_share);
         GridItem_Menu itemAlbum_exit = new GridItem_Menu(getResources().getString(R.string.menu_finish), R.drawable.icon_exit);
@@ -592,23 +593,25 @@ public class Activity_Main extends AppCompatActivity {
         final String url = mWebView.getUrl();
 
         final int SETTINGS = 0;
-        final int SAVE = 1;
-        final int SHARE = 2;
-        final int SEARCH = 3;
-        final int DOWNLOADS = 4;
+        final int BOOKMARKS = 1;
+        final int SEARCH = 2;
+        final int SAVE = 3;
+        final int SHARE = 4;
         final int EXIT = 5;
         final int PRINT = -1;
         final int OPEN_IN_BROWSER = -2;
+        final int DOWNLOADS = -3;
 
 
         final List<GridItem_Menu> gridList = new LinkedList<>();
 
         gridList.add(SETTINGS, itemAlbum_settings);
+        gridList.add(BOOKMARKS, itemAlbum_bookmarks);
+        gridList.add(SEARCH, itemAlbum_search);
         gridList.add(SAVE, itemAlbum_save);
         gridList.add(SHARE, itemAlbum_share);
-        gridList.add(SEARCH, itemAlbum_search);
-        gridList.add(DOWNLOADS, itemAlbum_downloads);
         gridList.add(EXIT, itemAlbum_exit);
+//        gridList.add(DOWNLOADS, itemAlbum_downloads);
 //        gridList.add(PRINT, itemAlbum_print);
 //        gridList.add(OPEN_IN_BROWSER, itemAlbum_open_in_browser);
 
@@ -627,6 +630,9 @@ public class Activity_Main extends AppCompatActivity {
                 case DOWNLOADS:
                     bottomSheetDialog.cancel();
                     startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
+                    break;
+                case BOOKMARKS:
+                    openBookmarkDialog();
                     break;
                 case SAVE:
                     if (url != null) {
