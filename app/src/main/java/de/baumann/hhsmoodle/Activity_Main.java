@@ -421,9 +421,38 @@ public class Activity_Main extends AppCompatActivity {
                     int indexPhp = newUrl.indexOf(".php");
                     int indexSlash = newUrl.substring(0, indexPhp).lastIndexOf('/');
                     newUrl = newUrl.substring(0, indexSlash + 1) + "saml" + newUrl.substring(indexPhp);
+                } else {
+                    String sub;
+                    if (newUrl.contains("studon.fau.de/studon/")) {
+                        int index = newUrl.indexOf("studon.fau.de/studon/") + "studon.fau.de/studon/".length();
+                        sub = newUrl.substring(index);
+                    } else {
+                        int index = newUrl.indexOf("studon.fau.de/") + "studon.fau.de/".length();
+                        sub = newUrl.substring(index);
+                    }
 
-                } /*else {
-                    if (!newUrl.contains("studon.fau.de/studon")) {
+                    if (sub.contains(".html")) {
+                        sub = sub.replace(".html", "");
+                    } else if (sub.contains(".htm")) {
+                        sub = sub.replace(".htm", "");
+                    }
+
+                    int firstDigit = -1;
+                    for (int i = 0; i < sub.length(); i++) {
+                        if (Character.isDigit(sub.charAt(i))) {
+                            firstDigit = i;
+                            break;
+                        }
+                    }
+
+                    if (firstDigit > 0) {
+                        sub = sub.substring(0, firstDigit) + "_" + sub.substring(firstDigit);
+                    }
+
+                    newUrl = "https://www.studon.fau.de/studon/saml.php?returnTo=" + sub;
+
+
+                    /*if (!newUrl.contains("studon.fau.de/studon")) {
                         int endOfBaseURL = newUrl.indexOf("studon.fau.de");
                         newUrl = newUrl.substring(0, endOfBaseURL + 13) + "/studon" + newUrl.substring(endOfBaseURL + 13);
                     }
@@ -431,8 +460,8 @@ public class Activity_Main extends AppCompatActivity {
                     int indexStudon = newUrl.indexOf("studon.fau.de/studon");
                     boolean hasSlash = newUrl.contains("studon.fau.de/studon/");
                     int htmIndex = newUrl.indexOf(".htm");
-                    newUrl = newUrl.substring(0, indexStudon + 20) + "/saml.php?target=" + newUrl.substring(indexStudon + 20 + (hasSlash ? 1 : 0), htmIndex);
-                }*/
+                    newUrl = newUrl.substring(0, indexStudon + 20) + "/saml.php?target=" + newUrl.substring(indexStudon + 20 + (hasSlash ? 1 : 0), htmIndex); */
+                }
             } catch (Exception e) {
                 newUrl = url;
             }
@@ -741,6 +770,7 @@ public class Activity_Main extends AppCompatActivity {
         mFilePathCallback = null;
     }
 
+    @SuppressLint("Range")
     private final BroadcastReceiver onComplete = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
