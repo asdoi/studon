@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 32
-    buildToolsVersion '29.0.3'
+    buildToolsVersion '30.0.3'
 
 
     compileOptions {
@@ -16,8 +16,8 @@ android {
         vectorDrawables.useSupportLibrary = true
         minSdkVersion 21
         targetSdkVersion 32
-        versionCode 170
-        versionName "1.7"
+        versionCode 180
+        versionName "1.8"
     }
 
     buildTypes {
@@ -33,14 +33,15 @@ android {
             }
         }
     }
+    namespace 'de.baumann.hhsmoodle'
 
     return void
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.preference:preference:1.2.0'
     implementation 'androidx.webkit:webkit:1.4.0'
     implementation 'androidx.browser:browser:1.4.0'
     implementation 'androidx.biometric:biometric:1.1.0'
