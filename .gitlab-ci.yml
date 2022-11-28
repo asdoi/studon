@@ -41,7 +41,7 @@ assembleDebug:
     - gradle wrapper
     - ./gradlew assembleDebug
     # move apk file to base folder
-    - mv app/build/outputs/apk/debug/app-debug.apk app-debug.apk
+    - mv app/build/outputs/apk/debug/StudOn.apk StudOn.apk
   artifacts:
     paths:
-      - app/build/outputs/
+      - StudOn.apk
