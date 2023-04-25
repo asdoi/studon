@@ -100,7 +100,7 @@ public class PreferenceHelper {
     }
 
     static boolean isAutoUpdate(Context context) {
-        return getSharedPreferences(context).getBoolean("auto_update", true);
+        return getSharedPreferences(context).getBoolean("auto_update", false);
     }
 
     static void disableAutoUpdate(Context context) {

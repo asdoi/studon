@@ -49,20 +49,20 @@
         android:title="@string/setting_nightMode" />
 
     <SwitchPreferenceCompat
-        android:defaultValue="true"
+        android:defaultValue="false"
         android:icon="@drawable/ic_baseline_update_24"
         android:key="auto_update"
         android:summary="@string/automatic_udpates_desc"
         android:title="@string/automatic_updates" />
 
-    <ListPreference
-        android:defaultValue="title"
+    <!-- <ListPreference
+        android:defaultValue="true"
         android:entries="@array/setting_entries_sort"
         android:entryValues="@array/setting_values_sort"
         android:icon="@drawable/icon_sort"
         android:key="sortDBB"
         android:summary="@string/setting_sort_summary"
-        android:title="@string/setting_sort" />
+        android:title="@string/setting_sort" /> -->
 
     <ListPreference
         android:defaultValue="2"
